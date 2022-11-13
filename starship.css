@@ -6,8 +6,6 @@ body {
 .starship {
     height: 225px;
     position:absolute;
-        left: 30%;
         top:25%;
-    transform:rotate(70deg);
     z-index:100;
 }
