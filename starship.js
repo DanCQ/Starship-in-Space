@@ -1,5 +1,7 @@
 let starship = document.querySelector(".starship");
+let screenWidth = document.documentElement.scrollWidth; //sets device screen width
 
+//images for background
 let images = [
     { 
         name: "Milky Way Galaxy",
@@ -23,9 +25,9 @@ function randomRange(min,max) {
 function outerSpace() {
     
     let body = document.querySelector(".body");
-    let num = randomRange(0, images.length -1);
+    let num = randomRange(0, images.length -1); //sets random number within array size
 
-    body.style.background = images[num].img;
+    body.style.background = images[num].img; //sets random background onload
 
     body.style.backgroundColor = "black";
     body.style.backgroundPosition = "center";
@@ -34,13 +36,17 @@ function outerSpace() {
 }
 
 
+//reassigns value to screenWidth if screen size changes
+window.addEventListener("resize", function() {
+    screenWidth = document.documentElement.scrollWidth;
+})
+
 //Animate item left to right
 function animate(item) {
     let advance;
     let position = 0;
     let retreat;
-    let screenWidth = document.documentElement.scrollWidth;
-
+    
     item.style.position = "absolute";
     advance = setInterval(animateForward, 20); //begin animation
         
