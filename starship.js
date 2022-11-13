@@ -5,7 +5,7 @@ let images = [
     },
     {
         name: "Distant Sun",
-        img: "url(assets/distant-sun.jpeg"
+        img: "url(assets/distant-sun.jpeg)"
     }
 ];
 
