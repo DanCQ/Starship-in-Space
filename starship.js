@@ -27,6 +27,7 @@ function outerSpace() {
 
     body.style.background = images[num].img;
 
+    body.style.backgroundColor = "black";
     body.style.backgroundPosition = "center";
     body.style.backgroundRepeat = "no-repeat";
     body.style.backgroundSize = "cover";
@@ -58,7 +59,8 @@ function animate(item) {
         item.style.left = position + "px";
         item.style.transform = "rotate(-90deg)";
 
-        if (position < screenWidth - screenWidth - 100) {
+
+        if (position < -100) {
             clearInterval(retreat);
             advance = setInterval(animateForward, 15);
         }
