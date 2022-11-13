@@ -1,3 +1,5 @@
+let starship = document.querySelector(".starship");
+
 let images = [
     { 
         name: "Milky Way Galaxy",
@@ -31,7 +33,43 @@ function outerSpace() {
 }
 
 
+//Animate item left to right
+function animate(item) {
+    let advance;
+    let position = 0;
+    let retreat;
+    let screenWidth = document.documentElement.scrollWidth;
+
+    item.style.position = "absolute";
+    advance = setInterval(animateForward, 20); //begin animation
+        
+    function animateForward() {
+        position += 0.5;
+        item.style.left = position + "px";
+        item.style.transform = "rotate(90deg)";
+
+        if (position > screenWidth) {
+            clearInterval(advance);
+            retreat = setInterval(animateBackward, 15);
+        }
+    }
+    function animateBackward() {
+        position -= 0.5;
+        item.style.left = position + "px";
+        item.style.transform = "rotate(-90deg)";
+
+        if (position < screenWidth - screenWidth - 100) {
+            clearInterval(retreat);
+            advance = setInterval(animateForward, 15);
+        }
+    }
+     
+}
+
+
 window.onload = function() {
+
+    animate(starship);
 
     outerSpace();
 
