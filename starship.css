@@ -1,6 +1,6 @@
 body {
-    background-color: black;
     min-height:100vh;
+    min-width:100vw;
 }
 
 .starship {
@@ -9,3 +9,29 @@ body {
         top:25%;
     z-index:100;
 }
+
+
+@media (max-width: 800px) {
+
+    .starship {
+        height: 200px;
+    }
+    
+}
+
+@media (max-width: 600px) {
+
+    .starship {
+        height: 175px;
+    }
+    
+}
+
+@media (max-width: 400px) {
+
+    .starship {
+        height: 150px;
+    }
+    
+}
+
