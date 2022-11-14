@@ -1,7 +1,7 @@
 const rocket = document.querySelector(".rocket");
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
 let earth = randomRange(1,69);
-let speed = false;
+let speed = false; //for boosters
 
 
 //images for background
@@ -73,6 +73,7 @@ window.addEventListener("resize", function() {
 });
 
 
+//clicking ship activates booster speeed
 rocket.addEventListener("click", function() {
 
     let boost = document.querySelector(".boost");
