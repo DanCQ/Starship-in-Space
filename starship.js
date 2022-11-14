@@ -109,7 +109,7 @@ function animate(item) {
         if (position > screenWidth + 200) {
             clearInterval(advance);
             retreat = setInterval(animateBackward, 15);
-            position -= 100;
+            position -= 150;
         }
     }
     function animateBackward() {
@@ -125,7 +125,7 @@ function animate(item) {
         if (position < -200) {
             clearInterval(retreat);
             advance = setInterval(animateForward, 15);
-            position += 100;
+            position += 150;
         }
     }
      
