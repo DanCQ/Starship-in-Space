@@ -40,10 +40,11 @@ function outerSpace() {
             if(earth > 67) {
                 earth = 1;
             };
-            images[num].img = `url(assets/earth/${earth}.png)`;
+            
             body.style.transition = "ease-in-out 1500ms";
+            images[num].img = `url(assets/earth/${earth}.png)`;
             background();
-        }, 8000);
+        }, 10000);
     }
 
     function background() {
