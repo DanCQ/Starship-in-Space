@@ -31,20 +31,27 @@ function outerSpace() {
     
     let body = document.querySelector(".body");
     let num = randomRange(0, images.length -1); //sets random number within array size
+    let nextImg = new Image(); //Img element for preloading next image
 
     background();
 
-   if(images[num].name == "Earth") {
+    if(images[num].name == "Earth") {
+
         setInterval(function() {
             earth++;
             if(earth > 69) {
                 earth = 1;
             };
+            nextImg.src = `assets/earth/${earth}.png`; //preloads next image
+            body.style.transition = "ease-in-out 250ms";
             
-            body.style.transition = "ease-in-out 1500ms";
-            images[num].img = `url(assets/earth/${earth}.png)`;
-            background();
-        }, 10000);
+            //change only happens once next image is loaded
+            nextImg.onload = function() {
+                images[num].img = `url(${nextImg.src})`;
+                background();
+            }
+
+        }, 5000);
     }
 
     function background() {
