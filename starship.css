@@ -24,7 +24,7 @@ body {
 }
 
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
 
     .starship {
         height: 200px;
@@ -38,7 +38,7 @@ body {
     
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
 
     .starship {
         height: 175px;
@@ -52,7 +52,7 @@ body {
 
 }
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
 
     .starship {
         height: 150px;
@@ -63,8 +63,6 @@ body {
         left: 32px;
         width: 16px;
     }
-
-    
     
 }
 
