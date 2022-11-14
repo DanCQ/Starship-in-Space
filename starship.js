@@ -1,6 +1,6 @@
 let starship = document.querySelector(".starship");
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
-let earth = randomRange(1,67);
+let earth = randomRange(1,69);
 
 //images for background
 let images = [
@@ -37,7 +37,7 @@ function outerSpace() {
    if(images[num].name == "Earth") {
         setInterval(function() {
             earth++;
-            if(earth > 67) {
+            if(earth > 69) {
                 earth = 1;
             };
             
