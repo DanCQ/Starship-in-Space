@@ -1,6 +1,8 @@
-let starship = document.querySelector(".starship");
+const rocket = document.querySelector(".rocket");
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
 let earth = randomRange(1,69);
+let speed = false;
+
 
 //images for background
 let images = [
@@ -68,36 +70,61 @@ function outerSpace() {
 //reassigns value to screenWidth if screen size changes
 window.addEventListener("resize", function() {
     screenWidth = document.documentElement.scrollWidth;
-})
+});
+
+
+rocket.addEventListener("click", function() {
+
+    let boost = document.querySelector(".boost");
+    boost.style.visibility = "visible";
+    speed = true;
+
+    setTimeout(function() {
+        boost.style.visibility = "hidden";
+        speed = false;
+
+    }, 500);
+});
+
 
 //Animate item left to right
 function animate(item) {
     let advance;
     let position = 0;
     let retreat;
-    
+
     item.style.position = "absolute";
     advance = setInterval(animateForward, 20); //begin animation
         
     function animateForward() {
-        position += 0.5;
+        if(speed) {
+            position += 4;
+        } else {
+            position += 0.5;
+        }
         item.style.left = position + "px";
         item.style.transform = "rotate(90deg)";
 
-        if (position > screenWidth) {
+        if (position > screenWidth + 150) {
             clearInterval(advance);
             retreat = setInterval(animateBackward, 15);
+            position -= 75;
         }
     }
     function animateBackward() {
-        position -= 0.5;
+        if(speed) {
+            position -= 4;
+        } else {
+            position -= 0.5;
+        }
         item.style.left = position + "px";
         item.style.transform = "rotate(-90deg)";
 
 
-        if (position < -115) {
+        if (position < -150) {
             clearInterval(retreat);
             advance = setInterval(animateForward, 15);
+            position += 75;
         }
     }
      
@@ -106,7 +133,7 @@ function animate(item) {
 
 window.onload = function() {
 
-    animate(starship);
+    animate(rocket);
 
     outerSpace();
 
