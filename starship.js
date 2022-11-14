@@ -1,5 +1,6 @@
 let starship = document.querySelector(".starship");
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
+let earth = randomRange(1,67);
 
 //images for background
 let images = [
@@ -10,6 +11,10 @@ let images = [
     {
         name: "Distant Sun",
         img: "url(assets/distant-sun.jpeg)"
+    },
+    {
+        name: "Earth",
+        img: `url(assets/earth/${earth}.png)`
     }
 ];
 
@@ -27,12 +32,28 @@ function outerSpace() {
     let body = document.querySelector(".body");
     let num = randomRange(0, images.length -1); //sets random number within array size
 
-    body.style.background = images[num].img; //sets random background onload
+    background();
 
-    body.style.backgroundColor = "black";
-    body.style.backgroundPosition = "center";
-    body.style.backgroundRepeat = "no-repeat";
-    body.style.backgroundSize = "cover";
+   if(images[num].name == "Earth") {
+        setInterval(function() {
+            earth++;
+            if(earth > 67) {
+                earth = 1;
+            };
+            images[num].img = `url(assets/earth/${earth}.png)`;
+            body.style.transition = "ease-in-out 1500ms";
+            background();
+        }, 8000);
+    }
+
+    function background() {
+        body.style.background = images[num].img; //sets random background onload
+        body.style.backgroundColor = "black";
+        body.style.backgroundPosition = "center";
+        body.style.backgroundRepeat = "no-repeat";
+        body.style.backgroundSize = "cover";
+    }
+    
 }
 
 
@@ -66,7 +87,7 @@ function animate(item) {
         item.style.transform = "rotate(-90deg)";
 
 
-        if (position < -100) {
+        if (position < -115) {
             clearInterval(retreat);
             advance = setInterval(animateForward, 15);
         }
