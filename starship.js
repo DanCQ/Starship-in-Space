@@ -17,6 +17,14 @@ let images = [
     {
         name: "Earth",
         img: `url(assets/earth/${earth}.png)`
+    },
+    {
+        name: "Mars",
+        img: "url(assets/mars.jpeg)"
+    },
+    {
+        name: "Neptune",
+        img: "url(assets/neptune.jpeg)"
     }
 ];
 
