@@ -91,11 +91,23 @@ rocket.addEventListener("click", function() {
 //Animate item left to right
 function animate(item) {
     let advance;
-    let position = 0;
+    let position = randomRange(0, screenWidth);
     let retreat;
 
     item.style.position = "absolute";
-    advance = setInterval(animateForward, 20); //begin animation
+    
+    //God plays dice
+    function flip() {
+        let coin = randomRange(1, 2);
+
+        if(coin == 1) {
+            advance = setInterval(animateForward, 20); 
+        } else {
+            retreat = setInterval(animateBackward, 20);
+        }
+    }
+    flip();
+    
         
     function animateForward() {
         if(speed) {
