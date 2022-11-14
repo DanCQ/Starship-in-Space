@@ -106,10 +106,10 @@ function animate(item) {
         item.style.left = position + "px";
         item.style.transform = "rotate(90deg)";
 
-        if (position > screenWidth + 150) {
+        if (position > screenWidth + 200) {
             clearInterval(advance);
             retreat = setInterval(animateBackward, 15);
-            position -= 75;
+            position -= 100;
         }
     }
     function animateBackward() {
@@ -122,10 +122,10 @@ function animate(item) {
         item.style.transform = "rotate(-90deg)";
 
 
-        if (position < -150) {
+        if (position < -200) {
             clearInterval(retreat);
             advance = setInterval(animateForward, 15);
-            position += 75;
+            position += 100;
         }
     }
      
