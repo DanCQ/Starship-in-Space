@@ -134,7 +134,7 @@ function outerSpace() {
 
                 fade = setInterval(fadeOut, 175); //fades out location name
 
-            },60000);//Sixty seconds
+            },45000);//Forty five seconds
         }
     }
 
