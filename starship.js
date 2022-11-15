@@ -1,6 +1,8 @@
+let boost = document.querySelector(".boost");
+let earth = randomRange(1,69);
+const raptor = new Audio("assets/raptor.mp3");
 const rocket = document.querySelector(".rocket");
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
-let earth = randomRange(1,69);
 let speed = false; //for boosters
 
 
@@ -78,7 +80,7 @@ window.addEventListener("resize", function() {
 //clicking ship activates booster speeed
 rocket.addEventListener("click", function() {
 
-    let boost = document.querySelector(".boost");
+    raptor.play();
     boost.style.visibility = "visible";
     speed = true;
 
