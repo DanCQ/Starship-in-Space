@@ -119,9 +119,9 @@ function animate(item) {
         
     function animateForward() {
         if(speed) {
-            position += 4;
+            position += 2.5;
         } else {
-            position += 0.5;
+            position += 0.2;
         }
         item.style.left = position + "px";
         item.style.transform = "rotate(90deg)";
@@ -134,9 +134,9 @@ function animate(item) {
     }
     function animateBackward() {
         if(speed) {
-            position -= 4;
+            position -= 2.5;
         } else {
-            position -= 0.5;
+            position -= 0.2;
         }
         item.style.left = position + "px";
         item.style.transform = "rotate(-90deg)";
