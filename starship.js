@@ -1,4 +1,4 @@
-let boost = document.querySelector(".boost");
+const boost = document.querySelector(".boost");
 let earth = randomRange(1,69);
 const raptor = new Audio("assets/raptor.mp3");
 const rocket = document.querySelector(".rocket");
