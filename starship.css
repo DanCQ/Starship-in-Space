@@ -21,7 +21,7 @@ body {
 
 .location {
     color:ghostwhite;
-    font-family: "audiowide", "antonio", monospace;
+    font-family: "audiowide", "antonio", "jura", monospace;
     font-size:26px;
     position:absolute;
         bottom:1em;
