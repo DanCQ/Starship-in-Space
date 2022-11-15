@@ -1,7 +1,9 @@
+const astronaut = document.querySelector(".astronaut");
 const boost = document.querySelector(".boost");
-let earth = randomRange(1,69);
 const raptor = new Audio("assets/raptor.mp3"); //raptor engine sounds 
 const rocket = document.querySelector(".rocket");
+
+let earth = randomRange(1,69);
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
 let speed = false; //for boosters
 
@@ -116,33 +118,34 @@ function outerSpace() {
         location.style.opacity = "0.0";
 
         fade = setInterval(fadeIn, 175); //fades in location name
-            
-        function fadeIn() {
-            opacity += 0.1;
-            location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
-
-            //when fully visible
-            if(location.style.opacity >= 1) {
-                clearInterval(fade);
-
-                setTimeout(function() {
-
-                    fade = setInterval(fadeOut, 175); //fades out location name
-
-                },30000);//twenty five seconds
-            }
-        }
-
-        function fadeOut() {
-            opacity -= 0.1;
-            location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
-
-            if(location.style.opacity <= 0.0) {
-                clearInterval(fade);
-            }
-        }
 
     }, 5000); //five seconds
+
+
+    function fadeIn() {
+        opacity += 0.1;
+        location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
+
+        //when fully visible
+        if(location.style.opacity >= 1) {
+            clearInterval(fade);
+
+            setTimeout(function() {
+
+                fade = setInterval(fadeOut, 175); //fades out location name
+
+            },30000);//Sixty seconds
+        }
+    }
+
+    function fadeOut() {
+        opacity -= 0.1;
+        location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
+
+        if(location.style.opacity <= 0.0) {
+            clearInterval(fade);
+        }
+    }
 
 
     if(images[num].name == "Earth") {
@@ -171,6 +174,36 @@ function outerSpace() {
         body.style.backgroundRepeat = "no-repeat";
         body.style.backgroundSize = "cover";
     }
+
+    //celestial body latin names
+    location.addEventListener("click", function() {
+        switch(location.innerHTML) {
+            case "Earth": 
+                location.innerHTML = "Terra";
+                break;
+            case "Terra":
+                location.innerHTML = "Earth";
+                break;
+            case "Moon":
+                location.innerHTML = "Luna";
+                break;
+            case "Luna":
+                location.innerHTML = "Moon";
+                break;
+            case "Sun":
+                location.innerHTML = "Sol";
+                break;
+            case "Sol":
+                location.innerHTML = "Sun";
+                break;
+            case "Mercury":
+                location.innerHTML = "Mercurius";
+                break;
+            case "Mercurious":
+                location.innerHTML = "Mercury";
+                break;
+        };
+    });
     
 }
 
