@@ -129,7 +129,7 @@ function outerSpace() {
 
                     fade = setInterval(fadeOut, 175); //fades out location name
 
-                },25000);//twenty five seconds
+                },30000);//twenty five seconds
             }
         }
 
