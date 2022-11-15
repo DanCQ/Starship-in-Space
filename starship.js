@@ -213,6 +213,7 @@ function animate(item) {
     let advance;
     let position = randomRange(0, screenWidth);
     let retreat;
+    let starship = document.querySelector(".starship");
 
     item.style.position = "absolute";
     
@@ -238,7 +239,7 @@ function animate(item) {
         item.style.left = position + "px";
         item.style.transform = "rotate(90deg)";
 
-        if (position > screenWidth + 200) {
+        if (position > screenWidth + starship.offsetHeight) {
             clearInterval(advance);
             retreat = setInterval(animateBackward, 15);
             position -= 150;
@@ -255,7 +256,7 @@ function animate(item) {
         item.style.transform = "rotate(-90deg)";
 
 
-        if (position < -200) {
+        if (position < 0 - starship.offsetHeight) {
             clearInterval(retreat);
             advance = setInterval(animateForward, 15);
             position += 150;
