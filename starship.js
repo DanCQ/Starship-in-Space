@@ -6,10 +6,6 @@ let speed = false; //for boosters
 
 //images for background
 let images = [
-    { 
-        name: "Milky Way Galaxy",
-        img: "url(assets/milky-way.jpeg)",
-    },
     {
         name: "Distant Sun",
         img: "url(assets/distant-sun.jpeg)"
@@ -19,14 +15,59 @@ let images = [
         img: `url(assets/earth/${earth}.png)`
     },
     {
+        name: "Jupiter",
+        img: "url(assets/jupiter.jpeg)"
+    },
+    {
         name: "Mars",
         img: "url(assets/mars.jpeg)"
     },
     {
+        name: "Milky Way Earth View",
+        img: "url(assets/milky-way-earth-view.jpeg)"
+    },
+    { 
+        name: "Milky Way Galaxy",
+        img: "url(assets/milky-way.jpeg)"
+    },
+    {
+        name: "Moon",
+        img: "url(assets/moon.jpeg)"
+    },
+    {
         name: "Neptune",
         img: "url(assets/neptune.jpeg)"
+    },
+    {
+        name: "Low Earth Orbit Night",
+        img: "url(assets/low-earth-orbit-night.jpeg)"
+    },
+    {
+        name: "Sun",
+        img: "url(assets/sun.jpeg)"
     }
 ];
+
+
+//reassigns value to screenWidth if screen size changes
+window.addEventListener("resize", function() {
+    screenWidth = document.documentElement.scrollWidth;
+});
+
+
+//clicking ship activates booster speeed
+rocket.addEventListener("click", function() {
+
+    let boost = document.querySelector(".boost");
+    boost.style.visibility = "visible";
+    speed = true;
+
+    setTimeout(function() {
+        boost.style.visibility = "hidden";
+        speed = false;
+
+    }, 500);
+});
 
 
 //Returns a random number within a chosen range
@@ -41,7 +82,7 @@ function outerSpace() {
     
     let body = document.querySelector(".body");
     let location = document.querySelector(".location");
-    let nextImg = new Image(); //Img element for preloading next image
+    let nextImg = new Image(); //img element for preloading next image
     let num = randomRange(0, images.length -1); //sets random number within array size
     let fade; 
     let opacity = 0;
@@ -78,7 +119,7 @@ function outerSpace() {
                 clearInterval(fade);
             }
         }
-        
+
     }, 5000); //five seconds
 
 
@@ -110,27 +151,6 @@ function outerSpace() {
     }
     
 }
-
-
-//reassigns value to screenWidth if screen size changes
-window.addEventListener("resize", function() {
-    screenWidth = document.documentElement.scrollWidth;
-});
-
-
-//clicking ship activates booster speeed
-rocket.addEventListener("click", function() {
-
-    let boost = document.querySelector(".boost");
-    boost.style.visibility = "visible";
-    speed = true;
-
-    setTimeout(function() {
-        boost.style.visibility = "hidden";
-        speed = false;
-
-    }, 500);
-});
 
 
 //Animate item left to right
@@ -169,6 +189,7 @@ function animate(item) {
             position -= 150;
         }
     }
+
     function animateBackward() {
         if(speed) {
             position -= 2.5;
