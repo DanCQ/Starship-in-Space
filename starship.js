@@ -40,10 +40,47 @@ function randomRange(min,max) {
 function outerSpace() {
     
     let body = document.querySelector(".body");
-    let num = randomRange(0, images.length -1); //sets random number within array size
+    let location = document.querySelector(".location");
     let nextImg = new Image(); //Img element for preloading next image
-
+    let num = randomRange(0, images.length -1); //sets random number within array size
+    let fade; 
+    let opacity = 0;
+    
     background();
+
+    setTimeout(function() {
+        location.innerHTML = images[num].name;
+        location.style.opacity = "0.0";
+
+        fade = setInterval(fadeIn, 175); //fades in location name
+            
+        function fadeIn() {
+            opacity += 0.1;
+            location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
+
+            //when fully visible
+            if(location.style.opacity >= 1) {
+                clearInterval(fade);
+
+                setTimeout(function() {
+
+                    fade = setInterval(fadeOut, 175); //fades out location name
+
+                },25000);//twenty five seconds
+            }
+        }
+
+        function fadeOut() {
+            opacity -= 0.1;
+            location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
+
+            if(location.style.opacity <= 0.0) {
+                clearInterval(fade);
+            }
+        }
+        
+    }, 5000); //five seconds
+
 
     if(images[num].name == "Earth") {
 
