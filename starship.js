@@ -19,8 +19,16 @@ let images = [
         img: "url(assets/jupiter.jpeg)"
     },
     {
+        name: "Low Earth Orbit Night",
+        img: "url(assets/low-earth-orbit-night.jpeg)"
+    },
+    {
         name: "Mars",
         img: "url(assets/mars.jpeg)"
+    },
+    {
+        name: "Mercury",
+        img: "url(assets/mercury.jpeg)"
     },
     {
         name: "Milky Way Earth View",
@@ -39,12 +47,24 @@ let images = [
         img: "url(assets/neptune.jpeg)"
     },
     {
-        name: "Low Earth Orbit Night",
-        img: "url(assets/low-earth-orbit-night.jpeg)"
+        name: "Pluto",
+        img: "url(assets/pluto.jpeg)"
+    },
+    {
+        name: "Saturn",
+        img: "url(assets/saturn.jpeg)"
     },
     {
         name: "Sun",
         img: "url(assets/sun.jpeg)"
+    },
+    {
+        name: "Uranus",
+        img: "url(assets/uranus.jpeg)"
+    },
+    {
+        name: "Venus",
+        img: "url(assets/venus.jpeg)"
     }
 ];
 
