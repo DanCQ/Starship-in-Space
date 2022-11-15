@@ -199,7 +199,7 @@ function outerSpace() {
             case "Mercury":
                 location.innerHTML = "Mercurius";
                 break;
-            case "Mercurious":
+            case "Mercurius":
                 location.innerHTML = "Mercury";
                 break;
         };
