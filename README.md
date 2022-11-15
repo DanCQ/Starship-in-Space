@@ -1,6 +1,6 @@
 # Starship-in-Space
 
-<a href="https://starship-vs-asteroid.pages.dev/">Starship Vs Asteroid</a>
+<a href="https://starship-vs-asteroid.pages.dev/">Starship in Space</a>
 
 A recreation of the space game from OpenAI. <br>
 Every refresh gives you a random space background. <br>
