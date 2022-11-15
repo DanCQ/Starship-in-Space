@@ -1,6 +1,6 @@
 const boost = document.querySelector(".boost");
 let earth = randomRange(1,69);
-const raptor = new Audio("assets/raptor.mp3");
+const raptor = new Audio("assets/raptor.mp3"); //raptor engine sounds 
 const rocket = document.querySelector(".rocket");
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
 let speed = false; //for boosters
