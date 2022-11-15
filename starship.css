@@ -11,6 +11,15 @@ body {
     visibility:hidden;
 }
 
+.location {
+    color:white;
+    font-family:monospace;
+    font-size:26px;
+    position:absolute;
+        bottom:1em;
+        right:1.5em;
+}
+
 .rocket {
     position: absolute;
         top: 45%;
@@ -35,7 +44,11 @@ body {
         left: 42px;
         width: 22px;
     }
-    
+
+    .location {
+        font-size:25px;
+    }
+
 }
 
 @media (max-width: 800px) {
@@ -50,6 +63,10 @@ body {
         width: 19px;
     }
 
+    .location {
+        font-size:24px;
+    }
+
 }
 
 @media (max-width: 600px) {
@@ -62,6 +79,10 @@ body {
         top:140px;
         left: 32px;
         width: 16px;
+    }
+
+    .location {
+        font-size:23px;
     }
     
 }
