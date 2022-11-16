@@ -104,7 +104,6 @@ function randomRange(min,max) {
 
 
 function outerSpace() {
-    
     let body = document.querySelector(".body");
     let location = document.querySelector(".location");
     let nextImg = new Image(); //img element for preloading next image
@@ -259,7 +258,6 @@ function outerSpace() {
                 spaceCowboy(); //calls astronaut
             break;
         }
-
     },60000); //waits 60 seconds
 }
 
@@ -280,7 +278,7 @@ function animate(item) {
         } else {
             retreat = setInterval(animateBackward, 20);
         }
-    }
+    } 
     flip();
     
         
@@ -315,7 +313,6 @@ function animate(item) {
             position += 150;
         }
     }
-     
 }
 
 function spaceCowboy() {
@@ -339,17 +336,7 @@ function spaceCowboy() {
     distance = setInterval(comingIn, 50);
     spin = setInterval(ride, 50);
 
-    astronaut.addEventListener("click", function() {
-        radio.play();
-        clearInterval(distance);
-        clearInterval(spin);
-        nextOriginX = randomRange(0, screenWidth);
-        nextOriginY = randomRange(0, screenHeight);
-        nextRotation = randomRange(-360, 360);
 
-        distance = setInterval(leave, 50);
-    });
-    
     //astronaut coming in
     function comingIn() {
         size += Math.round(0.5 * 100) /100;
@@ -360,13 +347,27 @@ function spaceCowboy() {
         }
     }
 
+
+    astronaut.addEventListener("click", function() {
+        radio.play();
+        clearInterval(spin); //stops intervals if running
+        clearInterval(distance);
+        
+        nextOriginX = randomRange(0, screenWidth);
+        nextOriginY = randomRange(0, screenHeight);
+        nextRotation = randomRange(-360, 360);
+
+        distance = setInterval(leave, 50); //starts interval
+    });
+
+
     //sends astonaut out
     function leave() {
         size -=  Math.round(0.5 * 100) /100;
         astronaut.style.height = size + "px";
         
         if(size <= 0) {
-            clearInterval(distance);
+            clearInterval(distance); //clears interval
         }
 
         if(rotation > nextRotation) {
@@ -401,7 +402,7 @@ function spaceCowboy() {
             rotation += Math.round(0.5 * 100) / 100;
             astronaut.style.transform = `rotate(${rotation}deg)`;
         } else if(rotation == 8) {
-            clearInterval(spin);
+            clearInterval(spin); //stops spinning
         }
     }
 
