@@ -175,32 +175,72 @@ function outerSpace() {
         body.style.backgroundSize = "cover";
     }
 
-    //celestial body latin names
+    //Fade in|out for celestial body latin names
     location.addEventListener("click", function() {
         switch(location.innerHTML) {
             case "Earth": 
-                location.innerHTML = "Terra";
+                fade = setInterval(fadeOut, 175); //fades out location name
+                setTimeout(function() {
+                    location.innerHTML = "Terra";
+                    location.style.opacity = "0.0";
+                    fade = setInterval(fadeIn, 175); //fades in location name
+                }, 2500); //2.5 seconds
                 break;
             case "Terra":
-                location.innerHTML = "Earth";
+                fade = setInterval(fadeOut, 175); //fades out location name
+                setTimeout(function() {
+                    location.innerHTML = "Earth";
+                    location.style.opacity = "0.0";
+                    fade = setInterval(fadeIn, 175); //fades in location name
+                }, 2500); //2.5seconds
                 break;
             case "Moon":
-                location.innerHTML = "Luna";
+                fade = setInterval(fadeOut, 175); //fades out location name
+                setTimeout(function() {
+                    location.innerHTML = "Luna";
+                    location.style.opacity = "0.0";
+                    fade = setInterval(fadeIn, 175); //fades in location name
+                }, 2500); //2.5seconds
                 break;
             case "Luna":
-                location.innerHTML = "Moon";
+                fade = setInterval(fadeOut, 175); //fades out location name
+                setTimeout(function() {
+                    location.innerHTML = "Moon";
+                    location.style.opacity = "0.0";
+                    fade = setInterval(fadeIn, 175); //fades in location name
+                }, 2500); //2.5seconds
                 break;
             case "Sun":
-                location.innerHTML = "Sol";
+                fade = setInterval(fadeOut, 175); //fades out location name
+                setTimeout(function() {
+                    location.innerHTML = "Sol";
+                    location.style.opacity = "0.0";
+                    fade = setInterval(fadeIn, 175); //fades in location name
+                }, 2500); //2.5seconds
                 break;
             case "Sol":
-                location.innerHTML = "Sun";
+                fade = setInterval(fadeOut, 175); //fades out location name
+                setTimeout(function() {
+                    location.innerHTML = "Sun";
+                    location.style.opacity = "0.0";
+                    fade = setInterval(fadeIn, 175); //fades in location name
+                }, 2500); //2.5seconds
                 break;
             case "Mercury":
-                location.innerHTML = "Mercurius";
+                fade = setInterval(fadeOut, 175); //fades out location name
+                setTimeout(function() {
+                    location.innerHTML = "Mercurius";
+                    location.style.opacity = "0.0";
+                    fade = setInterval(fadeIn, 175); //fades in location name
+                }, 2500); //2.5seconds
                 break;
             case "Mercurius":
-                location.innerHTML = "Mercury";
+                fade = setInterval(fadeOut, 175); //fades out location name
+                setTimeout(function() {
+                    location.innerHTML = "Mercury";
+                    location.style.opacity = "0.0";
+                    fade = setInterval(fadeIn, 175); //fades in location name
+                }, 2500); //2.5seconds
                 break;
         };
     });
