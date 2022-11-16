@@ -259,7 +259,7 @@ function outerSpace() {
                 spaceCowboy(); //calls astronaut
             break;
         }
-        
+
     },60000); //waits 60 seconds
 }
 
@@ -325,6 +325,9 @@ function spaceCowboy() {
     let originX = randomRange(180, screenWidth - 180);
     let originY = randomRange(180, screenHeight - 180);
     let rotation = randomRange(-360, 360);
+    let nextRotation;
+    let nextOriginX;
+    let nextOriginY;
     let size = 0;
     let spin;
     
@@ -333,17 +336,22 @@ function spaceCowboy() {
     astronaut.style.left = originX + "px";
     astronaut.style.top = originY + "px";
 
-    distance = setInterval(near, 50);
+    distance = setInterval(comingIn, 50);
     spin = setInterval(ride, 50);
 
     astronaut.addEventListener("click", function() {
         radio.play();
         clearInterval(distance);
-        distance = setInterval(out, 50);
+        clearInterval(spin);
+        nextOriginX = randomRange(0, screenWidth);
+        nextOriginY = randomRange(0, screenHeight);
+        nextRotation = randomRange(-360, 360);
+
+        distance = setInterval(leave, 50);
     });
     
     //astronaut coming in
-    function near() {
+    function comingIn() {
         size += Math.round(0.5 * 100) /100;
         astronaut.style.height = size + "px";
         
@@ -353,12 +361,35 @@ function spaceCowboy() {
     }
 
     //sends astonaut out
-    function out() {
+    function leave() {
         size -=  Math.round(0.5 * 100) /100;
         astronaut.style.height = size + "px";
-
+        
         if(size <= 0) {
             clearInterval(distance);
+        }
+
+        if(rotation > nextRotation) {
+            rotation -= Math.round(0.5 * 100) / 100;
+            astronaut.style.transform = `rotate(${rotation}deg)`;
+        } else if(rotation < nextRotation) {
+            rotation += Math.round(0.5 * 100) / 100;
+            astronaut.style.transform = `rotate(${rotation}deg)`;
+        }
+
+        if(originX > nextOriginX)  {
+            originX -= Math.round(0.5 * 100) / 100;
+            astronaut.style.left = `${originX}px`;
+        } else if(originX < nextOriginX) {
+            originX += Math.round(0.5 * 100) / 100;
+            astronaut.style.left = `${originX}px`;
+        }
+        
+        if(originY > nextOriginY) {
+            originY -= Math.round(0.5 * 100) / 100;
+            astronaut.style.top = `${originY}px`;
+        } else if(originY < nextOriginY) {
+            astronaut.style.top = `${originY}px`;
         }
     }
 
