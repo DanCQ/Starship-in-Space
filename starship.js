@@ -156,7 +156,7 @@ function outerSpace() {
                 earth = 1;
             };
             nextImg.src = `assets/earth/${earth}.png`; //preloads next image
-            body.style.transition = "ease-in-out 250ms";
+            body.style.transition = "ease-in-out 50ms";
             
             //change only happens once next image is loaded
             nextImg.onload = function() {
@@ -164,7 +164,7 @@ function outerSpace() {
                 background();
             }
 
-        }, 5000);
+        }, 4000);
     }
 
     function background() {
