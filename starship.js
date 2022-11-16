@@ -5,6 +5,7 @@ const rocket = document.querySelector(".rocket");
 
 let earth = randomRange(1,69);
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
+let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
 let speed = false; //for boosters
 
 
@@ -111,8 +112,9 @@ function outerSpace() {
     let fade; 
     let opacity = 0;
     
-    background();
+    background(); //sets background image
 
+    //displays location name
     setTimeout(function() {
         location.innerHTML = images[num].name;
         location.style.opacity = "0.0";
@@ -121,7 +123,7 @@ function outerSpace() {
 
     }, 5000); //five seconds
 
-
+    //word fade effect
     function fadeIn() {
         opacity += 0.1;
         location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
@@ -138,6 +140,7 @@ function outerSpace() {
         }
     }
 
+    //word fade effect
     function fadeOut() {
         opacity -= 0.1;
         location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
@@ -147,7 +150,7 @@ function outerSpace() {
         }
     }
 
-
+    //Earth spin animation
     if(images[num].name == "Earth") {
 
         setInterval(function() {
@@ -166,9 +169,10 @@ function outerSpace() {
 
         }, 4000);
     }
-
+    
+    //sets background image
     function background() {
-        body.style.background = images[num].img; //sets random background onload
+        body.style.background = images[num].img; 
         body.style.backgroundColor = "black";
         body.style.backgroundPosition = "center";
         body.style.backgroundRepeat = "no-repeat";
@@ -244,7 +248,19 @@ function outerSpace() {
                 break;
         };
     });
-    
+
+    //In these locations
+    setTimeout(function() { 
+        switch(images[num].name) {
+            case "Earth":
+            case "Moon":
+            case "Low Earth Orbit Night":
+            case "Mars":
+                spaceCowboy(); //calls astronaut
+            break;
+        }
+        
+    },60000); //waits 60 seconds
 }
 
 
@@ -255,8 +271,6 @@ function animate(item) {
     let retreat;
     let starship = document.querySelector(".starship");
 
-    item.style.position = "absolute";
-    
     //God plays dice
     function flip() {
         let coin = randomRange(1, 2);
@@ -295,7 +309,6 @@ function animate(item) {
         item.style.left = position + "px";
         item.style.transform = "rotate(-90deg)";
 
-
         if (position < 0 - starship.offsetHeight) {
             clearInterval(retreat);
             advance = setInterval(animateForward, 15);
@@ -303,6 +316,64 @@ function animate(item) {
         }
     }
      
+}
+
+function spaceCowboy() {
+
+    const radio = new Audio("assets/on-way.mp3");
+    let distance;
+    let originX = randomRange(180, screenWidth - 180);
+    let originY = randomRange(180, screenHeight - 180);
+    let rotation = randomRange(-360, 360);
+    let size = 0;
+    let spin;
+    
+    astronaut.style.visibility = "visible";
+    astronaut.style.transform = `rotate(${rotation}deg)`;
+    astronaut.style.left = originX + "px";
+    astronaut.style.top = originY + "px";
+
+    distance = setInterval(near, 50);
+    spin = setInterval(ride, 50);
+
+    astronaut.addEventListener("click", function() {
+        radio.play();
+        clearInterval(distance);
+        distance = setInterval(out, 50);
+    });
+    
+    //astronaut coming in
+    function near() {
+        size += Math.round(0.5 * 100) /100;
+        astronaut.style.height = size + "px";
+        
+        if(size >= 200) {
+            clearInterval(distance); //stops function
+        }
+    }
+
+    //sends astonaut out
+    function out() {
+        size -=  Math.round(0.5 * 100) /100;
+        astronaut.style.height = size + "px";
+
+        if(size <= 0) {
+            clearInterval(distance);
+        }
+    }
+
+    function ride() {
+        if(rotation > 8) {
+            rotation -= Math.round(0.5 * 100) / 100;
+            astronaut.style.transform = `rotate(${rotation}deg)`;
+        } else if(rotation < 8) {
+            rotation += Math.round(0.5 * 100) / 100;
+            astronaut.style.transform = `rotate(${rotation}deg)`;
+        } else if(rotation == 8) {
+            clearInterval(spin);
+        }
+    }
+
 }
 
 
