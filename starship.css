@@ -1,9 +1,10 @@
 .astronaut {
-    height: 169px;
+    height: 1px;
     position:absolute;
         top:3em;
         right:5em;
     visibility: hidden;
+    z-index:2
 }
 
 body {
