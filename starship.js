@@ -135,7 +135,7 @@ function outerSpace() {
 
                 fade = setInterval(fadeOut, 175); //fades out location name
 
-            },45000);//Forty five seconds
+            }, 30000);//Forty five seconds
         }
     }
 
@@ -180,6 +180,7 @@ function outerSpace() {
 
     //Fade in|out for celestial body latin names
     location.addEventListener("click", function() {
+
         switch(location.innerHTML) {
             case "Earth": 
                 fade = setInterval(fadeOut, 175); //fades out location name
@@ -248,6 +249,15 @@ function outerSpace() {
         };
     });
 
+    function info() {
+
+        if(location.style.opacity <= 0) {
+            fade = setInterval(fadeIn, 175); 
+        }
+
+        //location info to come
+    }
+
     //In these locations
     setTimeout(function() { 
         switch(images[num].name) {
@@ -259,6 +269,11 @@ function outerSpace() {
             break;
         }
     },60000); //waits 60 seconds
+
+    window.onclick = function() {
+
+        info();
+    };
 }
 
 
