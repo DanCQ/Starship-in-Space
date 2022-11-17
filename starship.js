@@ -1,4 +1,5 @@
 const boost = document.querySelector(".boost"); //engine fire
+const hubble = document.querySelector(".hubble"); //space telescope
 const onWay = new Audio("assets/sounds/on-way.mp3");
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine sounds 
 const rocket = document.querySelector(".rocket"); 
@@ -178,6 +179,11 @@ function outerSpace() {
             }
 
         }, 4000);
+    }
+
+    //hubble appears here only
+    if(images[num].name == "Low Earth Orbit Night") {
+        hubble.style.visibility = "visible";
     }
     
     //sets background image
