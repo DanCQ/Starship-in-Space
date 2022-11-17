@@ -21,9 +21,6 @@ body {
 }
 
 .hubble {
-    position:absolute;
-        left: 11em;
-        top: 3em;
     width: 225px;
     visibility:hidden;
     z-index:2;
@@ -36,7 +33,7 @@ body {
     position:absolute;
         bottom:1em;
         right:1.5em;
-    z-index:4;
+    z-index:5;
 }
 
 .rocket {
@@ -45,18 +42,34 @@ body {
     transform: rotate(90deg);
     z-index:1;
 }
+
 .starship {
     height: 225px;
     position:absolute;
     
 }
 
+.telescope {
+    color:whitesmoke;
+    display:flex;
+        justify-content: center;
+    font-family: "antonio", monospace;
+    font-size: 20px;
+    position:absolute;
+        left: 10em;
+        top: 3em;
+    text-align: center;
+}
+
+.telescope figcaption {
+    position:absolute;
+        bottom:20%;
+    visibility: hidden;
+    z-index:4;
+}
+
 
 @media (max-width: 1000px) {
-
-    .starship {
-        height: 200px;
-    }
 
     .boost {
         top:187px;
@@ -65,22 +78,26 @@ body {
     }
 
     .hubble {
-        left:10em;
-        top:5em;
         width: 200px;
     }
 
     .location {
         font-size:25px;
     }
+    
+    .starship {
+        height: 200px;
+    }
+
+    .telescope {
+        font-size: 19px;
+        left:8em;
+        top:4em;
+    }
 
 }
 
 @media (max-width: 800px) {
-
-    .starship {
-        height: 175px;
-    }
 
     .boost {
         top:164px;
@@ -89,22 +106,26 @@ body {
     }
 
     .hubble {
-        left:7em;
-        top:7em;
         width: 175px;
     }
 
     .location {
         font-size:24px;
     }
+    
+    .starship {
+        height: 175px;
+    }
+
+    .telescope {
+        font-size: 18px;
+        left:6em;
+        top:6em;
+    }
 
 }
 
 @media (max-width: 600px) {
-
-    .starship {
-        height: 150px;
-    }
 
     .boost {
         top:140px;
@@ -113,8 +134,6 @@ body {
     }
 
     .hubble {
-        left:5em;
-        top:8em;
         width: 150px;
     }
 
@@ -122,5 +141,14 @@ body {
         font-size:23px;
     }
     
+    .starship {
+        height: 150px;
+    }
+
+    .telescope {
+        font-size: 16px;
+        left:3em;
+    }
+
 }
 
