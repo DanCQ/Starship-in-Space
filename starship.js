@@ -225,6 +225,7 @@ function outerSpace() {
         body.style.backgroundPosition = "center";
         body.style.backgroundRepeat = "no-repeat";
         body.style.backgroundSize = "cover";
+        body.style.overflow = "hidden"; //hides scroll bars
     }
 
     //Fade in|out for celestial body latin names
@@ -319,10 +320,10 @@ function outerSpace() {
         }
     },60000); //waits 60 seconds
 
-    window.onclick = function() {
+    window.addEventListener("click", function() {
 
         info();
-    };
+    });
 }
 
 
