@@ -1,7 +1,6 @@
-const astronaut = document.querySelector(".astronaut");
-const boost = document.querySelector(".boost");
-const raptor = new Audio("assets/raptor.mp3"); //raptor engine sounds 
-const rocket = document.querySelector(".rocket");
+const boost = document.querySelector(".boost"); //engine fire
+const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine sounds 
+const rocket = document.querySelector(".rocket"); 
 
 let earth = randomRange(1,69);
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
@@ -331,8 +330,8 @@ function animate(item) {
 }
 
 function spaceCowboy() {
-
-    const radio = new Audio("assets/on-way.mp3");
+    const astronaut = document.querySelector(".astronaut");
+    const radio = new Audio("assets/sounds/on-way.mp3");
     let distance;
     let originX = randomRange(180, screenWidth - 180);
     let originY = randomRange(180, screenHeight - 180);
@@ -372,12 +371,12 @@ function spaceCowboy() {
         nextOriginY = randomRange(0, screenHeight);
         nextRotation = randomRange(-360, 360);
 
-        distance = setInterval(leave, 50); //starts interval
+        distance = setInterval(leaving, 50); //starts interval
     });
 
 
     //sends astonaut out
-    function leave() {
+    function leaving() {
         size -=  Math.round(0.5 * 100) /100;
         astronaut.style.height = size + "px";
         
