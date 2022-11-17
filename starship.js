@@ -1,4 +1,5 @@
 const boost = document.querySelector(".boost"); //engine fire
+const onWay = new Audio("assets/sounds/on-way.mp3");
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine sounds 
 const rocket = document.querySelector(".rocket"); 
 
@@ -82,15 +83,26 @@ window.addEventListener("resize", function() {
 //clicking ship activates booster speeed
 rocket.addEventListener("click", function() {
 
-    raptor.play();
-    boost.style.visibility = "visible";
-    speed = true;
+    //God plays dice
+    function flip() {
+        let coin = randomRange(1, 2);
 
-    setTimeout(function() {
-        boost.style.visibility = "hidden";
-        speed = false;
+        if(coin == 1) {
+            onWay.play();
+        } else {
+            raptor.play();
+            boost.style.visibility = "visible";
+            speed = true;
 
-    }, 500);
+            setTimeout(function() {
+                boost.style.visibility = "hidden";
+                speed = false;
+
+            }, 500);
+        }
+    }
+    flip();
+   
 });
 
 
@@ -331,7 +343,7 @@ function animate(item) {
 
 function spaceCowboy() {
     const astronaut = document.querySelector(".astronaut");
-    const radio = new Audio("assets/sounds/on-way.mp3");
+    const niceOrbit = new Audio("assets/sounds/nice-orbit.mp3");
     let distance;
     let originX = randomRange(180, screenWidth - 180);
     let originY = randomRange(180, screenHeight - 180);
@@ -350,7 +362,6 @@ function spaceCowboy() {
     distance = setInterval(comingIn, 50);
     spin = setInterval(ride, 50);
 
-
     //astronaut coming in
     function comingIn() {
         size += Math.round(0.5 * 100) /100;
@@ -363,7 +374,7 @@ function spaceCowboy() {
 
 
     astronaut.addEventListener("click", function() {
-        radio.play();
+        niceOrbit.play();
         clearInterval(spin); //stops intervals if running
         clearInterval(distance);
         
