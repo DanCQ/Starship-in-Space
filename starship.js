@@ -5,6 +5,7 @@ const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine sounds
 const rocket = document.querySelector(".rocket"); 
 
 let earth = randomRange(1,69);
+let sunAtmosphere = randomRange(1,107);
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
 let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
 let speed = false; //for boosters
@@ -63,6 +64,10 @@ let images = [
     {
         name: "Sun",
         img: "url(assets/sun.jpeg)"
+    },
+    {
+        name: "Sun's Atmosphere",
+        img: `url(assets/sun-surface/${sunAtmosphere}.jpg)`
     },
     {
         name: "Uranus",
@@ -161,6 +166,11 @@ function outerSpace() {
         }
     }
 
+    //hubble appears here only
+    if(images[num].name == "Low Earth Orbit Night") {
+        hubble.style.visibility = "visible";
+    }
+
     //Earth spin animation
     if(images[num].name == "Earth") {
 
@@ -169,6 +179,7 @@ function outerSpace() {
             if(earth > 69) {
                 earth = 1;
             };
+
             nextImg.src = `assets/earth/${earth}.png`; //preloads next image
             body.style.transition = "ease-in-out 50ms";
             
@@ -181,10 +192,31 @@ function outerSpace() {
         }, 4000);
     }
 
-    //hubble appears here only
-    if(images[num].name == "Low Earth Orbit Night") {
-        hubble.style.visibility = "visible";
+
+    //Sun's Atmosphere animation
+    if(images[num].name == "Sun's Atmosphere") {
+
+        location.style.color = "whitesmoke";
+        rocket.style.visibility = "hidden";
+
+        setInterval(function() {
+            sunAtmosphere++;
+            if(sunAtmosphere > 107) {
+                sunAtmosphere = 1;
+            };
+            
+            nextImg.src = `assets/sun-surface/${sunAtmosphere}.jpg`; //preloads next image
+            body.style.transition = "ease-in-out 50ms";
+                
+            //change only happens once next image is loaded
+            nextImg.onload = function() {
+                images[num].img = `url(${nextImg.src})`;
+                background();
+            }
+
+        }, 1200);
     }
+   
     
     //sets background image
     function background() {
@@ -268,7 +300,7 @@ function outerSpace() {
 
     function info() {
 
-        if(location.style.opacity <= 0) {
+        if(location.style.opacity <= 1) {
             fade = setInterval(fadeIn, 175); 
         }
 
