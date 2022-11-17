@@ -4,7 +4,7 @@
         top:3em;
         right:5em;
     visibility: hidden;
-    z-index:2
+    z-index:3;
 }
 
 body {
@@ -20,6 +20,15 @@ body {
     visibility:hidden;
 }
 
+.hubble {
+    position:absolute;
+        left: 11em;
+        top: 3em;
+    width: 225px;
+    visibility:hidden;
+    z-index:2;
+}
+
 .location {
     color:ghostwhite;
     font-family: "audiowide", "antonio", "jura", monospace;
@@ -27,6 +36,7 @@ body {
     position:absolute;
         bottom:1em;
         right:1.5em;
+    z-index:4;
 }
 
 .rocket {
@@ -54,6 +64,12 @@ body {
         width: 22px;
     }
 
+    .hubble {
+        left:10em;
+        top:5em;
+        width: 200px;
+    }
+
     .location {
         font-size:25px;
     }
@@ -72,6 +88,12 @@ body {
         width: 19px;
     }
 
+    .hubble {
+        left:7em;
+        top:7em;
+        width: 175px;
+    }
+
     .location {
         font-size:24px;
     }
@@ -88,6 +110,12 @@ body {
         top:140px;
         left: 32px;
         width: 16px;
+    }
+
+    .hubble {
+        left:5em;
+        top:8em;
+        width: 150px;
     }
 
     .location {
