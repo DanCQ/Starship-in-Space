@@ -1,12 +1,14 @@
 const boost = document.querySelector(".boost"); //engine fire
 const hubble = document.querySelector(".hubble"); //space telescope
-const hubbleName = document.getElementById("hubble-name");
-const onWay = new Audio("assets/sounds/on-way.mp3");
-const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine sounds 
-const rocket = document.querySelector(".rocket"); 
+const hubbleName = document.getElementById("hubble-name"); //name caption
+const leftNav = document.querySelector(".left-nav"); //left page navigation
+const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
+const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
+const rightNav = document.querySelector(".right-nav"); //right page navigation
+const rocket = document.querySelector(".rocket"); //ship and parts
 
-let earth = randomRange(1,69);
-let sunAtmosphere = randomRange(1,107);
+let earth = randomRange(1,69); //random start image
+let sunAtmosphere = randomRange(1,107); //random start image
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
 let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
 let speed = false; //for boosters
@@ -80,10 +82,28 @@ let images = [
     }
 ];
 
+window.addEventListener("click", function() {
+    leftNav.style.opacity = "0.08";
+    rightNav.style.opacity = "0.08";
+    
+    setTimeout(function() {
+        leftNav.style.opacity = "0.0";
+        rightNav.style.opacity = "0.0";
+    },150);
+});
 
 //reassigns value to screenWidth if screen size changes
 window.addEventListener("resize", function() {
     screenWidth = document.documentElement.scrollWidth;
+});
+
+//refresh page to random location
+leftNav.addEventListener("click", function() {
+    location.reload();
+});
+//refresh page to random location
+rightNav.addEventListener("click", function() {
+    location.reload();
 });
 
 
@@ -127,7 +147,7 @@ function outerSpace() {
     let nextImg = new Image(); //img element for preloading next image
     let num = randomRange(0, images.length -1); //sets random number within array size
     let fade; 
-    let opacity = 0;
+    let opacity = 0.0;
     
     background(); //sets background image
 
@@ -164,6 +184,7 @@ function outerSpace() {
 
         if(location.style.opacity <= 0.0) {
             clearInterval(fade);
+            location.style.opacity = "0.0";
         }
     }
 
@@ -228,7 +249,7 @@ function outerSpace() {
 
         }, 1200);
     }
-   
+
     
     //sets background image
     function background() {
@@ -313,7 +334,7 @@ function outerSpace() {
 
     function info() {
 
-        if(location.style.opacity <= 1) {
+        if(location.style.opacity == 0) {
             fade = setInterval(fadeIn, 175); 
         }
 
@@ -332,7 +353,7 @@ function outerSpace() {
         }
     },60000); //waits 60 seconds
 
-    window.addEventListener("click", function() {
+    body.addEventListener("click", function() {
 
         info();
     });
