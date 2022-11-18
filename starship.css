@@ -21,13 +21,26 @@ body {
 }
 
 .hubble {
+    cursor:pointer;
     width: 225px;
     visibility:hidden;
     z-index:2;
 }
 
+.left-nav {
+    background-color:white;
+    cursor:pointer;
+    height: 100%;
+    opacity:0.0;
+    position:absolute;
+        left:0;
+    width:5%;
+    z-index:0;
+}
+
 .location {
     color:ghostwhite;
+    cursor:default;
     font-family: "audiowide", "antonio", "jura", monospace;
     font-size:26px;
     position:absolute;
@@ -36,7 +49,19 @@ body {
     z-index:5;
 }
 
+.right-nav {
+    background-color:white;
+    cursor:pointer;
+    height: 100%;
+    opacity:0.0;
+    position:absolute;
+        right:0;
+    width:5%;
+    z-index:0;
+}
+
 .rocket {
+    cursor:pointer;
     position: absolute;
         top: 45%;
     transform: rotate(90deg);
