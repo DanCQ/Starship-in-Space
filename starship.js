@@ -15,7 +15,6 @@ let screenWidth = document.documentElement.scrollWidth; //sets device screen wid
 let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
 let speed = false; //for boosters
 
-
 //images for background
 let images = [
     {
@@ -84,6 +83,43 @@ let images = [
     }
 ];
 
+
+//refresh page to random location
+leftNav.addEventListener("click", function() {
+    location.reload();
+});
+
+//refresh page to random location
+rightNav.addEventListener("click", function() {
+    location.reload();
+});
+
+
+//activates booster speeed
+rocket.addEventListener("click", function() {
+    
+    flip();
+
+    function flip() {
+        let dice = randomRange(1, 6);
+
+        if(dice == 6) {
+            onWay.play();
+        } else {
+            raptor.play();
+            boost.style.visibility = "visible";
+            speed = true;
+
+            setTimeout(function() {
+                boost.style.visibility = "hidden";
+                speed = false;
+            }, 500);
+        }
+    }
+});
+
+
+//makes sidebars visible
 window.addEventListener("click", function() {
     leftNav.style.opacity = "0.08";
     rightNav.style.opacity = "0.08";
@@ -97,40 +133,6 @@ window.addEventListener("click", function() {
 //reassigns value to screenWidth if screen size changes
 window.addEventListener("resize", function() {
     screenWidth = document.documentElement.scrollWidth;
-});
-
-//refresh page to random location
-leftNav.addEventListener("click", function() {
-    location.reload();
-});
-//refresh page to random location
-rightNav.addEventListener("click", function() {
-    location.reload();
-});
-
-
-//clicking ship activates booster speeed
-rocket.addEventListener("click", function() {
-
-    //God plays dice
-    function flip() {
-        let dice = randomRange(1, 12);
-
-        if(dice > 10) {
-            onWay.play();
-        } else {
-            raptor.play();
-            boost.style.visibility = "visible";
-            speed = true;
-
-            setTimeout(function() {
-                boost.style.visibility = "hidden";
-                speed = false;
-            }, 500);
-        }
-    }
-    flip();
-   
 });
 
 
