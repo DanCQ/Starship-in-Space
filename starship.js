@@ -84,6 +84,14 @@ let images = [
 ];
 
 
+//Returns a random number within a chosen range
+function randomRange(min,max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+//Math.floor() rounds down to the nearest whole number  e.i. 10 = 0 - 9  
+//Math.random() returns a random decimal between 0 - 0.99
+}
+
+
 //refresh page to random location
 leftNav.addEventListener("click", function() {
     location.reload();
@@ -136,11 +144,57 @@ window.addEventListener("resize", function() {
 });
 
 
-//Returns a random number within a chosen range
-function randomRange(min,max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-//Math.floor() rounds down to the nearest whole number  e.i. 10 = 0 - 9  
-//Math.random() returns a random decimal between 0 - 0.99
+//Animate item left to right
+function animate(item) {
+    let advance;
+    let position = randomRange(0, screenWidth);
+    let retreat;
+    let starship = document.querySelector(".starship");
+
+    //random ship flight direction
+    function flip() {
+        let coin = randomRange(1, 2);
+
+        if(coin == 1) {
+            advance = setInterval(animateForward, 20); 
+        } else {
+            retreat = setInterval(animateBackward, 20);
+        }
+    } 
+    flip();
+    
+        
+    function animateForward() {
+        if(speed) {
+            position += 2.5;
+        } else {
+            position += 0.2;
+        }
+        item.style.left = position + "px";
+        item.style.transform = "rotate(90deg)";
+
+        if (position > screenWidth + starship.offsetHeight) {
+            clearInterval(advance);
+            retreat = setInterval(animateBackward, 15);
+            position -= 150;
+        }
+    }
+
+    function animateBackward() {
+        if(speed) {
+            position -= 2.5;
+        } else {
+            position -= 0.2;
+        }
+        item.style.left = position + "px";
+        item.style.transform = "rotate(-90deg)";
+
+        if (position < 0 - starship.offsetHeight) {
+            clearInterval(retreat);
+            advance = setInterval(animateForward, 15);
+            position += 150;
+        }
+    }
 }
 
 
@@ -163,7 +217,7 @@ function outerSpace() {
 
     }, 5000); //five seconds
 
-    //word fade effect
+    //words fade in effect
     function fadeIn() {
         opacity += 0.1;
         location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
@@ -180,7 +234,7 @@ function outerSpace() {
         }
     }
 
-    //word fade effect
+    //words fade out effect
     function fadeOut() {
         opacity -= 0.1;
         location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
@@ -261,9 +315,7 @@ function outerSpace() {
                 parkerName.style.visibility = "hidden";
             }, 4000);
         });
-
     }
-
 
     //sets background image
     function background() {
@@ -345,6 +397,11 @@ function outerSpace() {
                 break;
         };
     });
+    
+    body.addEventListener("click", function() {
+
+        info();
+    });
 
     function info() {
 
@@ -366,86 +423,29 @@ function outerSpace() {
             break;
         }
     },60000); //waits 60 seconds
-
-    body.addEventListener("click", function() {
-
-        info();
-    });
 }
 
-
-//Animate item left to right
-function animate(item) {
-    let advance;
-    let position = randomRange(0, screenWidth);
-    let retreat;
-    let starship = document.querySelector(".starship");
-
-    //God plays dice
-    function flip() {
-        let coin = randomRange(1, 2);
-
-        if(coin == 1) {
-            advance = setInterval(animateForward, 20); 
-        } else {
-            retreat = setInterval(animateBackward, 20);
-        }
-    } 
-    flip();
-    
-        
-    function animateForward() {
-        if(speed) {
-            position += 2.5;
-        } else {
-            position += 0.2;
-        }
-        item.style.left = position + "px";
-        item.style.transform = "rotate(90deg)";
-
-        if (position > screenWidth + starship.offsetHeight) {
-            clearInterval(advance);
-            retreat = setInterval(animateBackward, 15);
-            position -= 150;
-        }
-    }
-
-    function animateBackward() {
-        if(speed) {
-            position -= 2.5;
-        } else {
-            position -= 0.2;
-        }
-        item.style.left = position + "px";
-        item.style.transform = "rotate(-90deg)";
-
-        if (position < 0 - starship.offsetHeight) {
-            clearInterval(retreat);
-            advance = setInterval(animateForward, 15);
-            position += 150;
-        }
-    }
-}
 
 function spaceCowboy() {
     const astronaut = document.querySelector(".astronaut");
     const niceOrbit = new Audio("assets/sounds/nice-orbit.mp3");
-    let distance;
     let originX = randomRange(180, screenWidth - 180);
     let originY = randomRange(180, screenHeight - 180);
     let rotation = randomRange(-360, 360);
-    let nextRotation;
+    let size = 0;
+
     let nextOriginX;
     let nextOriginY;
-    let size = 0;
+    let nextRotation;
     let spin;
+    let travel;
     
     astronaut.style.visibility = "visible";
     astronaut.style.transform = `rotate(${rotation}deg)`;
     astronaut.style.left = originX + "px";
     astronaut.style.top = originY + "px";
 
-    distance = setInterval(comingIn, 50);
+    travel = setInterval(comingIn, 50);
     spin = setInterval(ride, 50);
 
     //astronaut coming in
@@ -454,31 +454,30 @@ function spaceCowboy() {
         astronaut.style.height = size + "px";
         
         if(size >= 200) {
-            clearInterval(distance); //stops function
+            clearInterval(travel); //stops function
         }
     }
 
-
+    //starts leaving animation
     astronaut.addEventListener("click", function() {
         niceOrbit.play();
         clearInterval(spin); //stops intervals if running
-        clearInterval(distance);
+        clearInterval(travel);
         
         nextOriginX = randomRange(0, screenWidth);
         nextOriginY = randomRange(0, screenHeight);
         nextRotation = randomRange(-360, 360);
 
-        distance = setInterval(leaving, 50); //starts interval
+        travel = setInterval(leaving, 50); //starts interval
     });
 
-
-    //sends astonaut out
+    //astonaut leaving animation
     function leaving() {
         size -=  Math.round(0.5 * 100) /100;
         astronaut.style.height = size + "px";
         
         if(size <= 0) {
-            clearInterval(distance); //clears interval
+            clearInterval(travel); //clears interval
         }
 
         if(rotation > nextRotation) {
@@ -505,6 +504,7 @@ function spaceCowboy() {
         }
     }
 
+    //spin animation
     function ride() {
         if(rotation > 8) {
             rotation -= Math.round(0.5 * 100) / 100;
@@ -516,7 +516,6 @@ function spaceCowboy() {
             clearInterval(spin); //stops spinning
         }
     }
-
 }
 
 
