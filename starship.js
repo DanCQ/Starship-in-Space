@@ -1,5 +1,6 @@
 const boost = document.querySelector(".boost"); //engine fire
 const hubble = document.querySelector(".hubble"); //space telescope
+const hubbleName = document.getElementById("hubble-name");
 const onWay = new Audio("assets/sounds/on-way.mp3");
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine sounds 
 const rocket = document.querySelector(".rocket"); 
@@ -168,7 +169,17 @@ function outerSpace() {
 
     //hubble appears here only
     if(images[num].name == "Low Earth Orbit Night") {
+
         hubble.style.visibility = "visible";
+
+        hubble.addEventListener("click", function() {
+
+            hubbleName.style.visibility = "visible";
+
+            setTimeout(function() {
+                hubbleName.style.visibility = "hidden";
+            }, 4000);
+        });
     }
 
     //Earth spin animation
@@ -196,7 +207,8 @@ function outerSpace() {
     //Sun's Atmosphere animation
     if(images[num].name == "Sun's Atmosphere") {
 
-        location.style.color = "whitesmoke";
+        location.style.color = "peachpuff";
+        location.style.textShadow = "0px 0px 2px black";
         rocket.style.visibility = "hidden";
 
         setInterval(function() {
