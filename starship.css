@@ -50,7 +50,7 @@ body {
 }
 
 .parker {
-    animation-duration: 200s;
+    animation-duration: 180s;
     animation-iteration-count:infinite;
     animation-name:scan;
     transform:rotate(30deg);
