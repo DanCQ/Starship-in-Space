@@ -114,9 +114,9 @@ rocket.addEventListener("click", function() {
 
     //God plays dice
     function flip() {
-        let coin = randomRange(1, 2);
+        let dice = randomRange(1, 12);
 
-        if(coin == 1) {
+        if(dice > 10) {
             onWay.play();
         } else {
             raptor.play();
@@ -126,7 +126,6 @@ rocket.addEventListener("click", function() {
             setTimeout(function() {
                 boost.style.visibility = "hidden";
                 speed = false;
-
             }, 500);
         }
     }
@@ -271,7 +270,6 @@ function outerSpace() {
         body.style.backgroundPosition = "center";
         body.style.backgroundRepeat = "no-repeat";
         body.style.backgroundSize = "cover";
-        body.style.overflow = "hidden"; //hides scroll bars
     }
 
     //Fade in|out for celestial body latin names
