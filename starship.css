@@ -50,7 +50,10 @@ body {
 }
 
 .parker {
-    transform:rotate(0deg);
+    animation-duration: 200s;
+    animation-iteration-count:infinite;
+    animation-name:scan;
+    transform:rotate(30deg);
     visibility:hidden;
 }
 
@@ -115,6 +118,22 @@ body {
         bottom:20%;
     visibility: hidden;
     z-index:4;
+}
+
+
+@keyframes scan {
+    0% {
+        transform: rotate(30deg);
+    }
+    25% {
+        transform: rotate(60deg);
+    }
+    75% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(30deg);
+    }
 }
 
 
