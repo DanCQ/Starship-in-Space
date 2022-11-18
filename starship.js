@@ -3,6 +3,8 @@ const hubble = document.querySelector(".hubble"); //space telescope
 const hubbleName = document.getElementById("hubble-name"); //name caption
 const leftNav = document.querySelector(".left-nav"); //left page navigation
 const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
+const parker = document.querySelector(".parker"); //solar parker probe
+const parkerName = document.getElementById("parker-name"); //name caption
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
 const rightNav = document.querySelector(".right-nav"); //right page navigation
 const rocket = document.querySelector(".rocket"); //ship and parts
@@ -231,6 +233,7 @@ function outerSpace() {
         location.style.color = "peachpuff";
         location.style.textShadow = "0px 0px 2px black";
         rocket.style.visibility = "hidden";
+        parker.style.visibility = "visible";
 
         setInterval(function() {
             sunAtmosphere++;
@@ -248,9 +251,19 @@ function outerSpace() {
             }
 
         }, 1200);
+
+        parker.addEventListener("click", function() {
+
+            parkerName.style.visibility = "visible";
+
+            setTimeout(function() {
+                parkerName.style.visibility = "hidden";
+            }, 4000);
+        });
+
     }
 
-    
+
     //sets background image
     function background() {
         body.style.background = images[num].img; 
