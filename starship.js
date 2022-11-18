@@ -270,6 +270,7 @@ function outerSpace() {
         body.style.backgroundPosition = "center";
         body.style.backgroundRepeat = "no-repeat";
         body.style.backgroundSize = "cover";
+        body.style.overflow = "hidden";
     }
 
     //Fade in|out for celestial body latin names
