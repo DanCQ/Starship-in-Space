@@ -10,6 +10,7 @@ const rightNav = document.querySelector(".right-nav"); //right page navigation
 const rocket = document.querySelector(".rocket"); //ship and parts
 
 let earth = randomRange(1,69); //random start image
+let earthNight = 1;
 let sunAtmosphere = randomRange(1,107); //random start image
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
 let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
@@ -24,6 +25,10 @@ let images = [
     {
         name: "Earth",
         img: `url(assets/earth/${earth}.png)`
+    },
+    {
+        name: "Earth At Night",
+        img: `url(assets/earth-night/${earthNight}.jpg)`
     },
     {
         name: "Jupiter",
@@ -200,11 +205,13 @@ function animate(item) {
 
 function outerSpace() {
     let body = document.querySelector(".body");
+    let fade; 
     let location = document.querySelector(".location");
     let nextImg = new Image(); //img element for preloading next image
     let num = randomRange(0, images.length -1); //sets random number within array size
-    let fade; 
     let opacity = 0.0;
+
+    let earthNightCycle;
     
     background(); //sets background image
 
@@ -281,6 +288,28 @@ function outerSpace() {
         }, 4000);
     }
 
+    if(images[num].name == "Earth At Night") {
+
+        rocket.style.visibility = "hidden";
+        earthNightCycle = setInterval(earthAtNight, 1500);
+
+        function earthAtNight () {
+            earthNight++;
+            if(earthNight > 119) {
+                earthNight = 1;
+            };
+
+            nextImg.src = `assets/earth-night/${earthNight}.jpg`; //preloads next image
+            body.style.transition = "ease-in-out 50ms";
+            
+            //change only happens once next image is loaded
+            nextImg.onload = function() {
+                images[num].img = `url(${nextImg.src})`;
+                background();
+            }
+        }
+    }
+
 
     //Sun's Atmosphere animation
     if(images[num].name == "Sun's Atmosphere") {
@@ -292,6 +321,7 @@ function outerSpace() {
 
         setInterval(function() {
             sunAtmosphere++;
+
             if(sunAtmosphere > 107) {
                 sunAtmosphere = 1;
             };
@@ -316,6 +346,7 @@ function outerSpace() {
             }, 4000);
         });
     }
+
 
     //sets background image
     function background() {
@@ -426,6 +457,7 @@ function outerSpace() {
 }
 
 
+//astronaut
 function spaceCowboy() {
     const astronaut = document.querySelector(".astronaut");
     const niceOrbit = new Audio("assets/sounds/nice-orbit.mp3");
