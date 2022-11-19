@@ -12,6 +12,8 @@ const rocket = document.querySelector(".rocket"); //ship and parts
 
 const eagle = new Audio("assets/sounds/eagle.mp3"); //the eagle has landed
 const earthFrom = new Audio("assets/sounds/earth-from-here.mp3"); //..from here..
+const hubbleLaunch = new Audio("assets/sounds/hubble-launch.mp3"); //launch
+const hubbleService = new Audio("assets/sounds/hubble-service.mp3"); //service
 const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
 const jfk = new Audio("assets/sounds/jfk.mp3"); //we choose..
@@ -282,6 +284,17 @@ function outerSpace() {
         hubble.addEventListener("click", function() {
 
             hubbleName.style.visibility = "visible";
+
+            function flip() {
+                let coin = randomRange(1, 2);
+        
+                if(coin == 1) {
+                    hubbleLaunch.play();
+                } else {
+                    hubbleService.play();
+                }
+            } 
+            flip();
 
             setTimeout(function() {
                 hubbleName.style.visibility = "hidden";
