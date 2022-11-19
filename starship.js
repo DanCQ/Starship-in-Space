@@ -11,6 +11,7 @@ const rocket = document.querySelector(".rocket"); //ship and parts
 
 
 const eagle = new Audio("assets/sounds/eagle.mp3"); //the eagle has landed
+const earthFrom = new Audio("assets/sounds/earth-from-here.mp3"); //..from here..
 const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
 
@@ -307,6 +308,7 @@ function outerSpace() {
 
         iss.addEventListener("click", function() {
 
+            earthFrom.play();
             issName.style.visibility = "visible";
 
             setTimeout(function() {
@@ -477,13 +479,14 @@ function outerSpace() {
                 spaceCowboy(); //calls astronaut
             break;
         }
-    },60000); //waits 60 seconds
+    },15000); //waits 15 seconds
 }
 
 
 //astronaut
 function spaceCowboy() {
     const astronaut = document.querySelector(".astronaut");
+    const explore = new Audio("assets/sounds/exploration.mp3"); //..at it's greatest
     const niceOrbit = new Audio("assets/sounds/nice-orbit.mp3"); //nice to be in orbit
     const smallStep = new Audio("assets/sounds/one-small-step.mp3"); //one small step for man..
 
@@ -520,6 +523,8 @@ function spaceCowboy() {
     astronaut.addEventListener("click", function() {
         if(images[num].name == "Moon") {
             smallStep.play();
+        } else if (images[num].name == "Mars") {
+            explore.play();
         } else {
             niceOrbit.play();
         }
