@@ -4,12 +4,15 @@ const hubbleName = document.getElementById("hubble-name"); //name caption
 const iss = document.querySelector(".iss"); //international space station
 const issName = document.getElementById("iss-name"); //name caption
 const leftNav = document.querySelector(".left-nav"); //left page navigation
-const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
 const parker = document.querySelector(".parker"); //solar parker probe
 const parkerName = document.getElementById("parker-name"); //name caption
-const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
 const rightNav = document.querySelector(".right-nav"); //right page navigation
 const rocket = document.querySelector(".rocket"); //ship and parts
+
+
+const eagle = new Audio("assets/sounds/eagle.mp3"); //the eagle has landed
+const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
+const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
 
 let earth = randomRange(1,69); //random start image
 let earthNight = 1;
@@ -119,7 +122,12 @@ rocket.addEventListener("click", function() {
         let dice = randomRange(1, 6);
 
         if(dice == 6) {
-            onWay.play();
+            if(images[num].name == "Moon") {
+                eagle.play();
+            } else {
+                onWay.play();
+            }
+
         } else {
             raptor.play();
             boost.style.visibility = "visible";
@@ -204,13 +212,14 @@ function animate(item) {
     }
 }
 
+let num = randomRange(0, images.length -1); //sets random number within array size
 
 function outerSpace() {
     let body = document.querySelector(".body");
     let fade; 
     let location = document.querySelector(".location");
     let nextImg = new Image(); //img element for preloading next image
-    let num = randomRange(0, images.length -1); //sets random number within array size
+    
     let opacity = 0.0;
 
     let earthNightCycle;
@@ -475,7 +484,9 @@ function outerSpace() {
 //astronaut
 function spaceCowboy() {
     const astronaut = document.querySelector(".astronaut");
-    const niceOrbit = new Audio("assets/sounds/nice-orbit.mp3");
+    const niceOrbit = new Audio("assets/sounds/nice-orbit.mp3"); //nice to be in orbit
+    const smallStep = new Audio("assets/sounds/one-small-step.mp3"); //one small step for man..
+
     let originX = randomRange(180, screenWidth - 180);
     let originY = randomRange(180, screenHeight - 180);
     let rotation = randomRange(-360, 360);
@@ -507,7 +518,11 @@ function spaceCowboy() {
 
     //starts leaving animation
     astronaut.addEventListener("click", function() {
-        niceOrbit.play();
+        if(images[num].name == "Moon") {
+            smallStep.play();
+        } else {
+            niceOrbit.play();
+        }
         clearInterval(spin); //stops intervals if running
         clearInterval(travel);
         
@@ -573,3 +588,4 @@ window.onload = function() {
     outerSpace();
 
 }
+
