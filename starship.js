@@ -1,6 +1,8 @@
 const boost = document.querySelector(".boost"); //engine fire
 const hubble = document.querySelector(".hubble"); //space telescope
 const hubbleName = document.getElementById("hubble-name"); //name caption
+const iss = document.querySelector(".iss"); 
+const issName = document.getElementById("iss-name")
 const leftNav = document.querySelector(".left-nav"); //left page navigation
 const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
 const parker = document.querySelector(".parker"); //solar parker probe
@@ -290,8 +292,18 @@ function outerSpace() {
 
     if(images[num].name == "Earth At Night") {
 
+        iss.style.visibility = "visible";
         rocket.style.visibility = "hidden";
         earthNightCycle = setInterval(earthAtNight, 1500);
+
+        iss.addEventListener("click", function() {
+
+            issName.style.visibility = "visible";
+
+            setTimeout(function() {
+                issName.style.visibility = "hidden";
+            }, 4000);
+        });
 
         function earthAtNight () {
             earthNight++;
@@ -308,6 +320,9 @@ function outerSpace() {
                 background();
             }
         }
+
+    } else {
+        clearInterval(earthNightCycle);
     }
 
 
