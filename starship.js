@@ -128,18 +128,19 @@ rocket.addEventListener("click", function() {
 
         if(dice == 6) {
             if(images[num].name == "Moon") {
-                function flip() {
 
-                    if(coin == 1) {
-                        eagle.play();
-                    } else {
-                        jfk.play();
-                    }
-                } 
-                flip();
+                if(coin == 1) {
+                    eagle.play();
+                } else {
+                    jfk.play();
+                }
+
+            } else if(images[num].name == "Earth") {
+                earthFrom.play();
             } else {
                 onWay.play();
             }
+
         } else {
 
             raptor.play();
@@ -331,7 +332,6 @@ function outerSpace() {
 
         iss.addEventListener("click", function() {
 
-            earthFrom.play();
             issName.style.visibility = "visible";
 
             setTimeout(function() {
@@ -546,7 +546,7 @@ function spaceCowboy() {
     astronaut.addEventListener("click", function() {
         if(images[num].name == "Moon") {
             smallStep.play();
-        } else if (images[num].name == "Mars") {
+        } else if (images[num].name == "Earth") {
             explore.play();
         } else {
             niceOrbit.play();
