@@ -29,8 +29,9 @@ body {
 }
 
 .iss {
-    width:400px;
+    cursor:pointer;
     transform:rotate(-20deg);
+    width:400px;
     visibility:hidden;
 }
 
