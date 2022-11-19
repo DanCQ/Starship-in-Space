@@ -14,6 +14,7 @@ const eagle = new Audio("assets/sounds/eagle.mp3"); //the eagle has landed
 const earthFrom = new Audio("assets/sounds/earth-from-here.mp3"); //..from here..
 const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
+const jfk = new Audio("assets/sounds/jfk.mp3"); //we choose..
 
 let earth = randomRange(1,69); //random start image
 let earthNight = 1;
@@ -121,15 +122,24 @@ rocket.addEventListener("click", function() {
 
     function flip() {
         let dice = randomRange(1, 6);
+        let coin = randomRange(1, 2);
 
         if(dice == 6) {
             if(images[num].name == "Moon") {
-                eagle.play();
+                function flip() {
+
+                    if(coin == 1) {
+                        eagle.play();
+                    } else {
+                        jfk.play();
+                    }
+                } 
+                flip();
             } else {
                 onWay.play();
             }
-
         } else {
+
             raptor.play();
             boost.style.visibility = "visible";
             speed = true;
