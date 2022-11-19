@@ -48,7 +48,7 @@ body {
 
 .location {
     color:ghostwhite;
-    cursor:default;
+    cursor:pointer;
     font-family: "audiowide", "antonio", "jura", monospace;
     font-size:26px;
     position:absolute;
@@ -58,9 +58,11 @@ body {
 }
 
 .parker {
-    animation-duration: 180s;
+    animation-duration: 60s;
     animation-iteration-count:infinite;
     animation-name:scan;
+    animation-timing-function: ease-in-out;
+    cursor:pointer;
     transform:rotate(30deg);
     visibility:hidden;
 }
@@ -157,7 +159,7 @@ body {
         transform: rotate(60deg);
     }
     75% {
-        transform: rotate(0deg);
+        transform: rotate(10deg);
     }
     100% {
         transform: rotate(30deg);
