@@ -27,6 +27,12 @@ body {
     z-index:2;
 }
 
+.iss {
+    width:400px;
+    transform:rotate(-20deg);
+    visibility:hidden;
+}
+
 .left-nav {
     background-color:white;
     cursor:pointer;
@@ -96,6 +102,26 @@ body {
     z-index:1;
 }
 
+.space-station {
+    display:flex;
+        align-items: center;
+        justify-content: center;
+    font-size: 20px;
+    position:absolute;
+        left: 0;
+        top: 0;
+    text-align: center;
+}
+
+.space-station figcaption {
+    color:whitesmoke;
+    font-family: "antonio", monospace;
+    position:absolute;
+        bottom:0;
+    visibility: hidden;
+    z-index:4;
+}
+
 .starship {
     height: 225px;
     position:absolute;
@@ -149,6 +175,10 @@ body {
         width: 200px;
     }
 
+    .iss {
+        width:375px;
+    }
+
     .location {
         font-size:25px;
     }
@@ -158,6 +188,10 @@ body {
     }
 
     .probe {
+        font-size: 19px;
+    }
+
+    .space-station {
         font-size: 19px;
     }
     
@@ -185,6 +219,10 @@ body {
         width: 175px;
     }
 
+    .iss {
+        width:350px;
+    }
+
     .location {
         font-size:24px;
     }
@@ -194,6 +232,10 @@ body {
     }
 
     .probe {
+        font-size: 18px;
+    }
+
+    .space-station {
         font-size: 18px;
     }
     
@@ -221,6 +263,10 @@ body {
         width: 150px;
     }
 
+    .iss {
+        width:350px;
+    }
+
     .location {
         font-size:23px;
     }
@@ -230,6 +276,10 @@ body {
     }
 
     .probe {
+        font-size: 16px;
+    }
+
+    .space-station {
         font-size: 16px;
     }
     
