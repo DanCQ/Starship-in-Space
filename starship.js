@@ -1,8 +1,8 @@
 const boost = document.querySelector(".boost"); //engine fire
 const hubble = document.querySelector(".hubble"); //space telescope
 const hubbleName = document.getElementById("hubble-name"); //name caption
-const iss = document.querySelector(".iss"); 
-const issName = document.getElementById("iss-name")
+const iss = document.querySelector(".iss"); //international space station
+const issName = document.getElementById("iss-name"); //name caption
 const leftNav = document.querySelector(".left-nav"); //left page navigation
 const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
 const parker = document.querySelector(".parker"); //solar parker probe
