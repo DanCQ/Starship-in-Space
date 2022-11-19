@@ -1,4 +1,5 @@
 .astronaut {
+    cursor: pointer;
     height: 1px;
     position:absolute;
         top:3em;
