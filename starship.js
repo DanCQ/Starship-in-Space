@@ -546,7 +546,7 @@ function spaceCowboy() {
     astronaut.addEventListener("click", function() {
         if(images[num].name == "Moon") {
             smallStep.play();
-        } else if (images[num].name == "Earth") {
+        } else if (images[num].name == "Mars") {
             explore.play();
         } else {
             niceOrbit.play();
