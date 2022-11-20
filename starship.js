@@ -9,14 +9,13 @@ const parkerName = document.getElementById("parker-name"); //name caption
 const rightNav = document.querySelector(".right-nav"); //right page navigation
 const rocket = document.querySelector(".rocket"); //ship and parts
 
-
 const eagle = new Audio("assets/sounds/eagle.mp3"); //the eagle has landed
 const earthFrom = new Audio("assets/sounds/earth-from-here.mp3"); //..from here..
 const hubbleLaunch = new Audio("assets/sounds/hubble-launch.mp3"); //launch
 const hubbleService = new Audio("assets/sounds/hubble-service.mp3"); //service
+const jfk = new Audio("assets/sounds/jfk.mp3"); //we choose..
 const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
-const jfk = new Audio("assets/sounds/jfk.mp3"); //we choose..
 
 let earth = randomRange(1,69); //random start image
 let earthNight = 1;
@@ -28,8 +27,20 @@ let speed = false; //for boosters
 //images for background
 let images = [
     {
-        name: "Distant Sun",
-        img: "url(assets/distant-sun.jpeg)"
+        name: "Sun's Atmosphere",
+        img: `url(assets/sun-surface/${sunAtmosphere}.jpg)`
+    },
+    {
+        name: "Sun",
+        img: "url(assets/sun.jpeg)"
+    },
+    {
+        name: "Mercury",
+        img: "url(assets/mercury.jpeg)"
+    },
+    {
+        name: "Venus",
+        img: "url(assets/venus.jpeg)"
     },
     {
         name: "Earth",
@@ -40,32 +51,32 @@ let images = [
         img: `url(assets/earth-night/${earthNight}.jpg)`
     },
     {
-        name: "Jupiter",
-        img: "url(assets/jupiter.jpeg)"
-    },
-    {
         name: "Low Earth Orbit Night",
         img: "url(assets/low-earth-orbit-night.jpeg)"
+    },
+    {
+        name: "Milky Way Earth View",
+        img: "url(assets/milky-way-earth-view.jpeg)"
+    },
+    {
+        name: "Moon",
+        img: "url(assets/moon.jpeg)"
     },
     {
         name: "Mars",
         img: "url(assets/mars.jpeg)"
     },
     {
-        name: "Mercury",
-        img: "url(assets/mercury.jpeg)"
+        name: "Jupiter",
+        img: "url(assets/jupiter.jpeg)"
     },
     {
-        name: "Milky Way Earth View",
-        img: "url(assets/milky-way-earth-view.jpeg)"
-    },
-    { 
-        name: "Milky Way Galaxy",
-        img: "url(assets/milky-way.jpeg)"
+        name: "Saturn",
+        img: "url(assets/saturn.jpeg)"
     },
     {
-        name: "Moon",
-        img: "url(assets/moon.jpeg)"
+        name: "Uranus",
+        img: "url(assets/uranus.jpeg)"
     },
     {
         name: "Neptune",
@@ -76,27 +87,16 @@ let images = [
         img: "url(assets/pluto.jpeg)"
     },
     {
-        name: "Saturn",
-        img: "url(assets/saturn.jpeg)"
+        name: "Distant Sun",
+        img: "url(assets/distant-sun.jpeg)"
     },
-    {
-        name: "Sun",
-        img: "url(assets/sun.jpeg)"
-    },
-    {
-        name: "Sun's Atmosphere",
-        img: `url(assets/sun-surface/${sunAtmosphere}.jpg)`
-    },
-    {
-        name: "Uranus",
-        img: "url(assets/uranus.jpeg)"
-    },
-    {
-        name: "Venus",
-        img: "url(assets/venus.jpeg)"
+    { 
+        name: "Milky Way Galaxy",
+        img: "url(assets/milky-way.jpeg)"
     }
 ];
 
+let num = randomRange(0, images.length - 1); //sets random number within array size
 
 //Returns a random number within a chosen range
 function randomRange(min,max) {
@@ -111,7 +111,7 @@ leftNav.addEventListener("click", function() {
     location.reload();
 });
 
-//refresh page to random location
+//could't get a -- or ++ iteration working without bugs
 rightNav.addEventListener("click", function() {
     location.reload();
 });
@@ -226,176 +226,20 @@ function animate(item) {
     }
 }
 
-let num = randomRange(0, images.length -1); //sets random number within array size
 
 function outerSpace() {
     let body = document.querySelector(".body");
-    let fade; 
-    let location = document.querySelector(".location");
     let nextImg = new Image(); //img element for preloading next image
-    
-    let opacity = 0.0;
+    let location = document.querySelector(".location");
+    let off;
 
-    let earthNightCycle;
-    
-    background(); //sets background image
-
-    //displays location name
-    setTimeout(function() {
-        location.innerHTML = images[num].name;
-        location.style.opacity = "0.0";
-
-        fade = setInterval(fadeIn, 175); //fades in location name
-
-    }, 5000); //five seconds
-
-    //words fade in effect
-    function fadeIn() {
-        opacity += 0.1;
-        location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
-
-        //when fully visible
-        if(location.style.opacity >= 1) {
-            clearInterval(fade);
-
-            setTimeout(function() {
-
-                fade = setInterval(fadeOut, 175); //fades out location name
-
-            }, 30000);//Forty five seconds
-        }
-    }
-
-    //words fade out effect
-    function fadeOut() {
-        opacity -= 0.1;
-        location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
-
-        if(location.style.opacity <= 0.0) {
-            clearInterval(fade);
-            location.style.opacity = "0.0";
-        }
-    }
-
-    //hubble appears here only
-    if(images[num].name == "Low Earth Orbit Night") {
-
-        hubble.style.visibility = "visible";
-
-        hubble.addEventListener("click", function() {
-
-            hubbleName.style.visibility = "visible";
-
-            function flip() {
-                let coin = randomRange(1, 2);
-        
-                if(coin == 1) {
-                    hubbleLaunch.play();
-                } else {
-                    hubbleService.play();
-                }
-            } 
-            flip();
-
-            setTimeout(function() {
-                hubbleName.style.visibility = "hidden";
-            }, 4000);
-        });
-    }
-
-    //Earth spin animation
-    if(images[num].name == "Earth") {
-
-        setInterval(function() {
-            earth++;
-            if(earth > 69) {
-                earth = 1;
-            };
-
-            nextImg.src = `assets/earth/${earth}.png`; //preloads next image
-            body.style.transition = "ease-in-out 50ms";
-            
-            //change only happens once next image is loaded
-            nextImg.onload = function() {
-                images[num].img = `url(${nextImg.src})`;
-                background();
-            }
-
-        }, 4000);
-    }
-
-    if(images[num].name == "Earth At Night") {
-
-        iss.style.visibility = "visible";
-        rocket.style.visibility = "hidden";
-        earthNightCycle = setInterval(earthAtNight, 1500);
-
-        iss.addEventListener("click", function() {
-
-            issName.style.visibility = "visible";
-
-            setTimeout(function() {
-                issName.style.visibility = "hidden";
-            }, 4000);
-        });
-
-        function earthAtNight () {
-            earthNight++;
-            if(earthNight > 119) {
-                earthNight = 1;
-            };
-
-            nextImg.src = `assets/earth-night/${earthNight}.jpg`; //preloads next image
-            body.style.transition = "ease-in-out 50ms";
-            
-            //change only happens once next image is loaded
-            nextImg.onload = function() {
-                images[num].img = `url(${nextImg.src})`;
-                background();
-            }
-        }
-
-    } else {
-        clearInterval(earthNightCycle);
-    }
-
-
-    //Sun's Atmosphere animation
-    if(images[num].name == "Sun's Atmosphere") {
-
-        location.style.color = "peachpuff";
-        location.style.textShadow = "0px 0px 2px black";
-        rocket.style.visibility = "hidden";
-        parker.style.visibility = "visible";
-
-        setInterval(function() {
-            sunAtmosphere++;
-
-            if(sunAtmosphere > 107) {
-                sunAtmosphere = 1;
-            };
-            
-            nextImg.src = `assets/sun-surface/${sunAtmosphere}.jpg`; //preloads next image
-            body.style.transition = "ease-in-out 50ms";
-                
-            //change only happens once next image is loaded
-            nextImg.onload = function() {
-                images[num].img = `url(${nextImg.src})`;
-                background();
-            }
-
-        }, 1200);
-
-        parker.addEventListener("click", function() {
-
-            parkerName.style.visibility = "visible";
-
-            setTimeout(function() {
-                parkerName.style.visibility = "hidden";
-            }, 4000);
-        });
-    }
-
+    background(); 
+    earthSpin(); //Earth spin animation
+    hubbleTelescope(); 
+    locationDisplay(); //displays location name
+    nightSpin(); //Earth at night
+    sunSpin(); //Sun's Atmosphere animation
+     
 
     //sets background image
     function background() {
@@ -407,90 +251,271 @@ function outerSpace() {
         body.style.overflow = "hidden";
     }
 
-    //Fade in|out for celestial body latin names
-    location.addEventListener("click", function() {
 
-        switch(location.innerHTML) {
-            case "Earth": 
-                fade = setInterval(fadeOut, 175); //fades out location name
+    function earthSpin() {
+
+        if(images[num].name == "Earth") {
+
+            setInterval(function() {
+                earth++;
+                if(earth > 69) {
+                    earth = 1;
+                };
+
+                nextImg.src = `assets/earth/${earth}.png`; //preloads next image
+                body.style.transition = "ease-in-out 50ms";
+            
+                //change only happens once next image is loaded
+                nextImg.onload = function() {
+                    images[num].img = `url(${nextImg.src})`;
+                    background();
+                } 
+
+            }, 3500); 
+        }
+    }
+
+
+    function hubbleTelescope() {
+
+        //hubble appears here only
+        if(images[num].name == "Low Earth Orbit Night") {
+
+            hubble.style.visibility = "visible";
+
+            hubble.addEventListener("click", function() {
+
+                hubbleName.style.visibility = "visible";
+                flip();
+
+                function flip() {
+                    let coin = randomRange(1, 2);
+        
+                    if(coin == 1) {
+                        hubbleLaunch.play();
+                    } else {
+                        hubbleService.play();
+                    }
+                } 
+                
                 setTimeout(function() {
-                    location.innerHTML = "Terra";
-                    location.style.opacity = "0.0";
-                    fade = setInterval(fadeIn, 175); //fades in location name
-                }, 2500); //2.5 seconds
-                break;
-            case "Terra":
-                fade = setInterval(fadeOut, 175); //fades out location name
-                setTimeout(function() {
-                    location.innerHTML = "Earth";
-                    location.style.opacity = "0.0";
-                    fade = setInterval(fadeIn, 175); //fades in location name
-                }, 2500); //2.5seconds
-                break;
-            case "Moon":
-                fade = setInterval(fadeOut, 175); //fades out location name
-                setTimeout(function() {
-                    location.innerHTML = "Luna";
-                    location.style.opacity = "0.0";
-                    fade = setInterval(fadeIn, 175); //fades in location name
-                }, 2500); //2.5seconds
-                break;
-            case "Luna":
-                fade = setInterval(fadeOut, 175); //fades out location name
-                setTimeout(function() {
-                    location.innerHTML = "Moon";
-                    location.style.opacity = "0.0";
-                    fade = setInterval(fadeIn, 175); //fades in location name
-                }, 2500); //2.5seconds
-                break;
-            case "Sun":
-                fade = setInterval(fadeOut, 175); //fades out location name
-                setTimeout(function() {
-                    location.innerHTML = "Sol";
-                    location.style.opacity = "0.0";
-                    fade = setInterval(fadeIn, 175); //fades in location name
-                }, 2500); //2.5seconds
-                break;
-            case "Sol":
-                fade = setInterval(fadeOut, 175); //fades out location name
-                setTimeout(function() {
-                    location.innerHTML = "Sun";
-                    location.style.opacity = "0.0";
-                    fade = setInterval(fadeIn, 175); //fades in location name
-                }, 2500); //2.5seconds
-                break;
-            case "Mercury":
-                fade = setInterval(fadeOut, 175); //fades out location name
-                setTimeout(function() {
-                    location.innerHTML = "Mercurius";
-                    location.style.opacity = "0.0";
-                    fade = setInterval(fadeIn, 175); //fades in location name
-                }, 2500); //2.5seconds
-                break;
-            case "Mercurius":
-                fade = setInterval(fadeOut, 175); //fades out location name
-                setTimeout(function() {
-                    location.innerHTML = "Mercury";
-                    location.style.opacity = "0.0";
-                    fade = setInterval(fadeIn, 175); //fades in location name
-                }, 2500); //2.5seconds
-                break;
-        };
-    });
+                    hubbleName.style.visibility = "hidden";
+                }, 4000);
+            });
+        } 
+    } 
+
+
+    function locationDisplay() {
+        
+        let fade;
+        let opacity = 0.0;
+        off = false;
     
-    body.addEventListener("click", function() {
+        //shows location name
+        setTimeout(function() {
+            location.innerHTML = images[num].name;
+            location.style.opacity = "0.0"; 
+            fade = setInterval(fadeIn, 175); //fades in location name
+    
+        }, 5000); //five seconds
+    
 
-        info();
-    });
+        //words fade in effect
+        function fadeIn() {
+            opacity += 0.1;
+            location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
+    
+            //when fully visible
+            if(location.style.opacity >= 1) {
+                clearInterval(fade);
+    
+                setTimeout(function() {
+    
+                    fade = setInterval(fadeOut, 175); //fades out location name
+    
+                }, 30000);//Forty five seconds
+            }
+        }
+    
+        //words fade out effect
+        function fadeOut() {
+            opacity -= 0.1;
+            location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
+    
+            if(location.style.opacity <= 0.0) {
+                clearInterval(fade);
+                //location.style.opacity = "0.0";
+                off = true;
+            }
+        }
 
+
+        //Fade in|out for celestial body latin names
+        location.addEventListener("click", function() {
+
+            switch(location.innerHTML) {
+                case "Earth": 
+                    fade = setInterval(fadeOut, 175); //fades out location name
+                    setTimeout(function() {
+                        location.innerHTML = "Terra";
+                        location.style.opacity = "0.0";
+                        fade = setInterval(fadeIn, 175); //fades in location name
+                    }, 2500); //2.5 seconds
+                    break;
+                case "Terra":
+                    fade = setInterval(fadeOut, 175); //fades out location name
+                    setTimeout(function() {
+                        location.innerHTML = "Earth";
+                        location.style.opacity = "0.0";
+                        fade = setInterval(fadeIn, 175); //fades in location name
+                    }, 2500); //2.5seconds
+                    break;
+                case "Moon":
+                    fade = setInterval(fadeOut, 175); //fades out location name
+                    setTimeout(function() {
+                        location.innerHTML = "Luna";
+                        location.style.opacity = "0.0";
+                        fade = setInterval(fadeIn, 175); //fades in location name
+                    }, 2500); //2.5seconds
+                    break;
+                case "Luna":
+                    fade = setInterval(fadeOut, 175); //fades out location name
+                    setTimeout(function() {
+                        location.innerHTML = "Moon";
+                        location.style.opacity = "0.0";
+                        fade = setInterval(fadeIn, 175); //fades in location name
+                    }, 2500); //2.5seconds
+                    break;
+                case "Sun":
+                    fade = setInterval(fadeOut, 175); //fades out location name
+                    setTimeout(function() {
+                        location.innerHTML = "Sol";
+                        location.style.opacity = "0.0";
+                        fade = setInterval(fadeIn, 175); //fades in location name
+                    }, 2500); //2.5seconds
+                    break;
+                case "Sol":
+                    fade = setInterval(fadeOut, 175); //fades out location name
+                    setTimeout(function() {
+                        location.innerHTML = "Sun";
+                        location.style.opacity = "0.0";
+                        fade = setInterval(fadeIn, 175); //fades in location name
+                    }, 2500); //2.5seconds
+                    break;
+                case "Mercury":
+                    fade = setInterval(fadeOut, 175); //fades out location name
+                    setTimeout(function() {
+                        location.innerHTML = "Mercurius";
+                        location.style.opacity = "0.0";
+                        fade = setInterval(fadeIn, 175); //fades in location name
+                    }, 2500); //2.5seconds
+                    break;
+                case "Mercurius":
+                    fade = setInterval(fadeOut, 175); //fades out location name
+                    setTimeout(function() {
+                        location.innerHTML = "Mercury";
+                        location.style.opacity = "0.0";
+                        fade = setInterval(fadeIn, 175); //fades in location name
+                    }, 2500); //2.5seconds
+                    break;
+            };
+        });
+    }
+    
+
+    function nightSpin() {
+
+        if(images[num].name == "Earth At Night") {
+
+            iss.style.visibility = "visible";
+            rocket.style.visibility = "hidden";
+
+            iss.addEventListener("click", function() {
+
+                earthFrom.play();
+                issName.style.visibility = "visible";
+
+                setTimeout(function() {
+                    issName.style.visibility = "hidden";
+                }, 4000);
+            });
+
+            setInterval(function() {
+                earthNight++;
+                if(earthNight > 119) {
+                    earthNight = 1;
+                };
+
+                nextImg.src = `assets/earth-night/${earthNight}.jpg`; //preloads next image
+                body.style.transition = "ease-in-out 50ms";
+            
+                //change only happens once next image is loaded
+                nextImg.onload = function() {
+                    images[num].img = `url(${nextImg.src})`;
+                    background();
+                }
+
+            }, 1500);
+        }
+    }
+
+    
+    //Sun's Atmosphere animation
+    function sunSpin() {
+
+        if(images[num].name == "Sun's Atmosphere") {
+
+            location.style.color = "peachpuff";
+            location.style.textShadow = "0px 0px 2px black";
+            rocket.style.visibility = "hidden";
+            parker.style.visibility = "visible";
+
+            setInterval(function() {
+                sunAtmosphere++;
+
+                if(sunAtmosphere > 107) {
+                    sunAtmosphere = 1;
+                };
+            
+                nextImg.src = `assets/sun-surface/${sunAtmosphere}.jpg`; //preloads next image
+                
+                //change only happens once next image is loaded
+                nextImg.onload = function() {
+                    images[num].img = `url(${nextImg.src})`;
+                    background();
+                }
+
+            }, 500);
+
+            parker.addEventListener("click", function() {
+
+                parkerName.style.visibility = "visible";
+
+                setTimeout(function() {
+                    parkerName.style.visibility = "hidden";
+                }, 4000);
+            });
+        }
+    }
+
+    /*
     function info() {
 
-        if(location.style.opacity == 0) {
-            fade = setInterval(fadeIn, 175); 
-        }
 
         //location info to come
     }
+    */
+
+    window.addEventListener("click", function() {
+
+        if(off) {
+
+            locationDisplay();
+        }
+
+    });
+
 
     //In these locations
     setTimeout(function() { 
@@ -610,9 +635,9 @@ function spaceCowboy() {
 
 
 window.onload = function() {
-
+    
     animate(rocket);
-
+    
     outerSpace();
 
 }
