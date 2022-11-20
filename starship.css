@@ -58,7 +58,7 @@ body {
 }
 
 .parker {
-    animation-duration: 60s;
+    animation-duration: 100s;
     animation-iteration-count:infinite;
     animation-name:scan;
     animation-timing-function: ease-in-out;
