@@ -507,7 +507,7 @@ function outerSpace() {
     }
     */
 
-    window.addEventListener("click", function() {
+    body.addEventListener("click", function() {
 
         if(off) {
 
