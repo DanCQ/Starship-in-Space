@@ -6,7 +6,8 @@ Every refresh gives you a random space background. <br>
 <a href="https://starship-in-space.pages.dev/">Starship in Space</a>
 
 The spinning Earth is my favorite. <br>
-I'm looking for detailed satellite photos.
+I'm searching for detailed satellite photos. <br>
+Also, searching for historical space quotes.
 
 Using their video as a tutorial: <br>
 https://youtu.be/Zm9B-DvwOgw
