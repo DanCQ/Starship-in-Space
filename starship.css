@@ -28,6 +28,34 @@ body {
     z-index:2;
 }
 
+.info {
+    background-color: black;
+    border-radius: 10px;
+    color:white;
+    font-family: "jura", monospace;
+    opacity: 0.8;
+    overflow-y:scroll;
+    max-width: 50vw;
+    max-height: 78vh;
+    padding: 1rem;
+    position:absolute;
+        right:5%;
+        top:20px;
+    text-shadow: 0px 0px 2px black;
+    z-index:5;
+}    
+
+.info h1 {
+    font-family: "audiowide";
+    text-align: center;
+}
+
+.info h3 {
+    font-family: "antonio";
+    margin-top:2rem;
+    text-indent: 5px;
+}
+
 .iss {
     cursor:pointer;
     transform:rotate(-20deg);
@@ -37,11 +65,21 @@ body {
 
 .left-nav {
     background-color:white;
+    border-radius: 5px;
     cursor:pointer;
-    height: 100%;
+    font-family: "jura", monospace;
+    font-size:larger;
+    height: 99%;
+    display:flex;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
     opacity:0.0;
     position:absolute;
         left:0;
+        top:20px;
+    text-shadow: 0px 0px 2px black;
     width:5%;
     z-index:0;
 }
@@ -89,11 +127,21 @@ body {
 
 .right-nav {
     background-color:white;
+    border-radius: 5px;
     cursor:pointer;
-    height: 100%;
+    font-family: "jura", monospace;
+    font-size:larger;
+    height: 99%;
+    display:flex;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
     opacity:0.0;
     position:absolute;
         right:0;
+        top:20px;
+    text-shadow: 0px 0px 2px black;
     width:5%;
     z-index:0;
 }
@@ -104,6 +152,10 @@ body {
         top: 45%;
     transform: rotate(90deg);
     z-index:1;
+}
+
+.sun-info {
+    visibility:hidden;
 }
 
 .space-station {
@@ -130,6 +182,7 @@ body {
     height: 225px;
     position:absolute;
 }
+
 
 .telescope {
     display:flex;
