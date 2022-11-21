@@ -1,11 +1,4 @@
-const boost = document.querySelector(".boost"); //engine fire
-const hubble = document.querySelector(".hubble"); //space telescope
-const hubbleName = document.getElementById("hubble-name"); //name caption
-const iss = document.querySelector(".iss"); //international space station
-const issName = document.getElementById("iss-name"); //name caption
 const leftNav = document.querySelector(".left-nav"); //left page navigation
-const parker = document.querySelector(".parker"); //solar parker probe
-const parkerName = document.getElementById("parker-name"); //name caption
 const rightNav = document.querySelector(".right-nav"); //right page navigation
 const rocket = document.querySelector(".rocket"); //ship and parts
 
@@ -123,8 +116,11 @@ rocket.addEventListener("click", function() {
     flip();
 
     function flip() {
-        let dice = randomRange(1, 6);
+
+        const boost = document.querySelector(".boost"); //engine fire
         let coin = randomRange(1, 2);
+        let dice = randomRange(1, 6);
+        
 
         if(dice == 6) {
             if(images[num].name == "Moon") {
@@ -239,6 +235,13 @@ function outerSpace() {
     locationDisplay(); //displays location name
     nightSpin(); //Earth at night
     sunSpin(); //Sun's Atmosphere animation
+
+
+    body.addEventListener("click", function() {
+        if(off) {
+            locationDisplay();
+        }
+    });
      
 
     //sets background image
@@ -277,6 +280,8 @@ function outerSpace() {
 
 
     function hubbleTelescope() {
+        const hubble = document.querySelector(".hubble"); //space telescope
+        const hubbleName = document.getElementById("hubble-name"); //name caption
 
         //hubble appears here only
         if(images[num].name == "Low Earth Orbit Night") {
@@ -307,7 +312,6 @@ function outerSpace() {
 
 
     function locationDisplay() {
-        
         let fade;
         let opacity = 0.0;
         off = false;
@@ -425,6 +429,8 @@ function outerSpace() {
     
 
     function nightSpin() {
+        const iss = document.querySelector(".iss"); //international space station
+        const issName = document.getElementById("iss-name"); //name caption
 
         if(images[num].name == "Earth At Night") {
 
@@ -463,6 +469,8 @@ function outerSpace() {
     
     //Sun's Atmosphere animation
     function sunSpin() {
+        const parker = document.querySelector(".parker"); //solar parker probe
+        const parkerName = document.getElementById("parker-name"); //name caption
 
         if(images[num].name == "Sun's Atmosphere") {
 
@@ -498,23 +506,6 @@ function outerSpace() {
             });
         }
     }
-
-    /*
-    function info() {
-
-
-        //location info to come
-    }
-    */
-
-    body.addEventListener("click", function() {
-
-        if(off) {
-
-            locationDisplay();
-        }
-
-    });
 
 
     //In these locations
