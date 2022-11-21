@@ -272,7 +272,7 @@ function outerSpace() {
                     background();
                 } 
 
-            }, 1100);
+            }, 1000);
         }
     }
      
