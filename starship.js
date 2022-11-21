@@ -10,6 +10,7 @@ const jfk = new Audio("assets/sounds/jfk.mp3"); //we choose..
 const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
 
+let aurora = randomRange(1,117); //random start image
 let earth = randomRange(1,69); //random start image
 let earthNight = 1;
 let sunAtmosphere = randomRange(1,107); //random start image
@@ -46,6 +47,10 @@ let images = [
     {
         name: "Low Earth Orbit Night",
         img: "url(assets/low-earth-orbit-night.jpeg)"
+    },
+    {
+        name: "Aurora Borealis",
+        img: `url(assets/aurora/${aurora}.jpg)`
     },
     {
         name: "Milky Way Earth View",
@@ -229,6 +234,7 @@ function outerSpace() {
     let location = document.querySelector(".location");
     let off;
 
+    auroraSpin();
     background(); 
     earthSpin(); //Earth spin animation
     hubbleTelescope(); 
@@ -242,6 +248,33 @@ function outerSpace() {
             locationDisplay();
         }
     });
+
+
+    //aurora borealis animation
+    function auroraSpin() {
+
+        if(images[num].name == "Aurora Borealis") {
+
+            rocket.style.visibility = "hidden";
+
+            setInterval(function() {
+                aurora++;
+                if(aurora > 117) {
+                    aurora = 0;
+                };
+
+                nextImg.src = `assets/aurora/${aurora}.jpg`; //preloads next image
+                body.style.transition = "ease-in-out 50ms";
+            
+                //change only happens once next image is loaded
+                nextImg.onload = function() {
+                    images[num].img = `url(${nextImg.src})`;
+                    background();
+                } 
+
+            }, 1200);
+        }
+    }
      
 
     //sets background image
