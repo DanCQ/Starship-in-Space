@@ -2,6 +2,8 @@ const leftNav = document.querySelector(".left-nav"); //left page navigation
 const rightNav = document.querySelector(".right-nav"); //right page navigation
 const rocket = document.querySelector(".rocket"); //ship and parts
 
+const sunInfo = document.querySelector(".sun-info");
+
 const eagle = new Audio("assets/sounds/eagle.mp3"); //the eagle has landed
 const earthFrom = new Audio("assets/sounds/earth-from-here.mp3"); //..from here..
 const hubbleLaunch = new Audio("assets/sounds/hubble-launch.mp3"); //launch
@@ -111,7 +113,16 @@ leftNav.addEventListener("click", function() {
 
 //could't get a -- or ++ iteration working without bugs
 rightNav.addEventListener("click", function() {
-    location.reload();
+
+    switch(images[num].name) {
+        case "Sun":
+            sunInfo.style.visibility == "visible" ? sunInfo.style.visibility = "hidden" : sunInfo.style.visibility = "visible";
+        break;
+        default: 
+            location.reload();
+        break;
+    }
+   
 });
 
 
@@ -159,13 +170,13 @@ rocket.addEventListener("click", function() {
 
 //makes sidebars visible
 window.addEventListener("click", function() {
-    leftNav.style.opacity = "0.08";
-    rightNav.style.opacity = "0.08";
+    leftNav.style.opacity = "0.3";
+    rightNav.style.opacity = "0.3";
     
     setTimeout(function() {
         leftNav.style.opacity = "0.0";
         rightNav.style.opacity = "0.0";
-    },150);
+    },250);
 });
 
 //reassigns value to screenWidth if screen size changes
