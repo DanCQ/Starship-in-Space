@@ -96,6 +96,7 @@ let images = [
     }
 ];
 
+
 let num = randomRange(0, images.length - 1); //sets random number within array size
 
 //Returns a random number within a chosen range
@@ -541,7 +542,7 @@ function outerSpace() {
                     background();
                 }
 
-            }, 500);
+            }, 1000);
 
             parker.addEventListener("click", function() {
 
