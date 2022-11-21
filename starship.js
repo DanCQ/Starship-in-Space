@@ -111,13 +111,16 @@ leftNav.addEventListener("click", function() {
     location.reload();
 });
 
-//could't get a -- or ++ iteration working without bugs
+//Site analysis
 rightNav.addEventListener("click", function() {
 
     switch(images[num].name) {
         case "Sun":
             sunInfo.style.visibility == "visible" ? sunInfo.style.visibility = "hidden" : sunInfo.style.visibility = "visible";
-        break;
+            break;
+        case "Sun's Atmosphere":
+            sunInfo.style.visibility == "visible" ? sunInfo.style.visibility = "hidden" : sunInfo.style.visibility = "visible";
+        break;    
         default: 
             location.reload();
         break;
