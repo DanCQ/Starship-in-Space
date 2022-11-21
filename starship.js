@@ -112,7 +112,7 @@ leftNav.addEventListener("click", function() {
     location.reload();
 });
 
-//Site analysis
+//site analysis
 rightNav.addEventListener("click", function() {
 
     switch(images[num].name) {
