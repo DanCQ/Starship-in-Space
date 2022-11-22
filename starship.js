@@ -577,6 +577,7 @@ function outerSpace() {
 function spaceCowboy() {
     const astronaut = document.querySelector(".astronaut");
     const explore = new Audio("assets/sounds/exploration.mp3"); //..at it's greatest
+    const hereMan = new Audio("assets/sounds/here-man.mp3"); //here man from..
     const niceOrbit = new Audio("assets/sounds/nice-orbit.mp3"); //nice to be in orbit
     const smallStep = new Audio("assets/sounds/one-small-step.mp3"); //one small step for man..
 
@@ -609,10 +610,22 @@ function spaceCowboy() {
         }
     }
 
+
     //starts leaving animation
     astronaut.addEventListener("click", function() {
         if(images[num].name == "Moon") {
-            smallStep.play();
+
+            function flip() {
+                let coin = randomRange(1, 2);
+        
+                if(coin == 1) {
+                    smallStep.play();
+                } else {
+                    hereMan.play();
+                }
+            } 
+            flip();
+
         } else if (images[num].name == "Mars") {
             explore.play();
         } else {
