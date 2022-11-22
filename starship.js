@@ -158,7 +158,7 @@ rocket.addEventListener("click", function() {
                     jfk.play();
                 }
 
-            } else if(images[num].name == "Earth") {
+            } else if(images[num].name == "Earth" | images[num].name == "Low Earth Orbit Night") {
                 earthFrom.play();
             } else {
                 onWay.play();
@@ -494,7 +494,7 @@ function outerSpace() {
 
             iss.addEventListener("click", function() {
 
-                earthFrom.play();
+                //earthFrom.play();
                 issName.style.visibility = "visible";
 
                 setTimeout(function() {
