@@ -526,6 +526,7 @@ function outerSpace() {
     function sunSpin() {
         const parker = document.querySelector(".parker"); //solar parker probe
         const parkerName = document.getElementById("parker-name"); //name caption
+        const parkerLaunch = new Audio("assets/sounds/parker-liftoff.mp3"); //parker launch
 
         if(images[num].name == "Sun's Atmosphere") {
 
@@ -553,6 +554,7 @@ function outerSpace() {
 
             parker.addEventListener("click", function() {
 
+                parkerLaunch.play();
                 parkerName.style.visibility = "visible";
 
                 setTimeout(function() {
