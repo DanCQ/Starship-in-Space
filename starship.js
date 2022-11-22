@@ -2,8 +2,9 @@ const leftNav = document.querySelector(".left-nav"); //left page navigation
 const rightNav = document.querySelector(".right-nav"); //right page navigation
 const rocket = document.querySelector(".rocket"); //ship and parts
 
-const sunInfo = document.querySelector(".info-sun");
+const auroraInfo = document.querySelector(".info-aurora");
 const earthInfo = document.querySelector(".info-earth");
+const sunInfo = document.querySelector(".info-sun");
 
 const eagle = new Audio("assets/sounds/eagle.mp3"); //the eagle has landed
 const earthFrom = new Audio("assets/sounds/earth-from-here.mp3"); //..from here..
@@ -126,9 +127,12 @@ rightNav.addEventListener("click", function() {
         case "Low Earth Orbit Night":
             earthInfo.style.visibility == "visible" ? earthInfo.style.visibility = "hidden" : earthInfo.style.visibility = "visible";
             break;
+        case "Aurora Borealis":
+            auroraInfo.style.visibility  == "visible" ? auroraInfo.style.visibility = "hidden" : auroraInfo.style.visibility = "visible";
+            break;    
         default: 
             location.reload();
-        break;
+            break;
     }
    
 });
