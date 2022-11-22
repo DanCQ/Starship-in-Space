@@ -2,7 +2,8 @@ const leftNav = document.querySelector(".left-nav"); //left page navigation
 const rightNav = document.querySelector(".right-nav"); //right page navigation
 const rocket = document.querySelector(".rocket"); //ship and parts
 
-const sunInfo = document.querySelector(".sun-info");
+const sunInfo = document.querySelector(".info-sun");
+const earthInfo = document.querySelector(".info-earth");
 
 const eagle = new Audio("assets/sounds/eagle.mp3"); //the eagle has landed
 const earthFrom = new Audio("assets/sounds/earth-from-here.mp3"); //..from here..
@@ -117,11 +118,14 @@ rightNav.addEventListener("click", function() {
 
     switch(images[num].name) {
         case "Sun":
-            sunInfo.style.visibility == "visible" ? sunInfo.style.visibility = "hidden" : sunInfo.style.visibility = "visible";
-            break;
         case "Sun's Atmosphere":
             sunInfo.style.visibility == "visible" ? sunInfo.style.visibility = "hidden" : sunInfo.style.visibility = "visible";
-        break;    
+            break;
+        case "Earth":
+        case "Earth At Night":
+        case "Low Earth Orbit Night":
+            earthInfo.style.visibility == "visible" ? earthInfo.style.visibility = "hidden" : earthInfo.style.visibility = "visible";
+            break;
         default: 
             location.reload();
         break;
