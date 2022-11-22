@@ -140,7 +140,6 @@ rocket.addEventListener("click", function() {
         const boost = document.querySelector(".boost"); //engine fire
         let coin = randomRange(1, 2);
         let dice = randomRange(1, 6);
-        
 
         if(dice == 6) {
             if(images[num].name == "Moon") {
@@ -180,7 +179,7 @@ window.addEventListener("click", function() {
     setTimeout(function() {
         leftNav.style.opacity = "0.0";
         rightNav.style.opacity = "0.0";
-    },250);
+    },500);
 });
 
 //reassigns value to screenWidth if screen size changes
