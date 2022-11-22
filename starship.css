@@ -55,6 +55,14 @@ body {
     text-indent: 5px;
 }
 
+.info-sun {
+    visibility:hidden;
+}
+
+.info-earth {
+    visibility:hidden;
+}
+
 .iss {
     cursor:pointer;
     transform:rotate(-20deg);
@@ -153,9 +161,7 @@ body {
     z-index:1;
 }
 
-.sun-info {
-    visibility:hidden;
-}
+
 
 .space-station {
     display:flex;
