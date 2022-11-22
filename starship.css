@@ -55,11 +55,15 @@ body {
     text-indent: 5px;
 }
 
-.info-sun {
+.info-aurora {
     visibility:hidden;
 }
 
 .info-earth {
+    visibility:hidden;
+}
+
+.info-sun {
     visibility:hidden;
 }
 
