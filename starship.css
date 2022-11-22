@@ -33,7 +33,7 @@ body {
     border-radius: 10px;
     color:white;
     font-family: "jura", monospace;
-    opacity: 0.8;
+    opacity: 0.75;
     overflow-y:scroll;
     max-width: 50vw;
     max-height: 78vh;
