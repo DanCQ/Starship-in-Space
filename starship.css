@@ -63,6 +63,10 @@ body {
     visibility:hidden;
 }
 
+.info-mars {
+    visibility:hidden;
+}
+
 .info-sun {
     visibility:hidden;
 }
