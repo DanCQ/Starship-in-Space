@@ -4,6 +4,7 @@ const rocket = document.querySelector(".rocket"); //ship and parts
 
 const auroraInfo = document.querySelector(".info-aurora");
 const earthInfo = document.querySelector(".info-earth");
+const marsInfo = document.querySelector(".info-mars");
 const sunInfo = document.querySelector(".info-sun");
 
 const eagle = new Audio("assets/sounds/eagle.mp3"); //the eagle has landed
@@ -129,7 +130,10 @@ rightNav.addEventListener("click", function() {
             break;
         case "Aurora Borealis":
             auroraInfo.style.visibility  == "visible" ? auroraInfo.style.visibility = "hidden" : auroraInfo.style.visibility = "visible";
-            break;    
+            break;
+        case "Mars":
+            marsInfo.style.visibility  == "visible" ? marsInfo.style.visibility = "hidden" : marsInfo.style.visibility = "visible";
+            break;
         default: 
             location.reload();
             break;
