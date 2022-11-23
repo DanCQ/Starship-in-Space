@@ -715,15 +715,15 @@ function spaceCowboy() {
         } else if(rotation < 8) {
             rotation += Math.round(0.5 * 100) / 100;
             astronaut.style.transform = `rotate(${rotation}deg)`;
-        } else {
+        } else if(rotation == 8.0) {
             clearInterval(spin); //stops spinning
         }
     }
 
 
     body.addEventListener("click", function fly(e) {     
-        let flyX = e.clientX;
-        let flyY = e.clientY;
+        let flyX = e.clientX - astronaut.offsetWidth / 2;
+        let flyY = e.clientY - astronaut.offsetHeight / 2;
         let tilt = flyX > originX ? 23 : -17;
         
         if(allow) { 
@@ -738,30 +738,28 @@ function spaceCowboy() {
 
             if(rotation < tilt) {
                 rotation += Math.round(0.5 * 100) / 100;
-                astronaut.style.transform = `rotate(${rotation}deg)`;
             }
             if(rotation > tilt) {
                 rotation -= Math.round(0.5 * 100) / 100;
-                astronaut.style.transform = `rotate(${rotation}deg)`;
             } 
 
             if(originX > flyX)  {
                 originX -= 1;
-                astronaut.style.left = `${originX}px`;
             }
             if(originX < flyX) {
                 originX += 1;
-                astronaut.style.left = `${originX}px`;
             }
         
             if(originY > flyY) {
                 originY -= 1;
-                astronaut.style.top = `${originY}px`;
             }
             if(originY < flyY) {
                 originY += 1;
-                astronaut.style.top = `${originY}px`;
             }
+
+            astronaut.style.transform = `rotate(${rotation}deg)`;
+            astronaut.style.left = `${originX}px`;
+            astronaut.style.top = `${originY}px`;
         }   
 
         if(allow == false) {
@@ -769,7 +767,7 @@ function spaceCowboy() {
                 clearInterval(flyTo);
                 spin = setInterval(ride, 50);
                 allow = true;
-            }, 10000);
+            }, 5000);
         }
     });
 }
