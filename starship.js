@@ -1,3 +1,4 @@
+const body = document.querySelector(".body"); //html body
 const leftNav = document.querySelector(".left-nav"); //left page navigation
 const rightNav = document.querySelector(".right-nav"); //right page navigation
 const rocket = document.querySelector(".rocket"); //ship and parts
@@ -15,6 +16,7 @@ const jfk = new Audio("assets/sounds/jfk.mp3"); //we choose..
 const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
 
+let allow = true;
 let aurora = randomRange(1,117); //random start image
 let earth = randomRange(1,69); //random start image
 let earthNight = 1;
@@ -22,6 +24,7 @@ let sunAtmosphere = randomRange(1,107); //random start image
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
 let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
 let speed = false; //for boosters
+
 
 //images for background
 let images = [
@@ -118,6 +121,8 @@ leftNav.addEventListener("click", function() {
 //site analysis
 rightNav.addEventListener("click", function() {
 
+    allow = false;
+
     switch(images[num].name) {
         case "Sun":
         case "Sun's Atmosphere":
@@ -138,13 +143,19 @@ rightNav.addEventListener("click", function() {
             location.reload();
             break;
     }
+
+    setTimeout(function() {
+        allow = true;
+    }, 500);
    
 });
 
 
 //activates booster speeed
 rocket.addEventListener("click", function() {
-    
+
+    allow = false;
+
     flip();
 
     function flip() {
@@ -177,6 +188,7 @@ rocket.addEventListener("click", function() {
             setTimeout(function() {
                 boost.style.visibility = "hidden";
                 speed = false;
+                allow = true;
             }, 500);
         }
     }
@@ -255,7 +267,6 @@ function animate(item) {
 
 
 function outerSpace() {
-    let body = document.querySelector(".body");
     let nextImg = new Image(); //img element for preloading next image
     let location = document.querySelector(".location");
     let off;
@@ -349,6 +360,7 @@ function outerSpace() {
 
             hubble.addEventListener("click", function() {
 
+                allow = false;
                 hubbleName.style.visibility = "visible";
                 flip();
 
@@ -364,7 +376,13 @@ function outerSpace() {
                 
                 setTimeout(function() {
                     hubbleName.style.visibility = "hidden";
+    
                 }, 4000);
+
+                setTimeout(function() {
+                    allow = true;
+                }, 500);
+
             });
         } 
     } 
@@ -408,7 +426,6 @@ function outerSpace() {
     
             if(location.style.opacity <= 0.0) {
                 clearInterval(fade);
-                //location.style.opacity = "0.0";
                 off = true;
             }
         }
@@ -579,7 +596,7 @@ function outerSpace() {
                 spaceCowboy(); //calls astronaut
             break;
         }
-    },15000); //waits 15 seconds
+    }, 15000); //waits 15 seconds
 }
 
 
@@ -599,8 +616,11 @@ function spaceCowboy() {
     let nextOriginX;
     let nextOriginY;
     let nextRotation;
+    
+    let flyTo;
     let spin;
     let travel;
+    
     
     astronaut.style.visibility = "visible";
     astronaut.style.transform = `rotate(${rotation}deg)`;
@@ -643,6 +663,7 @@ function spaceCowboy() {
         }
         clearInterval(spin); //stops intervals if running
         clearInterval(travel);
+        clearInterval(flyTo);
         
         nextOriginX = randomRange(0, screenWidth);
         nextOriginY = randomRange(0, screenHeight);
@@ -653,6 +674,7 @@ function spaceCowboy() {
 
     //astonaut leaving animation
     function leaving() {
+        allow = false;
         size -=  Math.round(0.5 * 100) /100;
         astronaut.style.height = size + "px";
         
@@ -680,6 +702,7 @@ function spaceCowboy() {
             originY -= Math.round(0.5 * 100) / 100;
             astronaut.style.top = `${originY}px`;
         } else if(originY < nextOriginY) {
+            originY += Math.round(0.5 * 100) / 100;
             astronaut.style.top = `${originY}px`;
         }
     }
@@ -692,10 +715,63 @@ function spaceCowboy() {
         } else if(rotation < 8) {
             rotation += Math.round(0.5 * 100) / 100;
             astronaut.style.transform = `rotate(${rotation}deg)`;
-        } else if(rotation == 8) {
+        } else {
             clearInterval(spin); //stops spinning
         }
     }
+
+
+    body.addEventListener("click", function fly(e) {     
+        let flyX = e.clientX;
+        let flyY = e.clientY;
+        let tilt = flyX > originX ? 23 : -17;
+        
+        if(allow) { 
+            clearInterval(flyTo);
+            clearInterval(spin);
+            
+            allow = false;
+            flyTo = setInterval(movement, 50); //starts interval
+        }
+
+        function movement() {
+
+            if(rotation < tilt) {
+                rotation += Math.round(0.5 * 100) / 100;
+                astronaut.style.transform = `rotate(${rotation}deg)`;
+            }
+            if(rotation > tilt) {
+                rotation -= Math.round(0.5 * 100) / 100;
+                astronaut.style.transform = `rotate(${rotation}deg)`;
+            } 
+
+            if(originX > flyX)  {
+                originX -= 1;
+                astronaut.style.left = `${originX}px`;
+            }
+            if(originX < flyX) {
+                originX += 1;
+                astronaut.style.left = `${originX}px`;
+            }
+        
+            if(originY > flyY) {
+                originY -= 1;
+                astronaut.style.top = `${originY}px`;
+            }
+            if(originY < flyY) {
+                originY += 1;
+                astronaut.style.top = `${originY}px`;
+            }
+        }   
+
+        if(allow == false) {
+            setTimeout(function() { 
+                clearInterval(flyTo);
+                spin = setInterval(ride, 50);
+                allow = true;
+            }, 10000);
+        }
+    });
 }
 
 
