@@ -620,6 +620,7 @@ function spaceCowboy() {
     let flyTo;
     let spin;
     let travel;
+    let staying = true;
     
     
     astronaut.style.visibility = "visible";
@@ -675,6 +676,7 @@ function spaceCowboy() {
     //astonaut leaving animation
     function leaving() {
         allow = false;
+        staying = false;
         size -=  Math.round(0.5 * 100) /100;
         astronaut.style.height = size + "px";
         
@@ -726,49 +728,51 @@ function spaceCowboy() {
         let flyY = e.clientY - astronaut.offsetHeight / 2;
         let tilt = flyX > originX ? 23 : -17;
         
-        if(allow) { 
+        if(allow && staying) { 
             clearInterval(flyTo);
             clearInterval(spin);
             
-            allow = false;
             flyTo = setInterval(movement, 50); //starts interval
         }
 
         function movement() {
 
-            if(rotation < tilt) {
-                rotation += Math.round(0.5 * 100) / 100;
-            }
-            if(rotation > tilt) {
-                rotation -= Math.round(0.5 * 100) / 100;
-            } 
+            if(staying) {
 
-            if(originX > flyX)  {
-                originX -= 1;
-            }
-            if(originX < flyX) {
-                originX += 1;
-            }
+                if(rotation < tilt) {
+                    rotation += Math.round(0.5 * 100) / 100;
+                }
+                if(rotation > tilt) {
+                    rotation -= Math.round(0.5 * 100) / 100;
+                } 
+
+                if(originX > flyX)  {
+                 originX -= 1;
+                }
+                if(originX < flyX) {
+                    originX += 1;
+                }
         
-            if(originY > flyY) {
-                originY -= 1;
-            }
-            if(originY < flyY) {
-                originY += 1;
-            }
+                if(originY > flyY) {
+                    originY -= 1;
+                }
+                if(originY < flyY) {
+                    originY += 1;
+                }
 
-            astronaut.style.transform = `rotate(${rotation}deg)`;
-            astronaut.style.left = `${originX}px`;
-            astronaut.style.top = `${originY}px`;
+                astronaut.style.transform = `rotate(${rotation}deg)`;
+                astronaut.style.left = `${originX}px`;
+                astronaut.style.top = `${originY}px`;
+            }
         }   
 
-        if(allow == false) {
             setTimeout(function() { 
-                clearInterval(flyTo);
-                spin = setInterval(ride, 50);
-                allow = true;
+                if(allow && staying) {
+                    clearInterval(flyTo);
+                    spin = setInterval(ride, 50);
+                }
             }, 5000);
-        }
+        
     });
 }
 
