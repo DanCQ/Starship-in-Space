@@ -16,14 +16,16 @@ const jfk = new Audio("assets/sounds/jfk.mp3"); //we choose..
 const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
 
-let allow = true;
+let allow = false; //check for astronaut animation
+let present = false; //checks austronaut
+let speed = false; //for boosters
+
 let aurora = randomRange(1,117); //random start image
 let earth = randomRange(1,69); //random start image
 let earthNight = 1;
 let sunAtmosphere = randomRange(1,107); //random start image
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
 let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
-let speed = false; //for boosters
 
 
 //images for background
@@ -145,7 +147,9 @@ rightNav.addEventListener("click", function() {
     }
 
     setTimeout(function() {
-        allow = true;
+        if(present) {
+            allow = true;
+        }
     }, 500);
    
 });
@@ -188,7 +192,10 @@ rocket.addEventListener("click", function() {
             setTimeout(function() {
                 boost.style.visibility = "hidden";
                 speed = false;
-                allow = true;
+
+                if(present) {
+                    allow = true;
+                }
             }, 500);
         }
     }
@@ -380,7 +387,9 @@ function outerSpace() {
                 }, 4000);
 
                 setTimeout(function() {
-                    allow = true;
+                    if(present) {
+                        allow = true;
+                    }
                 }, 500);
 
             });
@@ -620,8 +629,9 @@ function spaceCowboy() {
     let flyTo;
     let spin;
     let travel;
-    let staying = true;
     
+    allow = true;
+    present = true;
     
     astronaut.style.visibility = "visible";
     astronaut.style.transform = `rotate(${rotation}deg)`;
@@ -676,7 +686,7 @@ function spaceCowboy() {
     //astonaut leaving animation
     function leaving() {
         allow = false;
-        staying = false;
+        present = false;
         size -=  Math.round(0.5 * 100) /100;
         astronaut.style.height = size + "px";
         
@@ -728,7 +738,7 @@ function spaceCowboy() {
         let flyY = e.clientY - astronaut.offsetHeight / 2;
         let tilt = flyX > originX ? 23 : -17;
         
-        if(allow && staying) { 
+        if(allow && present) { 
             clearInterval(flyTo);
             clearInterval(spin);
             
@@ -737,7 +747,7 @@ function spaceCowboy() {
 
         function movement() {
 
-            if(staying) {
+            if(present) {
 
                 if(rotation < tilt) {
                     rotation += Math.round(0.5 * 100) / 100;
@@ -767,7 +777,7 @@ function spaceCowboy() {
         }   
 
             setTimeout(function() { 
-                if(allow && staying) {
+                if(present) {
                     clearInterval(flyTo);
                     spin = setInterval(ride, 50);
                 }
