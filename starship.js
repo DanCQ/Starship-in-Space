@@ -733,7 +733,8 @@ function spaceCowboy() {
     }
 
 
-    body.addEventListener("click", function fly(e) {     
+    body.addEventListener("click", function fly(e) {    
+         
         let flyX = e.clientX - astronaut.offsetWidth / 2;
         let flyY = e.clientY - astronaut.offsetHeight / 2;
         let tilt = flyX > originX ? 23 : -17;
@@ -741,7 +742,6 @@ function spaceCowboy() {
         if(allow && present) { 
             clearInterval(flyTo);
             clearInterval(spin);
-            
             flyTo = setInterval(movement, 50); //starts interval
         }
 
@@ -776,12 +776,12 @@ function spaceCowboy() {
             }
         }   
 
-            setTimeout(function() { 
-                if(present) {
-                    clearInterval(flyTo);
-                    spin = setInterval(ride, 50);
-                }
-            }, 5000);
+        setTimeout(function() { 
+            if(present) {
+                clearInterval(flyTo);
+                spin = setInterval(ride, 50);
+            }
+        }, 5000);
         
     });
 }
