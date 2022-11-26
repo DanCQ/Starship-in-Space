@@ -168,6 +168,12 @@ rocket.addEventListener("click", function() {
         let coin = randomRange(1, 2);
         let dice = randomRange(1, 6);
 
+        setTimeout(function() {
+            if(present) {
+                allow = true;
+            }
+        }, 500);
+
         if(dice == 6) {
             if(images[num].name == "Moon") {
 
@@ -184,7 +190,6 @@ rocket.addEventListener("click", function() {
             }
 
         } else {
-
             raptor.play();
             boost.style.visibility = "visible";
             speed = true;
@@ -192,10 +197,6 @@ rocket.addEventListener("click", function() {
             setTimeout(function() {
                 boost.style.visibility = "hidden";
                 speed = false;
-
-                if(present) {
-                    allow = true;
-                }
             }, 500);
         }
     }
@@ -383,7 +384,7 @@ function outerSpace() {
                 
                 setTimeout(function() {
                     hubbleName.style.visibility = "hidden";
-    
+
                 }, 4000);
 
                 setTimeout(function() {
@@ -524,7 +525,6 @@ function outerSpace() {
 
             iss.addEventListener("click", function() {
 
-                //earthFrom.play();
                 issName.style.visibility = "visible";
 
                 setTimeout(function() {
