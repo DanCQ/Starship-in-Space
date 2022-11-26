@@ -608,7 +608,7 @@ function outerSpace() {
     }, 15000); //waits 15 seconds
 }
 
-
+    
 //astronaut
 function spaceCowboy() {
     const astronaut = document.querySelector(".astronaut");
@@ -721,15 +721,17 @@ function spaceCowboy() {
 
     //spin animation
     function ride() {
-        if(rotation > 8) {
-            rotation -= Math.round(0.5 * 100) / 100;
-            astronaut.style.transform = `rotate(${rotation}deg)`;
-        } else if(rotation < 8) {
-            rotation += Math.round(0.5 * 100) / 100;
-            astronaut.style.transform = `rotate(${rotation}deg)`;
-        } else if(rotation == 8.0) {
-            clearInterval(spin); //stops spinning
-        }
+        if(allow && present) {
+            if(rotation > 8) {
+                rotation -= Math.round(0.5 * 100) / 100;
+                astronaut.style.transform = `rotate(${rotation}deg)`;
+            } else if(rotation < 8) {
+                rotation += Math.round(0.5 * 100) / 100;
+                astronaut.style.transform = `rotate(${rotation}deg)`;
+            } if(rotation == 8) {
+                clearInterval(spin);
+            }
+        } //console.log("ride:" + rotation);
     }
 
 
@@ -740,6 +742,7 @@ function spaceCowboy() {
         let tilt = flyX > originX ? 23 : -17;
         
         if(allow && present) { 
+            allow = false;
             clearInterval(flyTo);
             clearInterval(spin);
             flyTo = setInterval(movement, 50); //starts interval
@@ -773,17 +776,20 @@ function spaceCowboy() {
                 astronaut.style.transform = `rotate(${rotation}deg)`;
                 astronaut.style.left = `${originX}px`;
                 astronaut.style.top = `${originY}px`;
+                //console.log("movement:" + rotation);
             }
         }   
 
         setTimeout(function() { 
             if(present) {
+                allow = true;
                 clearInterval(flyTo);
                 spin = setInterval(ride, 50);
             }
         }, 5000);
         
     });
+    
 }
 
 
