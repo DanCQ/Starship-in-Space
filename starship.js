@@ -612,7 +612,6 @@ function outerSpace() {
 //astronaut
 function spaceCowboy() {
     const astronaut = document.querySelector(".astronaut");
-    //const airJet = new Audio("assets/sounds/airjet.mp3");//airjet sounds
     const explore = new Audio("assets/sounds/exploration.mp3"); //..at it's greatest
     const hereMan = new Audio("assets/sounds/here-man.mp3"); //here man from..
     const niceOrbit = new Audio("assets/sounds/nice-orbit.mp3"); //nice to be in orbit
@@ -737,12 +736,16 @@ function spaceCowboy() {
         let clearY;
         let flyX = e.clientX - astronaut.offsetWidth / 2;
         let flyY = e.clientY - astronaut.offsetHeight / 2;
-        let tilt = angle();
+        let tilt = angle(flyX - originX);
 
-        function angle() {
-            if(flyX - originX > 100) {
+        function angle(total) {
+            if(total > 250) {
+                return 30;
+            } else if(total > 75) {
                 return 23;
-            } else if(flyX - originX < -100) {
+            } else if(total < -250) {
+                return -14;
+            } else if(total < -75) {
                 return -7;
             } else {
                 return 8;
@@ -755,17 +758,12 @@ function spaceCowboy() {
             clearInterval(flyTo);
             clearInterval(spin);
             flyTo = setInterval(movement, 20); //starts interval
-            /*
-            setTimeout(function() {
-                if(present) {
-                airJet.play();
-                }
-            }, 50); */
         }
 
         function movement() {
 
             if(present) {
+
                 if(rotation < tilt) {
                     rotation += Math.round(0.5 * 100) / 100;
                 }
@@ -784,7 +782,6 @@ function spaceCowboy() {
                     if(present && clearX && clearY) {
                         clearInterval(flyTo);
                         spin = setInterval(ride, 50);
-                        //airJet.play();
                     }
                 }
         
@@ -800,10 +797,10 @@ function spaceCowboy() {
                 astronaut.style.transform = `rotate(${rotation}deg)`;
                 astronaut.style.left = `${originX}px`;
                 astronaut.style.top = `${originY}px`;
+                tilt = angle(flyX - originX);
             }
         }   
     });
-
 }
 
 
