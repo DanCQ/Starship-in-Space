@@ -612,7 +612,7 @@ function outerSpace() {
 //astronaut
 function spaceCowboy() {
     const astronaut = document.querySelector(".astronaut");
-    const airJet = new Audio("assets/sounds/airjet.mp3");//airjet sounds
+    //const airJet = new Audio("assets/sounds/airjet.mp3");//airjet sounds
     const explore = new Audio("assets/sounds/exploration.mp3"); //..at it's greatest
     const hereMan = new Audio("assets/sounds/here-man.mp3"); //here man from..
     const niceOrbit = new Audio("assets/sounds/nice-orbit.mp3"); //nice to be in orbit
@@ -755,12 +755,12 @@ function spaceCowboy() {
             clearInterval(flyTo);
             clearInterval(spin);
             flyTo = setInterval(movement, 20); //starts interval
-
+            /*
             setTimeout(function() {
                 if(present) {
                 airJet.play();
                 }
-            }, 50);
+            }, 50); */
         }
 
         function movement() {
@@ -784,7 +784,7 @@ function spaceCowboy() {
                     if(present && clearX && clearY) {
                         clearInterval(flyTo);
                         spin = setInterval(ride, 50);
-                        airJet.play();
+                        //airJet.play();
                     }
                 }
         
