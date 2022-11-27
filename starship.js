@@ -755,7 +755,6 @@ function spaceCowboy() {
         if(allow && present) { 
             clearX = false;
             clearY = false;
-            clearInterval(spin);
             clearInterval(flyTo);
             flyTo = setInterval(movement, 20); //starts interval
         }
