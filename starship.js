@@ -6,6 +6,7 @@ const rocket = document.querySelector(".rocket"); //ship and parts
 const auroraInfo = document.querySelector(".info-aurora");
 const earthInfo = document.querySelector(".info-earth");
 const marsInfo = document.querySelector(".info-mars");
+const moonInfo = document.querySelector(".info-moon");
 const sunInfo = document.querySelector(".info-sun");
 
 const eagle = new Audio("assets/sounds/eagle.mp3"); //the eagle has landed
@@ -126,20 +127,23 @@ rightNav.addEventListener("click", function() {
     allow = false;
 
     switch(images[num].name) {
-        case "Sun":
-        case "Sun's Atmosphere":
-            sunInfo.style.visibility == "visible" ? sunInfo.style.visibility = "hidden" : sunInfo.style.visibility = "visible";
+        case "Aurora Borealis":
+            auroraInfo.style.visibility  == "visible" ? auroraInfo.style.visibility = "hidden" : auroraInfo.style.visibility = "visible";
             break;
         case "Earth":
         case "Earth At Night":
         case "Low Earth Orbit Night":
             earthInfo.style.visibility == "visible" ? earthInfo.style.visibility = "hidden" : earthInfo.style.visibility = "visible";
             break;
-        case "Aurora Borealis":
-            auroraInfo.style.visibility  == "visible" ? auroraInfo.style.visibility = "hidden" : auroraInfo.style.visibility = "visible";
-            break;
         case "Mars":
             marsInfo.style.visibility  == "visible" ? marsInfo.style.visibility = "hidden" : marsInfo.style.visibility = "visible";
+            break;
+        case "Moon":
+            moonInfo.style.visibility  == "visible" ? moonInfo.style.visibility = "hidden" : moonInfo.style.visibility = "visible";
+            break;
+        case "Sun":
+        case "Sun's Atmosphere":
+            sunInfo.style.visibility == "visible" ? sunInfo.style.visibility = "hidden" : sunInfo.style.visibility = "visible";
             break;
         default: 
             location.reload();
