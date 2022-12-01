@@ -1,5 +1,10 @@
+const astronaut = document.querySelector(".astronaut"); //the astronaut
 const body = document.querySelector(".body"); //html body
+const hubble = document.querySelector(".hubble"); //space telescope
+const iss = document.querySelector(".iss"); //international space station
 const leftNav = document.querySelector(".left-nav"); //left page navigation
+const nav = document.querySelector(".nav"); //navigation menu
+const parker = document.querySelector(".parker"); //solar parker probe
 const rightNav = document.querySelector(".right-nav"); //right page navigation
 const rocket = document.querySelector(".rocket"); //ship and parts
 
@@ -19,6 +24,7 @@ const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine
 
 let allow = false; //check for astronaut animation
 let present = false; //checks austronaut
+let reset = false;
 let speed = false; //for boosters
 
 let aurora = randomRange(1,117); //random start image
@@ -118,7 +124,34 @@ function randomRange(min,max) {
 
 //refresh page to random location
 leftNav.addEventListener("click", function() {
-    location.reload();
+
+    if(reset) {
+        location.reload();
+    }
+
+    setTimeout(function() {
+        navigation();        
+        nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
+    },100);
+
+    allow = false;
+
+    setTimeout(function() {
+        if(present) {
+            allow = true;
+        }
+    }, 500);
+});
+
+nav.addEventListener("click", function () {
+
+    allow = false;
+
+    setTimeout(function() {
+        if(present) {
+            allow = true;
+        }
+    }, 500);
 });
 
 //site analysis
@@ -304,6 +337,7 @@ function outerSpace() {
 
         if(images[num].name == "Aurora Borealis") {
 
+            reset = true;
             rocket.style.visibility = "hidden";
 
             setInterval(function() {
@@ -340,6 +374,8 @@ function outerSpace() {
     function earthSpin() {
 
         if(images[num].name == "Earth") {
+            
+            reset = true;
 
             setInterval(function() {
                 earth++;
@@ -362,7 +398,6 @@ function outerSpace() {
 
 
     function hubbleTelescope() {
-        const hubble = document.querySelector(".hubble"); //space telescope
         const hubbleName = document.getElementById("hubble-name"); //name caption
 
         //hubble appears here only
@@ -519,11 +554,11 @@ function outerSpace() {
     
 
     function nightSpin() {
-        const iss = document.querySelector(".iss"); //international space station
         const issName = document.getElementById("iss-name"); //name caption
-
+        
         if(images[num].name == "Earth At Night") {
-
+            
+            reset = true;
             iss.style.visibility = "visible";
             rocket.style.visibility = "hidden";
 
@@ -558,16 +593,16 @@ function outerSpace() {
     
     //Sun's Atmosphere animation
     function sunSpin() {
-        const parker = document.querySelector(".parker"); //solar parker probe
         const parkerName = document.getElementById("parker-name"); //name caption
         const parkerLaunch = new Audio("assets/sounds/parker-liftoff.mp3"); //parker launch
 
         if(images[num].name == "Sun's Atmosphere") {
 
+            reset = true;
             location.style.color = "peachpuff";
             location.style.textShadow = "0px 0px 2px black";
-            rocket.style.visibility = "hidden";
             parker.style.visibility = "visible";
+            rocket.style.visibility = "hidden";
 
             setInterval(function() {
                 sunAtmosphere++;
@@ -600,22 +635,24 @@ function outerSpace() {
 
 
     //In these locations
-    setTimeout(function() { 
-        switch(images[num].name) {
-            case "Earth":
-            case "Moon":
-            case "Low Earth Orbit Night":
-            case "Mars":
-                spaceCowboy(); //calls astronaut
-            break;
-        }
-    }, 15000); //waits 15 seconds
+    switch(images[num].name) {
+        case "Earth":
+        case "Moon":
+        case "Low Earth Orbit Night":
+        case "Mars":
+
+            reset = true;
+            setTimeout(function() { 
+                
+                spaceCowboy();  //calls astronaut 
+            }, 15000); //waits 15 seconds
+        break;
+    }
 }
 
     
 //astronaut
-function spaceCowboy() {
-    const astronaut = document.querySelector(".astronaut");
+const spaceCowboy = function () {
     const explore = new Audio("assets/sounds/exploration.mp3"); //..at it's greatest
     const hereMan = new Audio("assets/sounds/here-man.mp3"); //here man from..
     const niceOrbit = new Audio("assets/sounds/nice-orbit.mp3"); //nice to be in orbit
@@ -722,20 +759,19 @@ function spaceCowboy() {
 
     //spin animation
     function ride() {
-            if(rotation > 8) {
-                rotation -= Math.round(0.5 * 100) / 100;
-                astronaut.style.transform = `rotate(${rotation}deg)`;
-            } else if(rotation < 8) {
-                rotation += Math.round(0.5 * 100) / 100;
-                astronaut.style.transform = `rotate(${rotation}deg)`;
-            } if(rotation == 8) {
-                clearInterval(spin);
-            }
+        if(rotation > 8) {
+            rotation -= Math.round(0.5 * 100) / 100;
+            astronaut.style.transform = `rotate(${rotation}deg)`;
+        } else if(rotation < 8) {
+            rotation += Math.round(0.5 * 100) / 100;
+            astronaut.style.transform = `rotate(${rotation}deg)`;
+        } if(rotation == 8) {
+            clearInterval(spin);
+        }
     }
 
 
     body.addEventListener("click", function fly(e) {    
-        
         let clearX;
         let clearY;
         let flyX = e.clientX - astronaut.offsetWidth / 2;
@@ -806,11 +842,114 @@ function spaceCowboy() {
 }
 
 
+function navigation() {    
+    let navTop = document.querySelector(".nav-top");
+    let navBottom = document.querySelector(".nav-bottom");
+
+    let j = randomRange(0, images.length - 1);
+    let i = j - 1;
+    let k = j + 1;
+
+    navBottom.onclick = function() { 
+        i--;
+        j--;
+        k--;
+
+        arrayCountCheck();
+    };
+
+    navTop.onclick = function() {
+        i++;
+        j++;
+        k++;
+
+        arrayCountCheck();
+    };
+
+    function arrayCountCheck() {
+        if(i < 0) {
+            i = images.length - 1;
+        }
+        if(j < 0) {
+            j = images.length - 1;
+        }
+        if(k < 0) {
+            k = images.length - 1;
+        }
+
+        if(i > images.length - 1) {
+            i = 0;
+        }
+        if(j > images.length - 1) {
+            j = 0;
+        }
+        if(k > images.length - 1) {
+            k = 0;
+        }
+
+        displayOn();
+    }
+
+    function hide () {
+        astronaut.style.visibility = "hidden";
+        hubble.style.visibility = "hidden";
+        //iss.style.visibility = "hidden";
+        nav.style.visibility = "hidden";
+        //parker.style.visibility = "hidden";
+    }
+
+    
+    function displayOn() {
+
+        let carouselTop = document.getElementById("top");
+        let carouselMiddle = document.getElementById("middle");
+        let carouselBottom = document.getElementById("bottom");
+
+        carouselTop.innerHTML = images[i].name;
+        carouselTop.style.background = images[i].img;
+        carouselTop.onclick = function() { 
+            
+            hide();
+            num = i;
+            outerSpace();
+        };
+    
+        carouselMiddle.innerHTML = images[j].name;
+        carouselMiddle.style.background = images[j].img;
+        carouselMiddle.onclick = function() { 
+            
+            hide();
+            num = j;
+            outerSpace();
+        };
+
+        carouselBottom.innerHTML = images[k].name;
+        carouselBottom.style.background = images[k].img;
+        carouselBottom.onclick = function() { 
+            
+            hide();
+            num = k;
+            outerSpace();
+        };
+
+        function picture(background) {
+            background.style.backgroundPosition = "center";
+            background.style.backgroundRepeat = "no-repeat";
+            background.style.backgroundSize = "cover";
+        }
+
+        picture(carouselTop);
+        picture(carouselMiddle);
+        picture(carouselBottom);
+    }
+
+    displayOn();
+}
+
 window.onload = function() {
     
     animate(rocket);
     
     outerSpace();
-
 }
 
