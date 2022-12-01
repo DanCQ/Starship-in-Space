@@ -24,12 +24,13 @@ const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine
 
 let allow = false; //check for astronaut animation
 let present = false; //checks austronaut
-let reset = false;
+let refresh = false; //page refresh is sometimes necessary to prevent bugs 
 let speed = false; //for boosters
 
 let aurora = randomRange(1,117); //random start image
 let earth = randomRange(1,69); //random start image
 let earthNight = 1;
+let locationName = document.querySelector(".location"); //display for location name
 let sunAtmosphere = randomRange(1,107); //random start image
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
 let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
@@ -124,15 +125,13 @@ function randomRange(min,max) {
 
 //refresh page to random location
 leftNav.addEventListener("click", function() {
-
-    if(reset) {
+    navigation();
+    
+    if(refresh) {
         location.reload();
-    }
-
-    setTimeout(function() {
-        navigation();        
+    } else {
         nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
-    },100);
+    }
 
     allow = false;
 
@@ -313,7 +312,6 @@ function animate(item) {
 
 function outerSpace() {
     let nextImg = new Image(); //img element for preloading next image
-    let location = document.querySelector(".location");
     let off;
 
     auroraSpin();
@@ -326,7 +324,7 @@ function outerSpace() {
 
 
     body.addEventListener("click", function() {
-        if(off) {
+        if(off && allow) {
             locationDisplay();
         }
     });
@@ -337,7 +335,7 @@ function outerSpace() {
 
         if(images[num].name == "Aurora Borealis") {
 
-            reset = true;
+            refresh = true;
             rocket.style.visibility = "hidden";
 
             setInterval(function() {
@@ -375,7 +373,7 @@ function outerSpace() {
 
         if(images[num].name == "Earth") {
             
-            reset = true;
+            refresh = true;
 
             setInterval(function() {
                 earth++;
@@ -444,8 +442,8 @@ function outerSpace() {
     
         //shows location name
         setTimeout(function() {
-            location.innerHTML = images[num].name;
-            location.style.opacity = "0.0"; 
+            locationName.innerHTML = images[num].name;
+            locationName.style.opacity = "0.0"; 
             fade = setInterval(fadeIn, 175); //fades in location name
     
         }, 5000); //five seconds
@@ -454,10 +452,10 @@ function outerSpace() {
         //words fade in effect
         function fadeIn() {
             opacity += 0.1;
-            location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
+            locationName.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
     
             //when fully visible
-            if(location.style.opacity >= 1) {
+            if(locationName.style.opacity >= 1) {
                 clearInterval(fade);
     
                 setTimeout(function() {
@@ -471,9 +469,9 @@ function outerSpace() {
         //words fade out effect
         function fadeOut() {
             opacity -= 0.1;
-            location.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
+            locationName.style.opacity = Math.round(opacity * 100) / 100; //keep decimal numbers from breaking
     
-            if(location.style.opacity <= 0.0) {
+            if(locationName.style.opacity <= 0.0) {
                 clearInterval(fade);
                 off = true;
             }
@@ -481,70 +479,70 @@ function outerSpace() {
 
 
         //Fade in|out for celestial body latin names
-        location.addEventListener("click", function() {
+        locationName.addEventListener("click", function() {
 
-            switch(location.innerHTML) {
+            switch(locationName.innerHTML) {
                 case "Earth": 
                     fade = setInterval(fadeOut, 175); //fades out location name
                     setTimeout(function() {
-                        location.innerHTML = "Terra";
-                        location.style.opacity = "0.0";
+                        locationName.innerHTML = "Terra";
+                        locationName.style.opacity = "0.0";
                         fade = setInterval(fadeIn, 175); //fades in location name
                     }, 2500); //2.5 seconds
                     break;
                 case "Terra":
                     fade = setInterval(fadeOut, 175); //fades out location name
                     setTimeout(function() {
-                        location.innerHTML = "Earth";
-                        location.style.opacity = "0.0";
+                        locationName.innerHTML = "Earth";
+                        locationName.style.opacity = "0.0";
                         fade = setInterval(fadeIn, 175); //fades in location name
                     }, 2500); //2.5seconds
                     break;
                 case "Moon":
                     fade = setInterval(fadeOut, 175); //fades out location name
                     setTimeout(function() {
-                        location.innerHTML = "Luna";
-                        location.style.opacity = "0.0";
+                        locationName.innerHTML = "Luna";
+                        locationName.style.opacity = "0.0";
                         fade = setInterval(fadeIn, 175); //fades in location name
                     }, 2500); //2.5seconds
                     break;
                 case "Luna":
                     fade = setInterval(fadeOut, 175); //fades out location name
                     setTimeout(function() {
-                        location.innerHTML = "Moon";
-                        location.style.opacity = "0.0";
+                        locationName.innerHTML = "Moon";
+                        locationName.style.opacity = "0.0";
                         fade = setInterval(fadeIn, 175); //fades in location name
                     }, 2500); //2.5seconds
                     break;
                 case "Sun":
                     fade = setInterval(fadeOut, 175); //fades out location name
                     setTimeout(function() {
-                        location.innerHTML = "Sol";
-                        location.style.opacity = "0.0";
+                        locationName.innerHTML = "Sol";
+                        locationName.style.opacity = "0.0";
                         fade = setInterval(fadeIn, 175); //fades in location name
                     }, 2500); //2.5seconds
                     break;
                 case "Sol":
                     fade = setInterval(fadeOut, 175); //fades out location name
                     setTimeout(function() {
-                        location.innerHTML = "Sun";
-                        location.style.opacity = "0.0";
+                        locationName.innerHTML = "Sun";
+                        locationName.style.opacity = "0.0";
                         fade = setInterval(fadeIn, 175); //fades in location name
                     }, 2500); //2.5seconds
                     break;
                 case "Mercury":
                     fade = setInterval(fadeOut, 175); //fades out location name
                     setTimeout(function() {
-                        location.innerHTML = "Mercurius";
-                        location.style.opacity = "0.0";
+                        locationName.innerHTML = "Mercurius";
+                        locationName.style.opacity = "0.0";
                         fade = setInterval(fadeIn, 175); //fades in location name
                     }, 2500); //2.5seconds
                     break;
                 case "Mercurius":
                     fade = setInterval(fadeOut, 175); //fades out location name
                     setTimeout(function() {
-                        location.innerHTML = "Mercury";
-                        location.style.opacity = "0.0";
+                        locationName.innerHTML = "Mercury";
+                        locationName.style.opacity = "0.0";
                         fade = setInterval(fadeIn, 175); //fades in location name
                     }, 2500); //2.5seconds
                     break;
@@ -558,7 +556,7 @@ function outerSpace() {
         
         if(images[num].name == "Earth At Night") {
             
-            reset = true;
+            refresh = true;
             iss.style.visibility = "visible";
             rocket.style.visibility = "hidden";
 
@@ -598,9 +596,9 @@ function outerSpace() {
 
         if(images[num].name == "Sun's Atmosphere") {
 
-            reset = true;
-            location.style.color = "peachpuff";
-            location.style.textShadow = "0px 0px 2px black";
+            refresh = true;
+            locationName.style.color = "peachpuff";
+            locationName.style.textShadow = "0px 0px 2px black";
             parker.style.visibility = "visible";
             rocket.style.visibility = "hidden";
 
@@ -641,7 +639,7 @@ function outerSpace() {
         case "Low Earth Orbit Night":
         case "Mars":
 
-            reset = true;
+            refresh = true;
             setTimeout(function() { 
                 
                 spaceCowboy();  //calls astronaut 
@@ -891,41 +889,43 @@ function navigation() {
     }
 
     function hide () {
-        astronaut.style.visibility = "hidden";
-        hubble.style.visibility = "hidden";
-        //iss.style.visibility = "hidden";
+        locationName.innerHTML = "";
+        locationName.style.opacity = "0.0"; 
         nav.style.visibility = "hidden";
+        //astronaut.style.visibility = "hidden";
+        //hubble.style.visibility = "hidden";
+        //iss.style.visibility = "hidden";
         //parker.style.visibility = "hidden";
     }
 
     
     function displayOn() {
 
-        let carouselTop = document.getElementById("top");
-        let carouselMiddle = document.getElementById("middle");
-        let carouselBottom = document.getElementById("bottom");
+        let top = document.getElementById("top");
+        let middle = document.getElementById("middle");
+        let bottom = document.getElementById("bottom");
 
-        carouselTop.innerHTML = images[i].name;
-        carouselTop.style.background = images[i].img;
-        carouselTop.onclick = function() { 
+        top.innerHTML = images[i].name;
+        top.style.background = images[i].img;
+        top.onclick = function() { 
             
             hide();
             num = i;
             outerSpace();
         };
     
-        carouselMiddle.innerHTML = images[j].name;
-        carouselMiddle.style.background = images[j].img;
-        carouselMiddle.onclick = function() { 
+        middle.innerHTML = images[j].name;
+        middle.style.background = images[j].img;
+        middle.onclick = function() { 
             
             hide();
             num = j;
             outerSpace();
         };
 
-        carouselBottom.innerHTML = images[k].name;
-        carouselBottom.style.background = images[k].img;
-        carouselBottom.onclick = function() { 
+        bottom.innerHTML = images[k].name;
+        bottom.style.background = images[k].img;
+        bottom.onclick = function() { 
             
             hide();
             num = k;
@@ -938,9 +938,9 @@ function navigation() {
             background.style.backgroundSize = "cover";
         }
 
-        picture(carouselTop);
-        picture(carouselMiddle);
-        picture(carouselBottom);
+        picture(top);
+        picture(middle);
+        picture(bottom);
     }
 
     displayOn();
