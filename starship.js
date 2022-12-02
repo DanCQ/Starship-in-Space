@@ -481,6 +481,14 @@ function outerSpace() {
         //Fade in|out for celestial body latin names
         locationName.addEventListener("click", function() {
 
+            allow = false;
+
+            setTimeout(function() {
+                if(present) {
+                    allow = true;
+                }
+            }, 500);
+
             switch(locationName.innerHTML) {
                 case "Earth": 
                     fade = setInterval(fadeOut, 175); //fades out location name
@@ -549,7 +557,7 @@ function outerSpace() {
             };
         });
     }
-    
+
 
     function nightSpin() {
         const issName = document.getElementById("iss-name"); //name caption
