@@ -720,15 +720,18 @@ const spaceCowboy = function () {
             niceOrbit.play();
         }
         
+        clearInterval(flyTo);
         nextOriginX = randomRange(0, screenWidth);
         nextOriginY = randomRange(0, screenHeight);
         nextRotation = randomRange(-360, 360);
-
+        
         travel = setInterval(leaving, 50); //starts interval
     });
 
     //astonaut leaving animation
     function leaving() {
+
+        
         allow = false;
         present = false;
         size -=  Math.round(0.5 * 100) /100;
