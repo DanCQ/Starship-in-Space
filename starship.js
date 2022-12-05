@@ -720,7 +720,8 @@ const spaceCowboy = function () {
             niceOrbit.play();
         }
         
-        clearInterval(flyTo);
+        clearInterval(flyTo); 
+        clearInterval(travel);
         nextOriginX = randomRange(0, screenWidth);
         nextOriginY = randomRange(0, screenHeight);
         nextRotation = randomRange(-360, 360);
@@ -731,7 +732,6 @@ const spaceCowboy = function () {
     //astonaut leaving animation
     function leaving() {
 
-        
         allow = false;
         present = false;
         size -=  Math.round(0.5 * 100) /100;
@@ -903,10 +903,6 @@ function navigation() {
         locationName.innerHTML = "";
         locationName.style.opacity = "0.0"; 
         nav.style.visibility = "hidden";
-        //astronaut.style.visibility = "hidden";
-        //hubble.style.visibility = "hidden";
-        //iss.style.visibility = "hidden";
-        //parker.style.visibility = "hidden";
     }
 
     
