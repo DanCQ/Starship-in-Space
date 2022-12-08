@@ -1,5 +1,6 @@
 const astronaut = document.querySelector(".astronaut"); //the astronaut
 const body = document.querySelector(".body"); //html body
+const footer = document.querySelector(".footer");
 const hubble = document.querySelector(".hubble"); //space telescope
 const iss = document.querySelector(".iss"); //international space station
 const leftNav = document.querySelector(".left-nav"); //left page navigation
@@ -157,7 +158,7 @@ nav.addEventListener("click", function () {
 rightNav.addEventListener("click", function() {
 
     allow = false;
-
+    
     switch(images[num].name) {
         case "Aurora Borealis":
             auroraInfo.style.visibility  == "visible" ? auroraInfo.style.visibility = "hidden" : auroraInfo.style.visibility = "visible";
@@ -183,9 +184,13 @@ rightNav.addEventListener("click", function() {
     }
 
     setTimeout(function() {
+
+        footer.style.visibility == "visible" ? footer.style.visibility = "hidden" : footer.style.visibility = "visible";
+
         if(present) {
             allow = true;
         }
+
     }, 500);
    
 });
@@ -903,6 +908,8 @@ function navigation() {
         locationName.innerHTML = "";
         locationName.style.opacity = "0.0"; 
         nav.style.visibility = "hidden";
+        sunInfo.style.visibility = "hidden";
+        footer.style.visibility = "hidden";
     }
 
     
