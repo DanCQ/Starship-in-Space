@@ -191,11 +191,6 @@ rightNav.addEventListener("click", function() {
             allow = true;
         }
 
-        setTimeout(function() {
-
-            footer.style.visibility = "hidden";
-        }, 10000)
-
     }, 500);
 
    
