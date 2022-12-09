@@ -191,7 +191,13 @@ rightNav.addEventListener("click", function() {
             allow = true;
         }
 
+        setTimeout(function() {
+
+            footer.style.visibility = "hidden";
+        }, 10000)
+
     }, 500);
+
    
 });
 
@@ -268,6 +274,7 @@ function animate(item) {
     let retreat;
     let starship = document.querySelector(".starship");
 
+    
     //random ship flight direction
     function flip() {
         let coin = randomRange(1, 2);
