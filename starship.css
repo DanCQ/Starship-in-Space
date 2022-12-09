@@ -29,7 +29,7 @@
 
 footer {
     position:absolute;
-        bottom:5%;
+        bottom:15px;
     text-align: center;
     visibility: hidden;
 }
