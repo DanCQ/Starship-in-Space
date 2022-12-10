@@ -225,7 +225,7 @@ rocket.addEventListener("click", function() {
                     jfk.play();
                 }
 
-            } else if(images[num].name == "Earth" | images[num].name == "Low Earth Orbit Night") {
+            } else if(images[num].name == "Earth" || images[num].name == "Low Earth Orbit Night") {
                 earthFrom.play();
             } else {
                 onWay.play();
