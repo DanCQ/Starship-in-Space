@@ -32,6 +32,7 @@ let speed = false; //for boosters
 let aurora = randomRange(1,117); //random start image
 let earth = randomRange(1,69); //random start image
 let earthNight = 1;
+let issSpin = 1;
 let locationName = document.querySelector(".location"); //display for location name
 let sunAtmosphere = randomRange(1,107); //random start image
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
@@ -67,6 +68,10 @@ let images = [
     {
         name: "Low Earth Orbit Night",
         img: "url(assets/low-earth-orbit-night.jpeg)"
+    },
+    {
+        name: "International Space Station",
+        img: `url(assets/iss/${issSpin}.jpg`
     },
     {
         name: "Aurora Borealis",
@@ -274,11 +279,23 @@ function animate(item) {
     function flip() {
         let coin = randomRange(1, 2);
 
-        if(coin == 1) {
-            advance = setInterval(animateForward, 20); 
-        } else {
-            retreat = setInterval(animateBackward, 20);
-        }
+        setTimeout(function() {
+            if(coin == 1) {
+                if(starship.style.visibility == "visible") {
+                    advance = setInterval(animateForward, 20);
+                    console.log(advance);
+                } else {
+                    clearInterval(advance);
+                }
+            } else {
+                if(starship.style.visibility == "visible") {
+                    retreat = setInterval(animateBackward, 20);
+                    console.log(retreat);
+                } else {
+                    clearInterval(retreat);
+                }
+            }
+        },25)
     } 
     flip();
     
@@ -319,12 +336,13 @@ function animate(item) {
 
 function outerSpace() {
     let nextImg = new Image(); //img element for preloading next image
-    let off;
+    let off; //used with location display
 
-    auroraSpin();
-    background(); 
+    auroraSpin(); //aurora spin animation
+    background(); //sets background
     earthSpin(); //Earth spin animation
-    hubbleTelescope(); 
+    hubbleTelescope(); //hubble spin animation
+    IntSpaceStation(); //ISS spin animation
     locationDisplay(); //displays location name
     nightSpin(); //Earth at night
     sunSpin(); //Sun's Atmosphere animation
@@ -335,6 +353,7 @@ function outerSpace() {
         case "Sun's Atmosphere":
         case "Earth At Night":
         case "Aurora Borealis":
+        case "International Space Station":
             starship.style.visibility = "hidden";
             break;
         default:
@@ -359,7 +378,7 @@ function outerSpace() {
             setInterval(function() {
                 aurora++;
                 if(aurora > 117) {
-                    aurora = 0;
+                    aurora = 1;
                 };
 
                 nextImg.src = `assets/aurora/${aurora}.jpg`; //preloads next image
@@ -451,6 +470,33 @@ function outerSpace() {
             });
         } 
     } 
+
+
+    //aurora borealis animation
+    function IntSpaceStation() {
+
+        if(images[num].name == "International Space Station") {
+
+            refresh = true;
+
+            setInterval(function() {
+                issSpin++;
+                if(issSpin > 80) {
+                    issSpin = 1;
+                };
+
+                nextImg.src = `assets/iss/${issSpin}.jpg`; //preloads next image
+                body.style.transition = "ease-in-out 50ms";
+            
+                //change only happens once next image is loaded
+                nextImg.onload = function() {
+                    images[num].img = `url(${nextImg.src})`;
+                    background();
+                } 
+
+            }, 1500);
+        }
+    }
 
 
     function locationDisplay() {
