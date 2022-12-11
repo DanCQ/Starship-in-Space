@@ -8,6 +8,7 @@ const nav = document.querySelector(".nav"); //navigation menu
 const parker = document.querySelector(".parker"); //solar parker probe
 const rightNav = document.querySelector(".right-nav"); //right page navigation
 const rocket = document.querySelector(".rocket"); //ship and parts
+const starship = document.querySelector(".starship");
 
 const auroraInfo = document.querySelector(".info-aurora");
 const earthInfo = document.querySelector(".info-earth");
@@ -267,7 +268,6 @@ function animate(item) {
     let advance;
     let position = randomRange(0, screenWidth);
     let retreat;
-    let starship = document.querySelector(".starship");
 
     
     //random ship flight direction
@@ -330,6 +330,18 @@ function outerSpace() {
     sunSpin(); //Sun's Atmosphere animation
 
 
+    //starship visibility
+    switch(images[num].name) {
+        case "Sun's Atmosphere":
+        case "Earth At Night":
+        case "Aurora Borealis":
+            starship.style.visibility = "hidden";
+            break;
+        default:
+            starship.style.visibility = "visible";
+            break;
+    }
+
     body.addEventListener("click", function() {
         if(off && allow) {
             locationDisplay();
@@ -343,7 +355,6 @@ function outerSpace() {
         if(images[num].name == "Aurora Borealis") {
 
             refresh = true;
-            rocket.style.visibility = "hidden";
 
             setInterval(function() {
                 aurora++;
@@ -573,7 +584,6 @@ function outerSpace() {
             
             refresh = true;
             iss.style.visibility = "visible";
-            rocket.style.visibility = "hidden";
 
             iss.addEventListener("click", function() {
 
@@ -615,7 +625,6 @@ function outerSpace() {
             locationName.style.color = "peachpuff";
             locationName.style.textShadow = "0px 0px 2px black";
             parker.style.visibility = "visible";
-            rocket.style.visibility = "hidden";
 
             setInterval(function() {
                 sunAtmosphere++;
