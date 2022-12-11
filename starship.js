@@ -796,11 +796,11 @@ const spaceCowboy = function () {
     }
 
 
-    body.addEventListener("click", function fly(e) {    
+    body.addEventListener("click", function fly(event) {    
         let clearX;
         let clearY;
-        let flyX = e.clientX - astronaut.offsetWidth / 2;
-        let flyY = e.clientY - astronaut.offsetHeight / 2;
+        let flyX = event.clientX - astronaut.offsetWidth / 2;
+        let flyY = event.clientY - astronaut.offsetHeight / 2;
         let tilt = angle(flyX - originX);
 
         function angle(total) {
