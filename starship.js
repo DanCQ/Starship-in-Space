@@ -283,15 +283,15 @@ function animate(item) {
             if(coin == 1) {
                 if(starship.style.visibility == "visible") {
                     advance = setInterval(animateForward, 20);
-                    console.log(advance);
                 } else {
                     clearInterval(advance);
+                    clearInterval(retreat);
                 }
             } else {
                 if(starship.style.visibility == "visible") {
                     retreat = setInterval(animateBackward, 20);
-                    console.log(retreat);
                 } else {
+                    clearInterval(advance);
                     clearInterval(retreat);
                 }
             }
