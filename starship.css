@@ -282,6 +282,7 @@ footer a {
 .starship {
     height: 225px;
     position:absolute;
+    visibility:hidden;
     z-index:1;
 }
 
