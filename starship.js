@@ -62,12 +62,12 @@ let images = [
         img: `url(assets/earth/${earth}.png)`
     },
     {
-        name: "Earth At Night",
-        img: `url(assets/earth-night/${earthNight}.jpg)`
-    },
-    {
         name: "Low Earth Orbit Night",
         img: "url(assets/low-earth-orbit-night.jpeg)"
+    },
+    {
+        name: "Earth At Night",
+        img: `url(assets/earth-night/${earthNight}.jpg)`
     },
     {
         name: "International Space Station",
