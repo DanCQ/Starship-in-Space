@@ -32,7 +32,6 @@ let speed = false; //for boosters
 let aurora = randomRange(1,117); //random start image
 let earth = randomRange(1,69); //random start image
 let earthNight = 1;
-let issSpin = 1;
 let locationName = document.querySelector(".location"); //display for location name
 let sunAtmosphere = randomRange(1,107); //random start image
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
@@ -68,10 +67,6 @@ let images = [
     {
         name: "Earth At Night",
         img: `url(assets/earth-night/${earthNight}.jpg)`
-    },
-    {
-        name: "International Space Station",
-        img: `url(assets/iss/${issSpin}.jpg`
     },
     {
         name: "Aurora Borealis",
@@ -342,7 +337,6 @@ function outerSpace() {
     background(); //sets background
     earthSpin(); //Earth spin animation
     hubbleTelescope(); //hubble spin animation
-    IntSpaceStation(); //ISS spin animation
     locationDisplay(); //displays location name
     nightSpin(); //Earth at night
     sunSpin(); //Sun's Atmosphere animation
@@ -353,7 +347,6 @@ function outerSpace() {
         case "Sun's Atmosphere":
         case "Earth At Night":
         case "Aurora Borealis":
-        case "International Space Station":
             starship.style.visibility = "hidden";
             break;
         default:
@@ -470,33 +463,6 @@ function outerSpace() {
             });
         } 
     } 
-
-
-    //aurora borealis animation
-    function IntSpaceStation() {
-
-        if(images[num].name == "International Space Station") {
-
-            refresh = true;
-
-            setInterval(function() {
-                issSpin++;
-                if(issSpin > 80) {
-                    issSpin = 1;
-                };
-
-                nextImg.src = `assets/iss/${issSpin}.jpg`; //preloads next image
-                body.style.transition = "ease-in-out 50ms";
-            
-                //change only happens once next image is loaded
-                nextImg.onload = function() {
-                    images[num].img = `url(${nextImg.src})`;
-                    background();
-                } 
-
-            }, 1500);
-        }
-    }
 
 
     function locationDisplay() {
