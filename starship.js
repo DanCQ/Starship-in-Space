@@ -33,7 +33,7 @@ let aurora = randomRange(1,117); //random start image
 let earth = randomRange(1,69); //random start image
 let earthNight = 1;
 let locationName = document.querySelector(".location"); //display for location name
-let sunAtmosphere = randomRange(1,107); //random start image
+let sunAtmosphere = randomRange(1,89); //random start image
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
 let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
 
@@ -641,7 +641,7 @@ function outerSpace() {
             setInterval(function() {
                 sunAtmosphere++;
 
-                if(sunAtmosphere > 107) {
+                if(sunAtmosphere > 89) {
                     sunAtmosphere = 1;
                 };
             
