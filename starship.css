@@ -187,13 +187,13 @@ footer a {
 }
 
 .parker {
-    animation-duration: 100s;
+    animation-duration: 60s;
     animation-iteration-count:infinite;
     animation-name:scan;
     animation-timing-function: ease-in-out;
     cursor:pointer;
     height: 250px;
-    transform:rotate(30deg);
+    transform:rotate(-10deg);
     visibility:hidden;
 }
 
@@ -309,16 +309,16 @@ footer a {
 
 @keyframes scan {
     0% {
-        transform: rotate(30deg);
+        transform: rotate(-10deg);
     }
     25% {
-        transform: rotate(60deg);
-    }
-    75% {
         transform: rotate(10deg);
     }
+    75% {
+        transform: rotate(0deg);
+    }
     100% {
-        transform: rotate(30deg);
+        transform: rotate(-10deg);
     }
 }
 
