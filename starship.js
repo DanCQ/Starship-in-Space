@@ -13,6 +13,7 @@ const starship = document.querySelector(".starship");
 const auroraInfo = document.querySelector(".info-aurora");
 const earthInfo = document.querySelector(".info-earth");
 const marsInfo = document.querySelector(".info-mars");
+const mercuryInfo = document.querySelector(".info-mercury");
 const moonInfo = document.querySelector(".info-moon");
 const sunInfo = document.querySelector(".info-sun");
 
@@ -170,7 +171,10 @@ rightNav.addEventListener("click", function() {
             earthInfo.style.visibility == "visible" ? earthInfo.style.visibility = "hidden" : earthInfo.style.visibility = "visible";
             break;
         case "Mars":
-            marsInfo.style.visibility  == "visible" ? marsInfo.style.visibility = "hidden" : marsInfo.style.visibility = "visible";
+            marsInfo.style.visibility == "visible" ? marsInfo.style.visibility = "hidden" : marsInfo.style.visibility = "visible";
+            break;
+        case "Mercury":
+            mercuryInfo.style.visibility == "visible" ? mercuryInfo.style.visibility = "hidden" : mercuryInfo.style.visibility = "visible";
             break;
         case "Moon":
             moonInfo.style.visibility  == "visible" ? moonInfo.style.visibility = "hidden" : moonInfo.style.visibility = "visible";
