@@ -16,6 +16,7 @@ const marsInfo = document.querySelector(".info-mars");
 const mercuryInfo = document.querySelector(".info-mercury");
 const moonInfo = document.querySelector(".info-moon");
 const sunInfo = document.querySelector(".info-sun");
+const venusInfo = document.querySelector(".info-venus");
 
 const eagle = new Audio("assets/sounds/eagle.mp3"); //the eagle has landed
 const earthFrom = new Audio("assets/sounds/earth-from-here.mp3"); //..from here..
@@ -182,6 +183,9 @@ rightNav.addEventListener("click", function() {
         case "Sun":
         case "Sun's Atmosphere":
             sunInfo.style.visibility == "visible" ? sunInfo.style.visibility = "hidden" : sunInfo.style.visibility = "visible";
+            break;
+        case "Venus":
+            venusInfo.style.visibility == "visible" ? venusInfo.style.visibility = "hidden" : venusInfo.style.visibility = "visible";
             break;
         default: 
             location.reload();
