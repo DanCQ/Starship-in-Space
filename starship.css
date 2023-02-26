@@ -102,6 +102,10 @@ footer a {
     visibility:hidden;
 }
 
+.info-venus {
+    visibility:hidden;
+}
+
 .iss {
     cursor:pointer;
     transform:rotate(-20deg);
