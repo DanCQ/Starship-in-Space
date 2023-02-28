@@ -938,9 +938,10 @@ function navigation() {
     function hide () {
         locationName.innerHTML = "";
         locationName.style.opacity = "0.0"; 
+        footer.style.visibility = "hidden";
         nav.style.visibility = "hidden";
         sunInfo.style.visibility = "hidden";
-        footer.style.visibility = "hidden";
+        venusInfo.style.visibility = "hidden";
     }
 
     
