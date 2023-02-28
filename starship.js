@@ -940,6 +940,11 @@ function navigation() {
         locationName.style.opacity = "0.0"; 
         footer.style.visibility = "hidden";
         nav.style.visibility = "hidden";
+        auroraInfo.style.visibility = "hidden";
+        earthInfo.style.visibility = "hidden";
+        marsInfo.style.visibility = "hidden";
+        mercuryInfo.style.visibility = "hidden";
+        moonInfo.style.visibility = "hidden";
         sunInfo.style.visibility = "hidden";
         venusInfo.style.visibility = "hidden";
     }
