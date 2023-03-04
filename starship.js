@@ -287,7 +287,7 @@ function animate(item) {
         default:
             setTimeout(function() {
                 starship.style.visibility = "visible"; //fixes initial position appearance of image
-            },25);
+            },50);
             break;
     }
     
@@ -360,7 +360,7 @@ function outerSpace() {
     locationDisplay(); //displays location name
     nightSpin(); //Earth at night
     sunSpin(); //Sun's Atmosphere animation
-    
+
 
     body.addEventListener("click", function() {
         if(off && allow) {
