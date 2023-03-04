@@ -277,28 +277,39 @@ function animate(item) {
     let position = randomRange(0, screenWidth);
     let retreat;
 
+    //starship visibility
+    switch(images[num].name) {
+        case "Sun's Atmosphere":
+        case "Earth At Night":
+        case "Aurora Borealis":
+            starship.style.visibility = "hidden";
+            break;
+        default:
+            setTimeout(function() {
+                starship.style.visibility = "visible"; //fixes initial position appearance of image
+            },25);
+            break;
+    }
     
     //random ship flight direction
     function flip() {
         let coin = randomRange(1, 2);
 
-        setTimeout(function() {
-            if(coin == 1) {
-                if(starship.style.visibility == "visible") {
-                    advance = setInterval(animateForward, 20);
-                } else {
-                    clearInterval(advance);
-                    clearInterval(retreat);
-                }
+        if(coin == 1) {
+            if(starship.style.visibility == "hidden") {
+                clearInterval(advance);
+                clearInterval(retreat);
             } else {
-                if(starship.style.visibility == "visible") {
-                    retreat = setInterval(animateBackward, 20);
-                } else {
-                    clearInterval(advance);
-                    clearInterval(retreat);
-                }
+                advance = setInterval(animateForward, 20);
             }
-        },25)
+        } else {
+            if(starship.style.visibility == "hidden") {
+                clearInterval(advance);
+                clearInterval(retreat);
+            } else {
+                retreat = setInterval(animateBackward, 20);
+            }
+        }
     } 
     flip();
     
@@ -334,6 +345,7 @@ function animate(item) {
             position += 150;
         }
     }
+
 }
 
 
@@ -348,19 +360,7 @@ function outerSpace() {
     locationDisplay(); //displays location name
     nightSpin(); //Earth at night
     sunSpin(); //Sun's Atmosphere animation
-
-
-    //starship visibility
-    switch(images[num].name) {
-        case "Sun's Atmosphere":
-        case "Earth At Night":
-        case "Aurora Borealis":
-            starship.style.visibility = "hidden";
-            break;
-        default:
-            starship.style.visibility = "visible";
-            break;
-    }
+    
 
     body.addEventListener("click", function() {
         if(off && allow) {
@@ -948,7 +948,6 @@ function navigation() {
         sunInfo.style.visibility = "hidden";
         venusInfo.style.visibility = "hidden";
     }
-
     
     function displayOn() {
 
