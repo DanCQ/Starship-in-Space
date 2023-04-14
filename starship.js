@@ -287,8 +287,7 @@ function animate(item) {
         default:
             setTimeout(function() {
                 starship.style.visibility = "visible"; //fixes initial position appearance of image
-            },50);
-            break;
+            },500);
     }
     
     //random ship flight direction
