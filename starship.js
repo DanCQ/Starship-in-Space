@@ -817,9 +817,7 @@ const spaceCowboy = function () {
 
     //body.addEventListener("click", function fly(event) {    
     function fly(event) {
-        let clearX;
-        let clearY;
-        
+
         if (event.type === 'touchmove') {
             // event.touches[0] gets the first touch point's coordinates
             let touch = event.touches[0];
@@ -827,6 +825,8 @@ const spaceCowboy = function () {
             event.y = touch.clientY;
         } 
         
+        let clearX;
+        let clearY;
         let flyX = event.x - astronaut.offsetWidth / 2;
         let flyY = event.y - astronaut.offsetHeight / 2;
         let tilt = angle(flyX - originX);
