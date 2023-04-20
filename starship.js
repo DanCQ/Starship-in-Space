@@ -815,7 +815,8 @@ const spaceCowboy = function () {
     }
 
 
-    body.addEventListener("click", function fly(event) {    
+    //body.addEventListener("click", function fly(event) {    
+    function fly(event) {
         let clearX;
         let clearY;
         let flyX = event.x - astronaut.offsetWidth / 2;
@@ -882,7 +883,10 @@ const spaceCowboy = function () {
                 tilt = angle(flyX - originX);
             }
         }   
-    });
+    }
+    
+    body.addEventListener("click", fly);
+    body.addEventListener("touchmove", fly);
 }
 
 
