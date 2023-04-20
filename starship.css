@@ -70,6 +70,7 @@ footer a {
         right:5%;
         top:1%;
     text-shadow: 0px 0px 2px black;
+    user-select: text;
     z-index:6;
 }    
 
