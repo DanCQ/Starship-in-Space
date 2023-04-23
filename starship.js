@@ -44,75 +44,75 @@ let screenHeight = document.documentElement.scrollHeight; //sets device screen h
 let images = [
     {
         name: "Sun's Atmosphere",
-        img: `url(assets/sun-surface/${sunAtmosphere}.jpg)`
+        img: `assets/sun-surface/${sunAtmosphere}.jpg`
     },
     {
         name: "Sun",
-        img: "url(assets/sun.jpeg)"
+        img: "assets/sun.jpeg"
     },
     {
         name: "Mercury",
-        img: "url(assets/mercury.jpeg)"
+        img: "assets/mercury.jpeg"
     },
     {
         name: "Venus",
-        img: "url(assets/venus.jpeg)"
+        img: "assets/venus.jpeg"
     },
     {
         name: "Earth",
-        img: `url(assets/earth/${earth}.png)`
+        img: `assets/earth/${earth}.png`
     },
     {
         name: "Low Earth Orbit Night",
-        img: "url(assets/low-earth-orbit-night.jpeg)"
+        img: "assets/low-earth-orbit-night.jpeg"
     },
     {
         name: "Earth At Night",
-        img: `url(assets/earth-night/${earthNight}.jpg)`
+        img: `assets/earth-night/${earthNight}.jpg`
     },
     {
         name: "Aurora Borealis",
-        img: `url(assets/aurora/${aurora}.jpg)`
+        img: `assets/aurora/${aurora}.jpg`
     },
     {
         name: "Milky Way Earth View",
-        img: "url(assets/milky-way-earth-view.jpeg)"
+        img: "assets/milky-way-earth-view.jpeg"
     },
     {
         name: "Moon",
-        img: "url(assets/moon.jpeg)"
+        img: "assets/moon.jpeg"
     },
     {
         name: "Mars",
-        img: "url(assets/mars.jpeg)"
+        img: "assets/mars.jpeg"
     },
     {
         name: "Jupiter",
-        img: "url(assets/jupiter.jpeg)"
+        img: "assets/jupiter.jpeg"
     },
     {
         name: "Saturn",
-        img: "url(assets/saturn.jpeg)"
+        img: "assets/saturn.jpeg"
     },
     {
         name: "Uranus",
-        img: "url(assets/uranus.jpeg)"
+        img: "assets/uranus.jpeg"
     },
     {
         name: "Neptune",
-        img: "url(assets/neptune.jpeg)"
+        img: "assets/neptune.jpeg"
     },
     {
         name: "Pluto",
-        img: "url(assets/pluto.jpeg)"
+        img: "assets/pluto.jpeg"
     },
     {
         name: "Distant Sun",
-        img: "url(assets/distant-sun.jpeg)"
+        img: "assets/distant-sun.jpeg"
     },
     { 
         name: "Milky Way Galaxy",
-        img: "url(assets/milky-way.jpeg)"
+        img: "assets/milky-way.jpeg"
     }
 ];
 
@@ -276,19 +276,6 @@ function animate(item) {
     let advance;
     let position = randomRange(0, screenWidth);
     let retreat;
-
-    //starship visibility
-    switch(images[num].name) {
-        case "Sun's Atmosphere":
-        case "Earth At Night":
-        case "Aurora Borealis":
-            starship.style.visibility = "hidden";
-            break;
-        default:
-            setTimeout(function() {
-                starship.style.visibility = "visible"; //fixes initial position appearance of image
-            },500);
-    }
     
     //random ship flight direction
     function flip() {
@@ -352,6 +339,19 @@ function outerSpace() {
     let nextImg = new Image(); //img element for preloading next image
     let off; //used with location display
 
+    //starship visibility
+    switch(images[num].name) {
+        case "Sun's Atmosphere":
+        case "Earth At Night":
+        case "Aurora Borealis":
+            starship.style.visibility = "hidden";
+            break;
+        default:
+            setTimeout(function() { 
+                starship.style.visibility = "visible"; 
+            }, 100); //fixes initial position appearance of image
+    }
+
     auroraSpin(); //aurora spin animation
     background(); //sets background
     earthSpin(); //Earth spin animation
@@ -386,7 +386,7 @@ function outerSpace() {
             
                 //change only happens once next image is loaded
                 nextImg.onload = function() {
-                    images[num].img = `url(${nextImg.src})`;
+                    images[num].img = nextImg.src;
                     background();
                 } 
 
@@ -397,7 +397,7 @@ function outerSpace() {
 
     //sets background image
     function background() {
-        body.style.background = images[num].img; 
+        body.style.background = `url(${images[num].img})`;
         body.style.backgroundColor = "black";
         body.style.backgroundPosition = "center";
         body.style.backgroundRepeat = "no-repeat";
@@ -423,7 +423,7 @@ function outerSpace() {
             
                 //change only happens once next image is loaded
                 nextImg.onload = function() {
-                    images[num].img = `url(${nextImg.src})`;
+                    images[num].img = nextImg.src;
                     background();
                 } 
 
@@ -624,7 +624,7 @@ function outerSpace() {
             
                 //change only happens once next image is loaded
                 nextImg.onload = function() {
-                    images[num].img = `url(${nextImg.src})`;
+                    images[num].img = nextImg.src;
                     background();
                 }
 
@@ -656,7 +656,7 @@ function outerSpace() {
                 
                 //change only happens once next image is loaded
                 nextImg.onload = function() {
-                    images[num].img = `url(${nextImg.src})`;
+                    images[num].img = nextImg.src;
                     background();
                 }
 
@@ -898,6 +898,17 @@ const spaceCowboy = function () {
 }
 
 
+//preloads images into cache
+function preloadImages() {
+
+    images.forEach(obj => {
+
+        let image = new Image();
+        image.src = obj.img;
+    });
+}
+
+
 function navigation() {    
     let navTop = document.querySelector(".nav-top");
     let navBottom = document.querySelector(".nav-bottom");
@@ -967,7 +978,7 @@ function navigation() {
         let bottom = document.getElementById("bottom");
 
         top.innerHTML = images[i].name;
-        top.style.background = images[i].img;
+        top.style.background = `url(${images[i].img})`;
         top.onclick = function() { 
             
             hide();
@@ -976,7 +987,7 @@ function navigation() {
         };
     
         middle.innerHTML = images[j].name;
-        middle.style.background = images[j].img;
+        middle.style.background = `url(${images[j].img})`;
         middle.onclick = function() { 
             
             hide();
@@ -985,7 +996,7 @@ function navigation() {
         };
 
         bottom.innerHTML = images[k].name;
-        bottom.style.background = images[k].img;
+        bottom.style.background = `url(${images[k].img})`;
         bottom.onclick = function() { 
             
             hide();
@@ -1008,9 +1019,10 @@ function navigation() {
 }
 
 window.onload = function() {
-    
-    animate(rocket);
+
+    animate(rocket); //animates starship
     
     outerSpace();
-}
 
+    setTimeout(function() { preloadImages() }, 2000); //waits for primary images to load first
+}
