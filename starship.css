@@ -1,9 +1,3 @@
-* {
-    user-select: none;
-    -webkit-touch-callout:none;
-    -webkit-user-select: none;
-}
-
 .astronaut {
     cursor: pointer;
     height: 1px;
@@ -11,6 +5,10 @@
         top:3em;
         right:5em;
     visibility: hidden;
+    user-select: none;
+    -webkit-touch-callout:none;
+    -webkit-user-drag:none;
+    -webkit-user-select: none;
     z-index:3;
 }
 
@@ -22,12 +20,17 @@
     min-height:100vh;
     min-width:100vw; 
     overflow: hidden;
+    scroll-behavior: smooth;
 }
 
 .boost {
     position: absolute;
         top: 210px;
         left: 47px;
+    user-select: none;
+    -webkit-touch-callout:none;
+    -webkit-user-drag:none;
+    -webkit-user-select: none;
     width: 25px;
     visibility:hidden;
     z-index:1;
@@ -51,6 +54,10 @@ footer a {
 
 .hubble {
     cursor:pointer;
+    user-select: none;
+    -webkit-touch-callout:none;
+    -webkit-user-drag:none;
+    -webkit-user-select: none;
     width: 225px;
     visibility:hidden;
     z-index:2;
@@ -70,7 +77,6 @@ footer a {
         right:5%;
         top:1%;
     text-shadow: 0px 0px 2px black;
-    user-select: text;
     z-index:6;
 }    
 
@@ -116,6 +122,10 @@ footer a {
 .iss {
     cursor:pointer;
     transform:rotate(-20deg);
+    user-select: none;
+    -webkit-touch-callout:none;
+    -webkit-user-drag:none;
+    -webkit-user-select: none;
     width:400px;
     visibility:hidden;
 }
@@ -149,6 +159,8 @@ footer a {
     position:absolute;
         bottom:1em;
         right:1.5em;
+    user-select: none;
+    -webkit-user-select: none;
     z-index:5;
 }
 
@@ -209,6 +221,10 @@ footer a {
     cursor:pointer;
     height: 200px;
     transform:rotate(-5deg);
+    user-select: none;
+    -webkit-touch-callout:none;
+    -webkit-user-drag:none;
+    -webkit-user-select: none;
     visibility:hidden;
 }
 
@@ -223,6 +239,10 @@ footer a {
     height:26.2%;
     position:absolute;
     text-align: center;
+    user-select: none;
+    -webkit-touch-callout:none;
+    -webkit-user-drag:none;
+    -webkit-user-select: none;
     width:100%;
 }
 
@@ -235,6 +255,10 @@ footer a {
         left: 0;
         top: 0;
     text-align: center;
+    user-select: none;
+    -webkit-touch-callout:none;
+    -webkit-user-drag:none;
+    -webkit-user-select: none;
 }
 
 .probe figcaption {
@@ -272,6 +296,10 @@ footer a {
     position: absolute;
         top: 45%;
     transform: rotate(90deg);
+    user-select: none;
+    -webkit-touch-callout:none;
+    -webkit-user-drag:none;
+    -webkit-user-select: none;
     z-index:1;
 }
 
@@ -284,6 +312,10 @@ footer a {
         left: 0;
         top: 0;
     text-align: center;
+    user-select: none;
+    -webkit-touch-callout:none;
+    -webkit-user-drag:none;
+    -webkit-user-select: none;
 }
 
 .space-station figcaption {
@@ -299,6 +331,10 @@ footer a {
     height: 225px;
     position:absolute;
     visibility:hidden;
+    user-select: none;
+    -webkit-touch-callout:none;
+    -webkit-user-drag:none;
+    -webkit-user-select: none;
     z-index:1;
 }
 
@@ -311,6 +347,10 @@ footer a {
         left: 9em;
         top: 3em;
     text-align: center;
+    user-select: none;
+    -webkit-touch-callout:none;
+    -webkit-user-drag:none;
+    -webkit-user-select: none;
 }
 
 .telescope figcaption {
