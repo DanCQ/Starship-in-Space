@@ -147,6 +147,8 @@ footer a {
         left:0;
         top:0;
     text-shadow: 0px 0px 2px black;
+    user-select: none;
+    -webkit-user-select: none;
     width:5%;
     z-index:0;
 }
@@ -287,6 +289,8 @@ footer a {
         right:0;
         top:0;
     text-shadow: 0px 0px 2px black;
+    user-select: none;
+    -webkit-user-select: none;
     width:5%;
     z-index:0;
 }
