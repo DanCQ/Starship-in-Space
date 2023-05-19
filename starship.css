@@ -4,10 +4,10 @@
     position:absolute;
         top:3em;
         right:5em;
-    visibility: hidden;
     user-select: none;
-    -webkit-touch-callout:none;
-    -webkit-user-drag:none;
+    visibility: hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
     -webkit-user-select: none;
     z-index:3;
 }
