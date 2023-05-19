@@ -132,7 +132,21 @@ leftNav.addEventListener("click", function() {
     navigation();
     
     if(refresh) {
-        location.reload();
+
+        //In these locations
+        switch(images[num].name) {
+            //case "Earth":
+            case "Moon":
+            case "Low Earth Orbit Night":
+            case "Mars":
+                
+                nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
+                break;
+
+            default:
+                location.reload();
+        }       
+
     } else {
         nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
     }
@@ -155,6 +169,7 @@ nav.addEventListener("click", function () {
             allow = true;
         }
     }, 500);
+
 });
 
 //site analysis
@@ -264,6 +279,7 @@ window.addEventListener("click", function() {
         rightNav.style.opacity = "0.0";
     },500);
 });
+
 
 //reassigns value to screenWidth if screen size changes
 window.addEventListener("resize", function() {
@@ -686,7 +702,8 @@ function outerSpace() {
             setTimeout(function() { 
                 
                 spaceCowboy();  //calls astronaut 
-            }, 15000); //waits 15 seconds
+
+            }, 1000); // 15000); //waits 15 seconds
         break;
     }
 }
@@ -694,15 +711,16 @@ function outerSpace() {
     
 //astronaut
 const spaceCowboy = function () {
+
     const explore = new Audio("assets/sounds/exploration.mp3"); //..at it's greatest
     const hereMan = new Audio("assets/sounds/here-man.mp3"); //here man from..
     const niceOrbit = new Audio("assets/sounds/nice-orbit.mp3"); //nice to be in orbit
     const smallStep = new Audio("assets/sounds/one-small-step.mp3"); //one small step for man..
-
+    
     let originX = randomRange(180, screenWidth - 180);
     let originY = randomRange(180, screenHeight - 180);
     let rotation = randomRange(-360, 360);
-    let size = 0;
+    let size = 1;
 
     let nextOriginX;
     let nextOriginY;
@@ -711,10 +729,10 @@ const spaceCowboy = function () {
     let flyTo;
     let spin;
     let travel;
-    
+  
     allow = true;
     present = true;
-    
+
     astronaut.style.visibility = "visible";
     astronaut.style.transform = `rotate(${rotation}deg)`;
     astronaut.style.left = originX + "px";
@@ -725,10 +743,11 @@ const spaceCowboy = function () {
 
     //astronaut coming in
     function comingIn() {
+
         size += Math.round(0.5 * 100) /100;
         astronaut.style.height = size + "px";
-        
-        if(size >= 200) {
+
+        if(size >= 200 || !present) {
             clearInterval(travel); //stops function
         }
     }
@@ -740,7 +759,7 @@ const spaceCowboy = function () {
 
             function flip() {
                 let coin = randomRange(1, 2);
-        
+    
                 if(coin == 1) {
                     smallStep.play();
                 } else {
@@ -754,13 +773,13 @@ const spaceCowboy = function () {
         } else {
             niceOrbit.play();
         }
-        
+    
         clearInterval(flyTo); 
         clearInterval(travel);
         nextOriginX = randomRange(0, screenWidth);
         nextOriginY = randomRange(0, screenHeight);
         nextRotation = randomRange(-360, 360);
-        
+    
         travel = setInterval(leaving, 50); //starts interval
     });
 
@@ -768,12 +787,13 @@ const spaceCowboy = function () {
     function leaving() {
 
         allow = false;
-        present = false;
-        size -=  Math.round(0.5 * 100) /100;
+        size -=  Math.round(0.5 * 100) / 100;
         astronaut.style.height = size + "px";
         
-        if(size <= 0) {
+        if(size <= 0 || !present) {
             clearInterval(travel); //clears interval
+            astronaut.style.visibility = "hidden"; 
+            present = false;
         }
 
         if(rotation > nextRotation) {
@@ -803,23 +823,23 @@ const spaceCowboy = function () {
 
     //spin animation
     function ride() {
+
         if(rotation > 8) {
             rotation -= Math.round(0.5 * 100) / 100;
             astronaut.style.transform = `rotate(${rotation}deg)`;
         } else if(rotation < 8) {
             rotation += Math.round(0.5 * 100) / 100;
             astronaut.style.transform = `rotate(${rotation}deg)`;
-        } if(rotation == 8) {
+        } if(rotation == 8 || !present) {
             clearInterval(spin);
         }
     }
 
 
-    //body.addEventListener("click", function fly(event) {    
     function fly(event) {
 
-        if (event.type === 'touchmove') {
-            // event.touches[0] gets the first touch point's coordinates
+        if(event.type === 'touchmove') {
+            //event.touches[0] --gets the first touch point's coordinates
             let touch = event.touches[0];
             event.x = touch.clientX;
             event.y = touch.clientY;
@@ -853,6 +873,10 @@ const spaceCowboy = function () {
         }
 
         function movement() {
+
+            if(!present) {
+                clearInterval(flyTo);
+            }
 
             if(present) {
 
@@ -892,7 +916,7 @@ const spaceCowboy = function () {
             }
         }   
     }
-    
+
     body.addEventListener("click", fly);
     body.addEventListener("touchmove", fly);
 }
@@ -958,12 +982,19 @@ function navigation() {
     }
 
     function hide () {
+
+        if(present) {
+            astronaut.style.visibility = "hidden";
+            present = false;
+        }
+
         locationName.innerHTML = "";
         locationName.style.opacity = "0.0"; 
         footer.style.visibility = "hidden";
         nav.style.visibility = "hidden";
         auroraInfo.style.visibility = "hidden";
         earthInfo.style.visibility = "hidden";
+        hubble.style.visibility = "hidden";
         marsInfo.style.visibility = "hidden";
         mercuryInfo.style.visibility = "hidden";
         moonInfo.style.visibility = "hidden";
@@ -1018,6 +1049,7 @@ function navigation() {
     displayOn();
 }
 
+
 window.onload = function() {
 
     animate(rocket); //animates starship
@@ -1025,4 +1057,5 @@ window.onload = function() {
     outerSpace();
 
     setTimeout(function() { preloadImages() }, 2000); //waits for primary images to load first
+
 }
