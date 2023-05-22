@@ -140,8 +140,9 @@ leftNav.addEventListener("click", function() {
             case "Low Earth Orbit Night":
             case "Mars":
                 
-                nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
-                break;
+                location.reload();
+                /* nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
+                break; */
 
             default:
                 location.reload();
@@ -703,7 +704,7 @@ function outerSpace() {
                 
                 spaceCowboy();  //calls astronaut 
 
-            }, 1000); // 15000); //waits 15 seconds
+            }, 15000); // 15000); //waits 15 seconds
         break;
     }
 }
