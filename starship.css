@@ -13,6 +13,7 @@
 }
 
 .body {
+    background-color: black;
     display:flex;
         align-items: center;
         justify-content: center;
@@ -34,6 +35,14 @@
     width: 25px;
     visibility:hidden;
     z-index:1;
+}
+
+canvas {
+    height:100vh;
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
 }
 
 footer {
