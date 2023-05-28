@@ -10,6 +10,14 @@ const rightNav = document.querySelector(".right-nav"); //right page navigation
 const rocket = document.querySelector(".rocket"); //ship and parts
 const starship = document.querySelector(".starship");
 
+//sets initial canvas screen size
+const canvas = document.getElementById("canvas");
+let screenWidth = document.documentElement.scrollWidth; //sets device screen width
+let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
+canvas.height = screenHeight;
+canvas.width = screenWidth;
+c = canvas.getContext("2d");
+
 const auroraInfo = document.querySelector(".info-aurora");
 const earthInfo = document.querySelector(".info-earth");
 const marsInfo = document.querySelector(".info-mars");
@@ -27,6 +35,7 @@ const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
 
 let allow = false; //check for astronaut animation
+let cowboy;
 let present = false; //checks austronaut
 let refresh = false; //page refresh is sometimes necessary to prevent bugs 
 let speed = false; //for boosters
@@ -36,8 +45,6 @@ let earth = randomRange(1,69); //random start image
 let earthNight = 1;
 let locationName = document.querySelector(".location"); //display for location name
 let sunAtmosphere = randomRange(1,170); //random start image
-let screenWidth = document.documentElement.scrollWidth; //sets device screen width
-let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
 
 
 //images for background
@@ -140,9 +147,8 @@ leftNav.addEventListener("click", function() {
             case "Low Earth Orbit Night":
             case "Mars":
                 
-                location.reload();
-                /* nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
-                break; */
+                nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
+                break;
 
             default:
                 location.reload();
@@ -349,6 +355,16 @@ function animate(item) {
         }
     }
 
+}
+
+
+function canvasAnimate() { 
+
+    animation = requestAnimationFrame(canvasAnimate);
+
+    c.clearRect(0,0,screenWidth,screenHeight);
+
+    cowboy.update();
 }
 
 
@@ -699,145 +715,118 @@ function outerSpace() {
         case "Low Earth Orbit Night":
         case "Mars":
 
-            refresh = true;
             setTimeout(function() { 
                 
-                spaceCowboy();  //calls astronaut 
+                cowboy = new spaceCowboy(); //calls astronaut 
+
+                canvasAnimate();
 
             }, 15000); // 15000); //waits 15 seconds
         break;
     }
 }
 
-    
+
 //astronaut
-const spaceCowboy = function () {
+class spaceCowboy {
+    constructor() {
 
-    const explore = new Audio("assets/sounds/exploration.mp3"); //..at it's greatest
-    const hereMan = new Audio("assets/sounds/here-man.mp3"); //here man from..
-    const niceOrbit = new Audio("assets/sounds/nice-orbit.mp3"); //nice to be in orbit
-    const smallStep = new Audio("assets/sounds/one-small-step.mp3"); //one small step for man..
+        this.explore = new Audio("assets/sounds/exploration.mp3"); //..at it's greatest
+        this.hereMan = new Audio("assets/sounds/here-man.mp3"); //here man from..
+        this.niceOrbit = new Audio("assets/sounds/nice-orbit.mp3"); //nice to be in orbit
+        this.smallStep = new Audio("assets/sounds/one-small-step.mp3"); //one small step for man..
+        
+        this.originX = randomRange(180, screenWidth - 180);
+        this.originY = randomRange(180, screenHeight - 180);
+        this.rotation = randomRange(-360, 360);
+        this.size = 1;
+
+        this.nextOriginX;
+        this.nextOriginY;
+        this.nextRotation;
+
+        this.clearX;
+        this.clearY;
+        this.coin;
+        this.flyX;
+        this.flyY;
+        this.tilt;
+        
+        this.flyTo = "nominal"
+        this.spin = "spinning";
+        this.travel = "arriving";
     
-    let originX = randomRange(180, screenWidth - 180);
-    let originY = randomRange(180, screenHeight - 180);
-    let rotation = randomRange(-360, 360);
-    let size = 1;
+        allow = true;
+        present = true;
+    }
 
-    let nextOriginX;
-    let nextOriginY;
-    let nextRotation;
-    
-    let flyTo;
-    let spin;
-    let travel;
-  
-    allow = true;
-    present = true;
+    //used to calculate angle of flying tilt
+    angle(total) {
 
-    astronaut.style.visibility = "visible";
-    astronaut.style.transform = `rotate(${rotation}deg)`;
-    astronaut.style.left = originX + "px";
-    astronaut.style.top = originY + "px";
-
-    travel = setInterval(comingIn, 50);
-    spin = setInterval(ride, 50);
-
-    //astronaut coming in
-    function comingIn() {
-
-        size += Math.round(0.5 * 100) /100;
-        astronaut.style.height = size + "px";
-
-        if(size >= 200 || !present) {
-            clearInterval(travel); //stops function
+        if(total > 250) {
+            return 30;
+        } else if(total > 75) {
+            return 23;
+        } else if(total < -250) {
+            return -14;
+        } else if(total < -75) {
+            return -7;
+        } else {
+            return 8;
         }
     }
 
+    //on astronaut click
+    contact() {
 
-    //starts leaving animation
-    astronaut.addEventListener("click", function() {
         if(images[num].name == "Moon") {
 
-            function flip() {
-                let coin = randomRange(1, 2);
+            this.flip();
     
-                if(coin == 1) {
-                    smallStep.play();
-                } else {
-                    hereMan.play();
-                }
-            } 
-            flip();
+            if(this.coin == 1) {
+                this.smallStep.play();
+            } else {
+                this.hereMan.play();
+            }
 
-        } else if (images[num].name == "Mars") {
-            explore.play();
+        } else if(images[num].name == "Mars") {
+            this.explore.play();
         } else {
-            niceOrbit.play();
+            this.niceOrbit.play();
         }
     
-        clearInterval(flyTo); 
-        clearInterval(travel);
-        nextOriginX = randomRange(0, screenWidth);
-        nextOriginY = randomRange(0, screenHeight);
-        nextRotation = randomRange(-360, 360);
+        this.flyTo = "nominal"; 
+        this.travel = "nominal";
+        this.nextOriginX = randomRange(0, screenWidth);
+        this.nextOriginY = randomRange(0, screenHeight);
+        this.nextRotation = randomRange(-360, 360);
     
-        travel = setInterval(leaving, 50); //starts interval
-    });
-
-    //astonaut leaving animation
-    function leaving() {
-
-        allow = false;
-        size -=  Math.round(0.5 * 100) / 100;
-        astronaut.style.height = size + "px";
-        
-        if(size <= 0 || !present) {
-            clearInterval(travel); //clears interval
-            astronaut.style.visibility = "hidden"; 
-            present = false;
-        }
-
-        if(rotation > nextRotation) {
-            rotation -= Math.round(0.5 * 100) / 100;
-            astronaut.style.transform = `rotate(${rotation}deg)`;
-        } else if(rotation < nextRotation) {
-            rotation += Math.round(0.5 * 100) / 100;
-            astronaut.style.transform = `rotate(${rotation}deg)`;
-        }
-
-        if(originX > nextOriginX)  {
-            originX -= Math.round(0.5 * 100) / 100;
-            astronaut.style.left = `${originX}px`;
-        } else if(originX < nextOriginX) {
-            originX += Math.round(0.5 * 100) / 100;
-            astronaut.style.left = `${originX}px`;
-        }
-        
-        if(originY > nextOriginY) {
-            originY -= Math.round(0.5 * 100) / 100;
-            astronaut.style.top = `${originY}px`;
-        } else if(originY < nextOriginY) {
-            originY += Math.round(0.5 * 100) / 100;
-            astronaut.style.top = `${originY}px`;
-        }
-    }
-
-    //spin animation
-    function ride() {
-
-        if(rotation > 8) {
-            rotation -= Math.round(0.5 * 100) / 100;
-            astronaut.style.transform = `rotate(${rotation}deg)`;
-        } else if(rotation < 8) {
-            rotation += Math.round(0.5 * 100) / 100;
-            astronaut.style.transform = `rotate(${rotation}deg)`;
-        } if(rotation == 8 || !present) {
-            clearInterval(spin);
-        }
+        this.travel = "leaving"; //starts interval
     }
 
 
-    function fly(event) {
+    //astronaut coming in
+    comingIn() {
+
+        this.size += Math.round(0.25 * 100) /100;
+        astronaut.style.visibility = "visible";
+        astronaut.style.height = this.size + "px";
+        
+        if(this.size >= 200) {
+            this.travel = "nominal";
+        }
+    } 
+
+
+    //creates randomness
+    flip() {
+
+        this.coin = randomRange(1, 2);
+    }
+
+
+    //sets variable values for use with the movement function
+    fly(event) {
 
         if(event.type === 'touchmove') {
             //event.touches[0] --gets the first touch point's coordinates
@@ -845,93 +834,155 @@ const spaceCowboy = function () {
             event.x = touch.clientX;
             event.y = touch.clientY;
         } 
-        
-        let clearX;
-        let clearY;
-        let flyX = event.x - astronaut.offsetWidth / 2;
-        let flyY = event.y - astronaut.offsetHeight / 2;
-        let tilt = angle(flyX - originX);
 
-        function angle(total) {
-            if(total > 250) {
-                return 30;
-            } else if(total > 75) {
-                return 23;
-            } else if(total < -250) {
-                return -14;
-            } else if(total < -75) {
-                return -7;
-            } else {
-                return 8;
-            }
-        }
+        this.flyX = event.x - astronaut.offsetWidth / 2;
+        this.flyY = event.y - astronaut.offsetHeight / 2;
+        this.tilt = this.angle(this.flyX - this.originX);
         
         if(allow && present) { 
-            clearX = false;
-            clearY = false;
-            clearInterval(flyTo);
-            flyTo = setInterval(movement, 20); //starts interval
+            this.clearX = false;
+            this.clearY = false;
+            this.flyTo = "flying";
         }
-
-        function movement() {
-
-            if(!present) {
-                clearInterval(flyTo);
-            }
-
-            if(present) {
-
-                if(rotation < tilt) {
-                    rotation += Math.round(0.5 * 100) / 100;
-                }
-                if(rotation > tilt) {
-                    rotation -= Math.round(0.5 * 100) / 100;
-                } 
-
-                if(originX > flyX)  {
-                    originX -= Math.round(0.5 * 100) / 100;
-                }
-                if(originX < flyX) {
-                    originX += Math.round(0.5 * 100) / 100;
-
-                } else if (originX == flyX) {
-                    clearX = true;
-                    if(present && clearX && clearY) {
-                        clearInterval(flyTo);
-                    }
-                }
-        
-                if(originY > flyY) {
-                    originY -= Math.round(0.5 * 100) / 100;
-                }
-                if(originY < flyY) {
-                    originY += Math.round(0.5 * 100) / 100;
-                } else if(originY == flyY) {
-                    clearY = true;
-                }
-
-                astronaut.style.transform = `rotate(${rotation}deg)`;
-                astronaut.style.left = `${originX}px`;
-                astronaut.style.top = `${originY}px`;
-                tilt = angle(flyX - originX);
-            }
-        }   
     }
 
-    body.addEventListener("click", fly);
-    body.addEventListener("touchmove", fly);
-}
+
+    //astonaut leaving animation
+    leaving() {
+
+        allow = false;
+        this.size -=  Math.round(0.25 * 100) / 100;
+        astronaut.style.height = this.size + "px";
+        
+        if(this.size <= 0 || !present) {
+            this.travel = "away"; //clears interval
+            present = false;
+        }
+
+        if(this.rotation > this.nextRotation) {
+            this.rotation -= Math.round(0.25 * 100) / 100;
+            astronaut.style.transform = `rotate(${this.rotation}deg)`;
+        } else if(this.rotation < this.nextRotation) {
+            this.rotation += Math.round(0.25 * 100) / 100;
+            astronaut.style.transform = `rotate(${this.rotation}deg)`;
+        }
+
+        if(this.originX > this.nextOriginX)  {
+            this.originX -= Math.round(0.25 * 100) / 100;
+            astronaut.style.left = `${this.originX}px`;
+        } else if(this.originX < this.nextOriginX) {
+            this.originX += Math.round(0.25 * 100) / 100;
+            astronaut.style.left = `${this.originX}px`;
+        }
+        
+        if(this.originY > this.nextOriginY) {
+            this.originY -= Math.round(0.25 * 100) / 100;
+            astronaut.style.top = `${this.originY}px`;
+        } else if(this.originY < this.nextOriginY) {
+            this.originY += Math.round(0.25 * 100) / 100;
+            astronaut.style.top = `${this.originY}px`;
+        }
+    }
 
 
-//preloads images into cache
-function preloadImages() {
+    //moves astronaut to click or tap location
+    movement() {
+        if(!present) {
+            this.flyTo = "nominal";
+        }
 
-    images.forEach(obj => {
+        if(present) {
 
-        let image = new Image();
-        image.src = obj.img;
-    });
-}
+            if(this.rotation < this.tilt) {
+                this.rotation += Math.round(0.5 * 100) / 100;
+            }
+            if(this.rotation > this.tilt) {
+                this.rotation -= Math.round(0.5 * 100) / 100;
+            } 
+
+            if(this.originX > this.flyX)  {
+                this.originX -= Math.round(0.5 * 100) / 100;
+            }
+            if(this.originX < this.flyX) {
+                this.originX += Math.round(0.5 * 100) / 100;
+
+            } else if (this.originX == this.flyX) {
+                this.clearX = true;
+                if(present && this.clearX && this.clearY) {
+                    this.flyTo = "nominal";
+                }
+            }
+    
+            if(this.originY > this.flyY) {
+                this.originY -= Math.round(0.5 * 100) / 100;
+            }
+            if(this.originY < this.flyY) {
+                this.originY += Math.round(0.5 * 100) / 100;
+            } else if(this.originY == this.flyY) {
+                this.clearY = true;
+            }
+
+            astronaut.style.transform = `rotate(${this.rotation}deg)`;
+            astronaut.style.left = `${this.originX}px`;
+            astronaut.style.top = `${this.originY}px`;
+            this.tilt = this.angle(this.flyX - this.originX);
+        }
+    }
+
+
+    //spin animation
+    ride() {
+        if(this.rotation > 8) {
+            this.rotation -= Math.round(0.25 * 100) / 100;
+            astronaut.style.transform = `rotate(${this.rotation}deg)`;
+        } else if(this.rotation < 8) {
+            this.rotation += Math.round(0.25 * 100) / 100;
+            astronaut.style.transform = `rotate(${this.rotation}deg)`;
+        } if(this.rotation == 8 || !present) {
+            this.spin = "nominal";
+        }
+    }
+    
+    //runs animations
+    update() {
+        
+        if(cowboy.travel != "away") {
+
+            astronaut.style.transform = `rotate(${this.rotation}deg)`;
+            astronaut.style.left = this.originX + "px";
+            astronaut.style.top = this.originY + "px";
+
+            if(this.flyTo == "flying" && present) {
+
+                this.movement();
+                console.log("flying");
+            }
+
+            if(this.spin == "spinning" && present) {
+
+                this.ride();
+                console.log("spinning");
+            }
+            
+            if(this.travel == "arriving" && present) {
+
+                this.comingIn();
+                console.log("arriving");
+            }
+
+            if(this.travel == "leaving" && present) {
+
+                this.leaving();
+            }
+
+            if(this.travel == "away") {
+                astronaut.style.visibility = "hidden";
+            }
+        }
+
+    };
+   
+} 
 
 
 function navigation() {    
@@ -986,6 +1037,7 @@ function navigation() {
 
         if(present) {
             astronaut.style.visibility = "hidden";
+            cowboy.travel = "away";
             present = false;
         }
 
@@ -1051,12 +1103,51 @@ function navigation() {
 }
 
 
+//preloads images into cache
+function preloadImages() {
+
+    images.forEach(obj => {
+
+        let image = new Image();
+        image.src = obj.img;
+    });
+}
+
+
+//starts astronaut leaving animation
+astronaut.addEventListener("click", function() {
+   
+    if(cowboy.travel != "away") {
+        cowboy.contact();
+    }
+});
+
+
+//starts astronaut movement animation
+document.body.addEventListener("click", function(event){
+
+    if(present && allow) {
+        cowboy.flyTo = "flying";
+        cowboy.fly(event);
+    }
+});
+
+
+//starts astronaut movement animation
+document.body.addEventListener("touchmove",function(event){
+
+    if(present && allow) {
+        cowboy.flyTo = "flying";
+        cowboy.fly(event);
+    }
+});
+
+
 window.onload = function() {
 
     animate(rocket); //animates starship
     
     outerSpace();
 
-    setTimeout(function() { preloadImages() }, 2000); //waits for primary images to load first
-
+    setTimeout(function() { preloadImages() }, 1500); //waits for primary images to load first
 }
