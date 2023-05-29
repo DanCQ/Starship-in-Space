@@ -739,7 +739,7 @@ function outerSpace() {
 
                     canvasAnimate();
                 }        
-            }, randomRange(5000, 15000)); //waits 5 to 15 seconds
+            }, randomRange(10000, 15000)); //waits 5 to 15 seconds
         break;
     }
 }
