@@ -145,9 +145,9 @@ function randomRange(min,max) {
 //refresh page to random location
 leftNav.addEventListener("click", function() {
 
-    nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
-
     navigation();
+
+    nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
 
     allow = false;
 
@@ -170,7 +170,7 @@ nav.addEventListener("click", function () {
 
 });
 
-//site analysis
+//planetary analysis
 rightNav.addEventListener("click", function() {
 
     allow = false;
