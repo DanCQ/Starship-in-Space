@@ -141,21 +141,10 @@ leftNav.addEventListener("click", function() {
     
     if(refresh) {
 
-        //In these locations
-        switch(images[num].name) {
-            //case "Earth":
-            case "Moon":
-            case "Low Earth Orbit Night":
-            case "Mars":
-                
-                nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
-                break;
-
-            default:
-                location.reload();
-        }       
+        location.reload();    
 
     } else {
+
         nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
     }
 
@@ -726,9 +715,9 @@ function outerSpace() {
                     canvasOff = false;
 
                     canvasAnimate();
-                }
-                
+                }        
             }, randomRange(5000, 15000)); //waits 5 to 15 seconds
+
         break;
     }
 }
@@ -1150,5 +1139,5 @@ window.onload = function() {
     
     outerSpace();
 
-    setTimeout(function() { preloadImages() }, 1500); //waits for primary images to load first
+    setTimeout(function() { preloadImages() }, 1250); //waits for primary images to load first
 }
