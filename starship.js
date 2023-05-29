@@ -15,6 +15,7 @@ const starship = document.querySelector(".starship");
 
 //sets initial canvas screen size
 const canvas = document.getElementById("canvas");
+let animationFrame; //used to on|off canvas 
 let canvasOff = true;
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
 let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
@@ -151,9 +152,9 @@ leftNav.addEventListener("click", function() {
     allow = false;
 
     setTimeout(function() {
-        if(present) {
-            allow = true;
-        }
+        
+        allow = true;
+
     }, 500);
 });
 
@@ -162,9 +163,9 @@ nav.addEventListener("click", function () {
     allow = false;
 
     setTimeout(function() {
-        if(present) {
-            allow = true;
-        }
+        
+        allow = true;
+
     }, 500);
 
 });
@@ -208,13 +209,10 @@ rightNav.addEventListener("click", function() {
 
         footer.style.visibility == "visible" ? footer.style.visibility = "hidden" : footer.style.visibility = "visible";
 
-        if(present) {
-            allow = true;
-        }
+        allow = true;        
 
     }, 500);
 
-   
 });
 
 
@@ -232,9 +230,9 @@ rocket.addEventListener("click", function() {
         let dice = randomRange(1, 6);
 
         setTimeout(function() {
-            if(present) {
-                allow = true;
-            }
+            
+            allow = true;
+            
         }, 500);
 
         if(dice == 6) {
@@ -350,11 +348,20 @@ function animate(item) {
 
 function canvasAnimate() { 
 
-    animation = requestAnimationFrame(canvasAnimate);
+    if(present) {
 
-    c.clearRect(0,0,screenWidth,screenHeight);
+        animationFrame = requestAnimationFrame(canvasAnimate);
 
-    cowboy.update();
+        c.clearRect(0,0,screenWidth,screenHeight);
+
+        cowboy.update();
+
+    } else {
+
+        animationFrame = cancelAnimationFrame(canvasAnimate);
+
+        canvasOff = true;
+    }
 }
 
 
@@ -383,6 +390,7 @@ function outerSpace() {
     sunSpin(); //Sun's Atmosphere animation
 
 
+    //repeats show of location name on click
     body.addEventListener("click", function() {
         
         if(off && allow) {
@@ -480,9 +488,9 @@ function outerSpace() {
                 }, 4000);
 
                 setTimeout(function() {
-                    if(present) {
-                        allow = true;
-                    }
+                    
+                    allow = true;
+                    
                 }, 500);
 
             });
@@ -493,21 +501,26 @@ function outerSpace() {
     function locationDisplay() {
 
         let opacity = 0.0;
+        clearInterval(fade);
+        locationName.style.opacity = "0.0"; 
+        locationName.innerHTML = images[num].name;
         off = false;
-    
+
         //shows location name
         setTimeout(function() {
-            
-            locationName.style.opacity = "0.0"; 
-            locationName.innerHTML = images[num].name;
 
-            fade = setInterval(fadeIn, 175); //fades in location name
-    
+            if(locationName.style.opacity <= 0.0) {
+
+                fade = setInterval(fadeIn, 175); //fades in location name
+            }
+            
         }, 5000); //five seconds
     
 
         //words fade in effect
         function fadeIn() {
+
+            off = false;
             
             locationName.style.opacity = Math.round(opacity += 0.1 * 100) / 100; //keep decimal numbers from breaking
 
@@ -526,7 +539,10 @@ function outerSpace() {
     
                 setTimeout(function() {
     
-                    fade = setInterval(fadeOut, 175); //fades out location name
+                    if(locationName.style.opacity >= 1) {
+                        
+                        fade = setInterval(fadeOut, 175); //fades out location name
+                    }
     
                 }, 30000);//Thirty seconds
             }
@@ -534,6 +550,8 @@ function outerSpace() {
     
         //words fade out effect
         function fadeOut() {
+
+            off = false;
 
             locationName.style.opacity = Math.round(opacity -= 0.1 * 100) / 100; //keeps decimal numbers from breaking
     
@@ -543,87 +561,88 @@ function outerSpace() {
                 off = true;
             }
         }
-        
-/*         //Fade in|out for celestial body latin names
-        function latinNames() {
 
-            off = false;
 
-        } */
-
+        //working out the bugs in this one
         //latin names switch
         locationName.addEventListener("click", function() {
 
-            allow = false;
+            //only if name is visible
+            if(locationName.style.opacity > 0.0) {
 
-            setTimeout(function() {
-                if(present) {
+                allow = false;
+
+                setTimeout(function() {
+                    
                     allow = true;
-                }
-            }, 500);
+                    
+                }, 500);
 
-            clearInterval(fade);
-            fade = setInterval(fadeOut, 175); //fades out location name
+                clearInterval(fade);
+                
+                fade = setInterval(fadeOut, 175); //fades out location name            
 
-            switch(locationName.innerHTML) {
-                case "Earth":
-                    setTimeout(function() {
-                        locationName.innerHTML = "Terra";
-                        //locationName.style.opacity = "0.0";
-                        fade = setInterval(fadeIn, 175); //fades in location name
-                    }, 2500); //2.5 seconds
-                    break;
-                case "Terra":
-                    setTimeout(function() {
-                        locationName.innerHTML = "Earth";
-                        //locationName.style.opacity = "0.0";
-                        fade = setInterval(fadeIn, 175); //fades in location name
-                    }, 2500); //2.5seconds
-                    break;
-                case "Moon":
-                    setTimeout(function() {
-                        locationName.innerHTML = "Luna";
-                        locationName.style.opacity = "0.0";
-                        fade = setInterval(fadeIn, 175); //fades in location name
-                    }, 2500); //2.5seconds
-                    break;
-                case "Luna":
-                    setTimeout(function() {
-                        locationName.innerHTML = "Moon";
-                        locationName.style.opacity = "0.0";
-                        fade = setInterval(fadeIn, 175); //fades in location name
-                    }, 2500); //2.5seconds
-                    break;
-                case "Sun":
-                    setTimeout(function() {
-                        locationName.innerHTML = "Sol";
-                        locationName.style.opacity = "0.0";
-                        fade = setInterval(fadeIn, 175); //fades in location name
-                    }, 5000); //2.5seconds
-                    break;
-                case "Sol":
-                    setTimeout(function() {
-                        locationName.innerHTML = "Sun";
-                        locationName.style.opacity = "0.0";
-                        fade = setInterval(fadeIn, 175); //fades in location name
-                    }, 5000); //2.5seconds
-                    break;
-                case "Mercury":
-                    setTimeout(function() {
-                        locationName.innerHTML = "Mercurius";
-                        locationName.style.opacity = "0.0";
-                        fade = setInterval(fadeIn, 175); //fades in location name
-                    }, 2500); //2.5seconds
-                    break;
-                case "Mercurius":
-                    setTimeout(function() {
-                        locationName.innerHTML = "Mercury";
-                        locationName.style.opacity = "0.0";
-                        fade = setInterval(fadeIn, 175); //fades in location name
-                    }, 2500); //2.5seconds
-                    break;
-            };
+                switch(locationName.innerHTML) {
+                    case "Earth":
+                        setTimeout(function() {
+                            locationName.innerHTML = "Terra";
+                            //locationName.style.opacity = "0.0";
+                            fade = setInterval(fadeIn, 175); //fades in location name
+                        }, 2500); //2.5 seconds
+                        break;
+                    case "Terra":
+                        setTimeout(function() {
+                            locationName.innerHTML = "Earth";
+                            //locationName.style.opacity = "0.0";
+                            fade = setInterval(fadeIn, 175); //fades in location name
+                        }, 2500); //2.5seconds
+                        break;
+                    case "Moon":
+                        setTimeout(function() {
+                            locationName.innerHTML = "Luna";
+                            locationName.style.opacity = "0.0";
+                            fade = setInterval(fadeIn, 175); //fades in location name
+                        }, 2500); //2.5seconds
+                        break;
+                    case "Luna":
+                        setTimeout(function() {
+                            locationName.innerHTML = "Moon";
+                            locationName.style.opacity = "0.0";
+                            fade = setInterval(fadeIn, 175); //fades in location name
+                        }, 2500); //2.5seconds
+                        break;
+                    case "Sun":
+                        setTimeout(function() {
+                            locationName.innerHTML = "Sol";
+                            locationName.style.opacity = "0.0";
+                            fade = setInterval(fadeIn, 175); //fades in location name
+                        }, 5000); //2.5seconds
+                        break;
+                    case "Sol":
+                        setTimeout(function() {
+                            locationName.innerHTML = "Sun";
+                            locationName.style.opacity = "0.0";
+                            fade = setInterval(fadeIn, 175); //fades in location name
+                        }, 5000); //2.5seconds
+                        break;
+                    case "Mercury":
+                        setTimeout(function() {
+                            locationName.innerHTML = "Mercurius";
+                            locationName.style.opacity = "0.0";
+                            fade = setInterval(fadeIn, 175); //fades in location name
+                        }, 2500); //2.5seconds
+                        break;
+                    case "Mercurius":
+                        setTimeout(function() {
+                            locationName.innerHTML = "Mercury";
+                            locationName.style.opacity = "0.0";
+                            fade = setInterval(fadeIn, 175); //fades in location name
+                        }, 2500); //2.5seconds
+                        break;
+                };
+            }
         });
+        
     }
 
 
@@ -838,7 +857,7 @@ class spaceCowboy {
         this.flyY = event.y - astronaut.offsetHeight / 2;
         this.tilt = this.angle(this.flyX - this.originX);
         
-        if(allow && present) { 
+        if(allow && this.travel != "away") { 
             this.clearX = false;
             this.clearY = false;
             this.flyTo = "flying";
@@ -856,6 +875,7 @@ class spaceCowboy {
         if(this.size <= 0) {
             this.travel = "away"; //clears interval
             present = false;
+            allow = true;
         }
 
         if(this.rotation > this.nextRotation) {
@@ -887,7 +907,11 @@ class spaceCowboy {
     //moves astronaut to click or tap location
     movement() {
 
-        if(present) {
+        if(this.travel != "away") {
+            
+            if(this.clearX && this.clearY) {
+                this.flyTo = "nominal";
+            }
 
             if(this.rotation < this.tilt) {
                 this.rotation += Math.round(0.5 * 100) / 100;
@@ -901,12 +925,9 @@ class spaceCowboy {
             }
             if(this.originX < this.flyX) {
                 this.originX += Math.round(0.5 * 100) / 100;
-
-            } else if (this.originX == this.flyX) {
+            }  
+            if (this.originX == this.flyX) {
                 this.clearX = true;
-                if(present && this.clearX && this.clearY) {
-                    this.flyTo = "nominal";
-                }
             }
     
             if(this.originY > this.flyY) {
@@ -914,10 +935,11 @@ class spaceCowboy {
             }
             if(this.originY < this.flyY) {
                 this.originY += Math.round(0.5 * 100) / 100;
-            } else if(this.originY == this.flyY) {
+            } 
+            if(this.originY == this.flyY) {
                 this.clearY = true;
             }
-
+            
             astronaut.style.transform = `rotate(${this.rotation}deg)`;
             astronaut.style.left = `${this.originX}px`;
             astronaut.style.top = `${this.originY}px`;
@@ -934,7 +956,7 @@ class spaceCowboy {
         } else if(this.rotation < 8) {
             this.rotation += Math.round(0.25 * 100) / 100;
             astronaut.style.transform = `rotate(${this.rotation}deg)`;
-        } if(this.rotation == 8 || !present) {
+        } if(this.rotation == 8) {
             this.spin = "nominal";
         }
     }
@@ -1056,7 +1078,6 @@ function navigation() {
         mercuryInfo.style.visibility = "hidden";
         moonInfo.style.visibility = "hidden";
         nav.style.visibility = "hidden";
-        off = true;
         parker.style.visibility = "hidden";
         parkerName.style.visibility = "hidden";
         sunInfo.style.visibility = "hidden";
