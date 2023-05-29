@@ -2,10 +2,13 @@ const astronaut = document.querySelector(".astronaut"); //the astronaut
 const body = document.querySelector(".body"); //html body
 const footer = document.querySelector(".footer");
 const hubble = document.querySelector(".hubble"); //space telescope
+const hubbleName = document.getElementById("hubble-name"); //name caption
 const iss = document.querySelector(".iss"); //international space station
+const issName = document.getElementById("iss-name"); //name caption
 const leftNav = document.querySelector(".left-nav"); //left page navigation
 const nav = document.querySelector(".nav"); //navigation menu
 const parker = document.querySelector(".parker"); //solar parker probe
+const parkerName = document.getElementById("parker-name"); //name caption
 const rightNav = document.querySelector(".right-nav"); //right page navigation
 const rocket = document.querySelector(".rocket"); //ship and parts
 const starship = document.querySelector(".starship");
@@ -36,14 +39,16 @@ const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
 
 let allow = false; //check for astronaut animation
-let cowboy;
+let cowboy; //used for astronaut object
+let fade; //used for location name animation
+let movies; //used for background animation
 let present = false; //checks austronaut
-let refresh = false; //page refresh is sometimes necessary to prevent bugs 
+let refresh = false; //page refresh needed to prevent bugs 
 let speed = false; //for boosters
 
 let aurora = randomRange(1,117); //random start image
 let earth = randomRange(1,69); //random start image
-let earthNight = 1;
+let earthNight = 1; //start image
 let locationName = document.querySelector(".location"); //display for location name
 let sunAtmosphere = randomRange(1,170); //random start image
 
@@ -137,16 +142,10 @@ function randomRange(min,max) {
 
 //refresh page to random location
 leftNav.addEventListener("click", function() {
+
+    nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
+
     navigation();
-    
-    if(refresh) {
-
-        location.reload();    
-
-    } else {
-
-        nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
-    }
 
     allow = false;
 
@@ -396,9 +395,7 @@ function outerSpace() {
 
         if(images[num].name == "Aurora Borealis") {
 
-            refresh = true;
-
-            setInterval(function() {
+            movies = setInterval(function() {
                 aurora++;
                 if(aurora > 117) {
                     aurora = 1;
@@ -432,10 +429,8 @@ function outerSpace() {
     function earthSpin() {
 
         if(images[num].name == "Earth") {
-            
-            refresh = true;
 
-            setInterval(function() {
+            movies = setInterval(function() {
                 earth++;
                 if(earth > 69) {
                     earth = 1;
@@ -456,7 +451,6 @@ function outerSpace() {
 
 
     function hubbleTelescope() {
-        const hubbleName = document.getElementById("hubble-name"); //name caption
 
         //hubble appears here only
         if(images[num].name == "Low Earth Orbit Night") {
@@ -496,7 +490,7 @@ function outerSpace() {
 
 
     function locationDisplay() {
-        let fade;
+
         let opacity = 0.0;
         off = false;
     
@@ -620,11 +614,9 @@ function outerSpace() {
 
 
     function nightSpin() {
-        const issName = document.getElementById("iss-name"); //name caption
         
         if(images[num].name == "Earth At Night") {
             
-            refresh = true;
             iss.style.visibility = "visible";
 
             iss.addEventListener("click", function() {
@@ -636,7 +628,7 @@ function outerSpace() {
                 }, 4000);
             });
 
-            setInterval(function() {
+            movies = setInterval(function() {
                 earthNight++;
                 if(earthNight > 119) {
                     earthNight = 1;
@@ -658,17 +650,16 @@ function outerSpace() {
     
     //Sun's Atmosphere animation
     function sunSpin() {
-        const parkerName = document.getElementById("parker-name"); //name caption
+
         const parkerLaunch = new Audio("assets/sounds/parker-liftoff.mp3"); //parker launch
 
         if(images[num].name == "Sun's Atmosphere") {
 
-            refresh = true;
             locationName.style.color = "peachpuff";
             locationName.style.textShadow = "0px 0px 2px black";
             parker.style.visibility = "visible";
 
-            setInterval(function() {
+            movies = setInterval(function() {
                 sunAtmosphere++;
 
                 if(sunAtmosphere > 170) {
@@ -717,7 +708,6 @@ function outerSpace() {
                     canvasAnimate();
                 }        
             }, randomRange(5000, 15000)); //waits 5 to 15 seconds
-
         break;
     }
 }
@@ -968,8 +958,19 @@ class spaceCowboy {
             if(this.travel == "away") {
                 astronaut.style.visibility = "hidden";
             }
-        }
 
+            //In these locations
+            switch(images[num].name) {
+                case "Earth":
+                case "Moon":
+                case "Low Earth Orbit Night":
+                case "Mars":
+                    break;
+                default:
+                    noCowboys();
+                    break;
+            }
+        }
     };
    
 } 
@@ -1025,11 +1026,9 @@ function navigation() {
 
     function hide () {
 
-        if(present) {
-            astronaut.style.visibility = "hidden";
-            cowboy.travel = "away";
-            present = false;
-        }
+        clearInterval(fade);
+        clearInterval(movies); //clears animated background
+        noCowboys(); //hides astronaut
 
         locationName.innerHTML = "";
         locationName.style.opacity = "0.0"; 
@@ -1038,9 +1037,14 @@ function navigation() {
         auroraInfo.style.visibility = "hidden";
         earthInfo.style.visibility = "hidden";
         hubble.style.visibility = "hidden";
+        hubbleName.style.visibility = "hidden";
+        iss.style.visibility = "hidden";
+        issName.style.visibility = "hidden";
         marsInfo.style.visibility = "hidden";
         mercuryInfo.style.visibility = "hidden";
         moonInfo.style.visibility = "hidden";
+        parker.style.visibility = "hidden";
+        parkerName.style.visibility = "hidden";
         sunInfo.style.visibility = "hidden";
         venusInfo.style.visibility = "hidden";
     }
@@ -1090,6 +1094,17 @@ function navigation() {
     }
 
     displayOn();
+}
+
+
+//hides astronaut & stops functions
+function noCowboys() {
+
+    if(present) {   
+        astronaut.style.visibility = "hidden";
+        cowboy.travel = "away";
+        present = false;
+    }
 }
 
 
