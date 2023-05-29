@@ -164,7 +164,6 @@ footer a {
 
 .location {
     color:ghostwhite;
-    cursor:pointer;
     font-family: "audiowide", "antonio", "jura", monospace;
     font-size:26px;
     position:absolute;
@@ -185,7 +184,7 @@ footer a {
     position:absolute;
         left:5%;
     width:33vw;
-    visibility:hidden;
+    visibility: hidden;
     z-index:5;
 }
 
