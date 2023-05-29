@@ -12,6 +12,7 @@ const starship = document.querySelector(".starship");
 
 //sets initial canvas screen size
 const canvas = document.getElementById("canvas");
+let canvasOff = true;
 let screenWidth = document.documentElement.scrollWidth; //sets device screen width
 let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
 canvas.height = screenHeight;
@@ -719,9 +720,15 @@ function outerSpace() {
                 
                 cowboy = new spaceCowboy(); //calls astronaut 
 
-                canvasAnimate();
+                //prevents duplicate versions
+                if(canvasOff) {
 
-            }, 15000); // 15000); //waits 15 seconds
+                    canvasOff = false;
+
+                    canvasAnimate();
+                }
+                
+            }, randomRange(5000, 15000)); //waits 5 to 15 seconds
         break;
     }
 }
@@ -854,7 +861,7 @@ class spaceCowboy {
         this.size -=  Math.round(0.25 * 100) / 100;
         astronaut.style.height = this.size + "px";
         
-        if(this.size <= 0 || !present) {
+        if(this.size <= 0) {
             this.travel = "away"; //clears interval
             present = false;
         }
@@ -887,9 +894,6 @@ class spaceCowboy {
 
     //moves astronaut to click or tap location
     movement() {
-        if(!present) {
-            this.flyTo = "nominal";
-        }
 
         if(present) {
 
@@ -945,32 +949,29 @@ class spaceCowboy {
     
     //runs animations
     update() {
-        
-        if(cowboy.travel != "away") {
+
+        if(this.travel != "away") {
 
             astronaut.style.transform = `rotate(${this.rotation}deg)`;
-            astronaut.style.left = this.originX + "px";
-            astronaut.style.top = this.originY + "px";
+            astronaut.style.left = `${this.originX}px`;
+            astronaut.style.top = `${this.originY}px`;
 
-            if(this.flyTo == "flying" && present) {
+            if(this.flyTo == "flying") {
 
                 this.movement();
-                console.log("flying");
             }
 
-            if(this.spin == "spinning" && present) {
+            if(this.spin == "spinning") {
 
                 this.ride();
-                console.log("spinning");
             }
             
-            if(this.travel == "arriving" && present) {
+            if(this.travel == "arriving") {
 
                 this.comingIn();
-                console.log("arriving");
             }
 
-            if(this.travel == "leaving" && present) {
+            if(this.travel == "leaving") {
 
                 this.leaving();
             }
