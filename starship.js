@@ -264,24 +264,6 @@ rocket.addEventListener("click", function() {
 });
 
 
-//makes sidebars visible
-window.addEventListener("click", function() {
-    leftNav.style.opacity = "0.3";
-    rightNav.style.opacity = "0.3";
-    
-    setTimeout(function() {
-        leftNav.style.opacity = "0.0";
-        rightNav.style.opacity = "0.0";
-    },500);
-});
-
-
-//reassigns value to screenWidth if screen size changes
-window.addEventListener("resize", function() {
-    screenWidth = document.documentElement.scrollWidth;
-});
-
-
 //Animate item left to right
 function animate(item) {
     let advance;
@@ -1024,7 +1006,7 @@ function navigation() {
         j--;
         k--;
 
-        arrayCountCheck();
+        displayOn();
     };
 
     navTop.onclick = function() {
@@ -1032,7 +1014,7 @@ function navigation() {
         j++;
         k++;
 
-        arrayCountCheck();
+        displayOn();
     };
 
     function arrayCountCheck() {
@@ -1055,8 +1037,6 @@ function navigation() {
         if(k > images.length - 1) {
             k = 0;
         }
-
-        displayOn();
     }
 
     function hide () {
@@ -1089,6 +1069,8 @@ function navigation() {
         let top = document.getElementById("top");
         let middle = document.getElementById("middle");
         let bottom = document.getElementById("bottom");
+
+        arrayCountCheck(); //position here prevents bugs
 
         top.innerHTML = images[i].name;
         top.style.background = `url(${images[i].img})`;
@@ -1164,7 +1146,7 @@ astronaut.addEventListener("click", function() {
 
 
 //starts astronaut movement animation
-document.body.addEventListener("click", function(event){
+window.addEventListener("touchmove",function(event){
 
     if(present && allow) {
         cowboy.flyTo = "flying";
@@ -1173,13 +1155,28 @@ document.body.addEventListener("click", function(event){
 });
 
 
-//starts astronaut movement animation
-document.body.addEventListener("touchmove",function(event){
+window.addEventListener("click", function(event) {
 
+    //starts astronaut movement animation
     if(present && allow) {
         cowboy.flyTo = "flying";
         cowboy.fly(event);
     }
+    
+    //makes sidebars visible
+    leftNav.style.opacity = "0.3";
+    rightNav.style.opacity = "0.3";
+    
+    setTimeout(function() {
+        leftNav.style.opacity = "0.0";
+        rightNav.style.opacity = "0.0";
+    },550);
+});
+
+
+//reassigns value to screenWidth if screen size changes
+window.addEventListener("resize", function() {
+    screenWidth = document.documentElement.scrollWidth;
 });
 
 
