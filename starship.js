@@ -13,16 +13,6 @@ const rightNav = document.querySelector(".right-nav"); //right page navigation
 const rocket = document.querySelector(".rocket"); //ship and parts
 const starship = document.querySelector(".starship");
 
-//sets initial canvas screen size
-const canvas = document.getElementById("canvas");
-let animationFrame; //used to on|off canvas 
-let canvasOff = true;
-let screenWidth = document.documentElement.scrollWidth; //sets device screen width
-let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
-canvas.height = screenHeight;
-canvas.width = screenWidth;
-c = canvas.getContext("2d");
-
 const auroraInfo = document.querySelector(".info-aurora");
 const earthInfo = document.querySelector(".info-earth");
 const marsInfo = document.querySelector(".info-mars");
@@ -131,203 +121,20 @@ let images = [
     }
 ];
 
-
 let num = randomRange(0, images.length - 1); //sets random number within array size
 
-//Returns a random number within a chosen range
-function randomRange(min,max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-//Math.floor() rounds down to the nearest whole number  e.i. 10 = 0 - 9  
-//Math.random() returns a random decimal between 0 - 0.99
-}
+//sets initial canvas screen size
+const canvas = document.getElementById("canvas");
+let animationFrame; //used to on|off canvas 
+let canvasOff = true;
+let screenWidth = document.documentElement.scrollWidth; //sets device screen width
+let screenHeight = document.documentElement.scrollHeight; //sets device screen heigth
+canvas.height = screenHeight;
+canvas.width = screenWidth;
+c = canvas.getContext("2d");
 
 
-//refresh page to random location
-leftNav.addEventListener("click", function() {
-
-    navigation();
-
-    nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
-
-    allow = false;
-
-    setTimeout(function() {
-        
-        allow = true;
-
-    }, 500);
-});
-
-nav.addEventListener("click", function () {
-
-    allow = false;
-
-    setTimeout(function() {
-        
-        allow = true;
-
-    }, 500);
-
-});
-
-//planetary analysis
-rightNav.addEventListener("click", function() {
-
-    allow = false;
-    
-    switch(images[num].name) {
-        case "Aurora Borealis":
-            auroraInfo.style.visibility  == "visible" ? auroraInfo.style.visibility = "hidden" : auroraInfo.style.visibility = "visible";
-            break;
-        case "Earth":
-        case "Earth At Night":
-        case "Low Earth Orbit Night":
-            earthInfo.style.visibility == "visible" ? earthInfo.style.visibility = "hidden" : earthInfo.style.visibility = "visible";
-            break;
-        case "Mars":
-            marsInfo.style.visibility == "visible" ? marsInfo.style.visibility = "hidden" : marsInfo.style.visibility = "visible";
-            break;
-        case "Mercury":
-            mercuryInfo.style.visibility == "visible" ? mercuryInfo.style.visibility = "hidden" : mercuryInfo.style.visibility = "visible";
-            break;
-        case "Moon":
-            moonInfo.style.visibility  == "visible" ? moonInfo.style.visibility = "hidden" : moonInfo.style.visibility = "visible";
-            break;
-        case "Sun":
-        case "Sun's Atmosphere":
-            sunInfo.style.visibility == "visible" ? sunInfo.style.visibility = "hidden" : sunInfo.style.visibility = "visible";
-            break;
-        case "Venus":
-            venusInfo.style.visibility == "visible" ? venusInfo.style.visibility = "hidden" : venusInfo.style.visibility = "visible";
-            break;
-        default: 
-            location.reload();
-            break;
-    }
-
-    setTimeout(function() {
-
-        footer.style.visibility == "visible" ? footer.style.visibility = "hidden" : footer.style.visibility = "visible";
-
-        allow = true;        
-
-    }, 500);
-
-});
-
-
-//activates booster speeed
-rocket.addEventListener("click", function() {
-
-    allow = false;
-
-    flip();
-
-    function flip() {
-
-        const boost = document.querySelector(".boost"); //engine fire
-        let coin = randomRange(1, 2);
-        let dice = randomRange(1, 6);
-
-        setTimeout(function() {
-            
-            allow = true;
-            
-        }, 500);
-
-        if(dice == 6) {
-            if(images[num].name == "Moon") {
-
-                if(coin == 1) {
-                    eagle.play();
-                } else {
-                    jfk.play();
-                }
-
-            } else if(images[num].name == "Earth" || images[num].name == "Low Earth Orbit Night") {
-                earthFrom.play();
-            } else {
-                onWay.play();
-            }
-
-        } else {
-            raptor.play();
-            boost.style.visibility = "visible";
-            speed = true;
-
-            setTimeout(function() {
-                boost.style.visibility = "hidden";
-                speed = false;
-            }, 500);
-        }
-    }
-});
-
-
-//Animate item left to right
-function animate(item) {
-    let advance;
-    let position = randomRange(0, screenWidth);
-    let retreat;
-    
-    //random ship flight direction
-    function flip() {
-        let coin = randomRange(1, 2);
-
-        if(coin == 1) {
-            if(starship.style.visibility == "hidden") {
-                clearInterval(advance);
-                clearInterval(retreat);
-            } else {
-                advance = setInterval(animateForward, 20);
-            }
-        } else {
-            if(starship.style.visibility == "hidden") {
-                clearInterval(advance);
-                clearInterval(retreat);
-            } else {
-                retreat = setInterval(animateBackward, 20);
-            }
-        }
-    } 
-    flip();
-    
-        
-    function animateForward() {
-        if(speed) {
-            position += 2.5;
-        } else {
-            position += 0.2;
-        }
-        item.style.left = position + "px";
-        item.style.transform = "rotate(90deg)";
-
-        if (position > screenWidth + starship.offsetHeight) {
-            clearInterval(advance);
-            retreat = setInterval(animateBackward, 15);
-            position -= 150;
-        }
-    }
-
-    function animateBackward() {
-        if(speed) {
-            position -= 2.5;
-        } else {
-            position -= 0.2;
-        }
-        item.style.left = position + "px";
-        item.style.transform = "rotate(-90deg)";
-
-        if (position < 0 - starship.offsetHeight) {
-            clearInterval(retreat);
-            advance = setInterval(animateForward, 15);
-            position += 150;
-        }
-    }
-
-}
-
-
+//on|off canvas animation
 function canvasAnimate() { 
 
     if(present) {
@@ -347,6 +154,7 @@ function canvasAnimate() {
 }
 
 
+//sets background scene
 function outerSpace() {
     let nextImg = new Image(); //img element for preloading next image
 
@@ -545,7 +353,7 @@ function outerSpace() {
         }
 
 
-        //working out the bugs in this one
+        //still working out the bugs in this one
         //latin names switch
         locationName.addEventListener("click", function() {
 
@@ -568,14 +376,14 @@ function outerSpace() {
                     case "Earth":
                         setTimeout(function() {
                             locationName.innerHTML = "Terra";
-                            //locationName.style.opacity = "0.0";
+                            locationName.style.opacity = "0.0";
                             fade = setInterval(fadeIn, 175); //fades in location name
                         }, 2500); //2.5 seconds
                         break;
                     case "Terra":
                         setTimeout(function() {
                             locationName.innerHTML = "Earth";
-                            //locationName.style.opacity = "0.0";
+                            locationName.style.opacity = "0.0";
                             fade = setInterval(fadeIn, 175); //fades in location name
                         }, 2500); //2.5seconds
                         break;
@@ -703,7 +511,7 @@ function outerSpace() {
     }
 
 
-    //In these locations
+    //in these locations
     switch(images[num].name) {
         case "Earth":
         case "Moon":
@@ -714,7 +522,7 @@ function outerSpace() {
                 
                 cowboy = new spaceCowboy(); //calls astronaut 
 
-                //prevents duplicate versions
+                //prevent duplicates 
                 if(canvasOff) {
 
                     canvasOff = false;
@@ -727,7 +535,224 @@ function outerSpace() {
 }
 
 
-//astronaut
+//shows & manages locations
+function navigation() {  
+
+    let navTop = document.querySelector(".nav-top");
+    let navBottom = document.querySelector(".nav-bottom");
+
+    let j = randomRange(0, images.length - 1);
+    let i = j - 1;
+    let k = j + 1;
+
+    navBottom.onclick = function() { 
+        i--;
+        j--;
+        k--;
+
+        displayOn();
+    };
+
+    navTop.onclick = function() {
+        i++;
+        j++;
+        k++;
+
+        displayOn();
+    };
+
+    function arrayCountCheck() {
+        if(i < 0) {
+            i = images.length - 1;
+        }
+        if(j < 0) {
+            j = images.length - 1;
+        }
+        if(k < 0) {
+            k = images.length - 1;
+        }
+
+        if(i > images.length - 1) {
+            i = 0;
+        }
+        if(j > images.length - 1) {
+            j = 0;
+        }
+        if(k > images.length - 1) {
+            k = 0;
+        }
+    }
+
+    function hide () {
+
+        clearInterval(fade);
+        clearInterval(movies); //clears animated background
+        noCowboys(); //hides astronaut
+
+        auroraInfo.style.visibility = "hidden";
+        earthInfo.style.visibility = "hidden";
+        footer.style.visibility = "hidden";
+        hubble.style.visibility = "hidden";
+        hubbleName.style.visibility = "hidden";
+        iss.style.visibility = "hidden";
+        issName.style.visibility = "hidden";
+        locationName.innerHTML = "";
+        locationName.style.opacity = "0.0"; 
+        marsInfo.style.visibility = "hidden";
+        mercuryInfo.style.visibility = "hidden";
+        moonInfo.style.visibility = "hidden";
+        nav.style.visibility = "hidden";
+        parker.style.visibility = "hidden";
+        parkerName.style.visibility = "hidden";
+        sunInfo.style.visibility = "hidden";
+        venusInfo.style.visibility = "hidden";
+    }
+    
+    function displayOn() {
+
+        let top = document.getElementById("top");
+        let middle = document.getElementById("middle");
+        let bottom = document.getElementById("bottom");
+
+        arrayCountCheck(); //position here prevents bugs
+
+        top.innerHTML = images[i].name;
+        top.style.background = `url(${images[i].img})`;
+        top.onclick = function() { 
+            
+            hide();
+            num = i;
+            outerSpace();
+        };
+    
+        middle.innerHTML = images[j].name;
+        middle.style.background = `url(${images[j].img})`;
+        middle.onclick = function() { 
+            
+            hide();
+            num = j;
+            outerSpace();
+        };
+
+        bottom.innerHTML = images[k].name;
+        bottom.style.background = `url(${images[k].img})`;
+        bottom.onclick = function() { 
+            
+            hide();
+            num = k;
+            outerSpace();
+        };
+
+        function picture(background) {
+            background.style.backgroundPosition = "center";
+            background.style.backgroundRepeat = "no-repeat";
+            background.style.backgroundSize = "cover";
+        }
+
+        picture(top);
+        picture(middle);
+        picture(bottom);
+    }
+
+    displayOn();
+}
+
+
+//hide astronaut & stop functions
+function noCowboys() {
+
+    if(present) {   
+        astronaut.style.visibility = "hidden";
+        cowboy.travel = "away";
+        present = false;
+    }
+}
+
+
+//Animate item left to right
+function orbit(item) {
+    let advance;
+    let position = randomRange(0, screenWidth);
+    let retreat;
+    
+    //random ship flight direction
+    function flip() {
+        let coin = randomRange(1, 2);
+
+        if(coin == 1) {
+            if(starship.style.visibility == "hidden") {
+                clearInterval(advance);
+                clearInterval(retreat);
+            } else {
+                advance = setInterval(animateForward, 20);
+            }
+        } else {
+            if(starship.style.visibility == "hidden") {
+                clearInterval(advance);
+                clearInterval(retreat);
+            } else {
+                retreat = setInterval(animateBackward, 20);
+            }
+        }
+    } 
+    flip();
+    
+        
+    function animateForward() {
+        if(speed) {
+            position += 2.5;
+        } else {
+            position += 0.2;
+        }
+        item.style.left = position + "px";
+        item.style.transform = "rotate(90deg)";
+
+        if (position > screenWidth + starship.offsetHeight) {
+            clearInterval(advance);
+            retreat = setInterval(animateBackward, 15);
+            position -= 150;
+        }
+    }
+
+    function animateBackward() {
+        if(speed) {
+            position -= 2.5;
+        } else {
+            position -= 0.2;
+        }
+        item.style.left = position + "px";
+        item.style.transform = "rotate(-90deg)";
+
+        if (position < 0 - starship.offsetHeight) {
+            clearInterval(retreat);
+            advance = setInterval(animateForward, 15);
+            position += 150;
+        }
+    }
+
+}
+
+
+//preloads images into cache
+function preloadImages() {
+
+    images.forEach(obj => {
+
+        let image = new Image();
+        image.src = obj.img;
+    });
+}
+
+
+//Returns a random number within a chosen range
+function randomRange(min,max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+//Math.floor() rounds down to the nearest whole number  e.i. 10 = 0 - 9  
+//Math.random() returns a random decimal between 0 - 0.99
+}
+
+
+//astronaut object
 class spaceCowboy {
     constructor() {
 
@@ -760,7 +785,7 @@ class spaceCowboy {
         present = true;
     }
 
-    //used to calculate angle of flying tilt
+    //calculate angle of tilt
     angle(total) {
 
         if(total > 250) {
@@ -776,7 +801,7 @@ class spaceCowboy {
         }
     }
 
-    //on astronaut click
+    //astronaut onclick
     contact() {
 
         if(images[num].name == "Moon") {
@@ -800,7 +825,7 @@ class spaceCowboy {
         this.nextOriginX = randomRange(0, screenWidth);
         this.nextOriginY = randomRange(0, screenHeight);
         this.nextRotation = randomRange(-360, 360);
-    
+
         this.travel = "leaving"; //starts interval
     }
 
@@ -976,13 +1001,13 @@ class spaceCowboy {
                 astronaut.style.visibility = "hidden";
             }
 
-            //In these locations
+            //in these locations
             switch(images[num].name) {
                 case "Earth":
                 case "Moon":
                 case "Low Earth Orbit Night":
                 case "Mars":
-                    break;
+                    break; //nothing happens
                 default:
                     noCowboys();
                     break;
@@ -991,149 +1016,6 @@ class spaceCowboy {
     };
    
 } 
-
-
-function navigation() {    
-    let navTop = document.querySelector(".nav-top");
-    let navBottom = document.querySelector(".nav-bottom");
-
-    let j = randomRange(0, images.length - 1);
-    let i = j - 1;
-    let k = j + 1;
-
-    navBottom.onclick = function() { 
-        i--;
-        j--;
-        k--;
-
-        displayOn();
-    };
-
-    navTop.onclick = function() {
-        i++;
-        j++;
-        k++;
-
-        displayOn();
-    };
-
-    function arrayCountCheck() {
-        if(i < 0) {
-            i = images.length - 1;
-        }
-        if(j < 0) {
-            j = images.length - 1;
-        }
-        if(k < 0) {
-            k = images.length - 1;
-        }
-
-        if(i > images.length - 1) {
-            i = 0;
-        }
-        if(j > images.length - 1) {
-            j = 0;
-        }
-        if(k > images.length - 1) {
-            k = 0;
-        }
-    }
-
-    function hide () {
-
-        clearInterval(fade);
-        clearInterval(movies); //clears animated background
-        noCowboys(); //hides astronaut
-
-        auroraInfo.style.visibility = "hidden";
-        earthInfo.style.visibility = "hidden";
-        footer.style.visibility = "hidden";
-        hubble.style.visibility = "hidden";
-        hubbleName.style.visibility = "hidden";
-        iss.style.visibility = "hidden";
-        issName.style.visibility = "hidden";
-        locationName.innerHTML = "";
-        locationName.style.opacity = "0.0"; 
-        marsInfo.style.visibility = "hidden";
-        mercuryInfo.style.visibility = "hidden";
-        moonInfo.style.visibility = "hidden";
-        nav.style.visibility = "hidden";
-        parker.style.visibility = "hidden";
-        parkerName.style.visibility = "hidden";
-        sunInfo.style.visibility = "hidden";
-        venusInfo.style.visibility = "hidden";
-    }
-    
-    function displayOn() {
-
-        let top = document.getElementById("top");
-        let middle = document.getElementById("middle");
-        let bottom = document.getElementById("bottom");
-
-        arrayCountCheck(); //position here prevents bugs
-
-        top.innerHTML = images[i].name;
-        top.style.background = `url(${images[i].img})`;
-        top.onclick = function() { 
-            
-            hide();
-            num = i;
-            outerSpace();
-        };
-    
-        middle.innerHTML = images[j].name;
-        middle.style.background = `url(${images[j].img})`;
-        middle.onclick = function() { 
-            
-            hide();
-            num = j;
-            outerSpace();
-        };
-
-        bottom.innerHTML = images[k].name;
-        bottom.style.background = `url(${images[k].img})`;
-        bottom.onclick = function() { 
-            
-            hide();
-            num = k;
-            outerSpace();
-        };
-
-        function picture(background) {
-            background.style.backgroundPosition = "center";
-            background.style.backgroundRepeat = "no-repeat";
-            background.style.backgroundSize = "cover";
-        }
-
-        picture(top);
-        picture(middle);
-        picture(bottom);
-    }
-
-    displayOn();
-}
-
-
-//hides astronaut & stops functions
-function noCowboys() {
-
-    if(present) {   
-        astronaut.style.visibility = "hidden";
-        cowboy.travel = "away";
-        present = false;
-    }
-}
-
-
-//preloads images into cache
-function preloadImages() {
-
-    images.forEach(obj => {
-
-        let image = new Image();
-        image.src = obj.img;
-    });
-}
 
 
 //starts astronaut leaving animation
@@ -1145,7 +1027,132 @@ astronaut.addEventListener("click", function() {
 });
 
 
-//starts astronaut movement animation
+//refresh page to random location
+leftNav.addEventListener("click", function() {
+
+    navigation();
+
+    nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
+
+    allow = false;
+
+    setTimeout(function() {
+        
+        allow = true;
+
+    }, 500);
+});
+
+
+//prevents certain functions
+nav.addEventListener("click", function () {
+
+    allow = false;
+
+    setTimeout(function() {
+        
+        allow = true;
+
+    }, 500);
+
+});
+
+
+//planetary analysis
+rightNav.addEventListener("click", function() {
+
+    allow = false;
+    
+    switch(images[num].name) {
+        case "Aurora Borealis":
+            auroraInfo.style.visibility  == "visible" ? auroraInfo.style.visibility = "hidden" : auroraInfo.style.visibility = "visible";
+            break;
+        case "Earth":
+        case "Earth At Night":
+        case "Low Earth Orbit Night":
+            earthInfo.style.visibility == "visible" ? earthInfo.style.visibility = "hidden" : earthInfo.style.visibility = "visible";
+            break;
+        case "Mars":
+            marsInfo.style.visibility == "visible" ? marsInfo.style.visibility = "hidden" : marsInfo.style.visibility = "visible";
+            break;
+        case "Mercury":
+            mercuryInfo.style.visibility == "visible" ? mercuryInfo.style.visibility = "hidden" : mercuryInfo.style.visibility = "visible";
+            break;
+        case "Moon":
+            moonInfo.style.visibility  == "visible" ? moonInfo.style.visibility = "hidden" : moonInfo.style.visibility = "visible";
+            break;
+        case "Sun":
+        case "Sun's Atmosphere":
+            sunInfo.style.visibility == "visible" ? sunInfo.style.visibility = "hidden" : sunInfo.style.visibility = "visible";
+            break;
+        case "Venus":
+            venusInfo.style.visibility == "visible" ? venusInfo.style.visibility = "hidden" : venusInfo.style.visibility = "visible";
+            break;
+        default: 
+            location.reload();
+            break;
+    }
+
+    setTimeout(function() {
+
+        footer.style.visibility == "visible" ? footer.style.visibility = "hidden" : footer.style.visibility = "visible";
+
+        allow = true;        
+
+    }, 500);
+
+});
+
+
+//activates rocket boosters
+rocket.addEventListener("click", function() {
+
+    allow = false;
+
+    flip();
+
+    function flip() {
+
+        const boost = document.querySelector(".boost"); //engine fire
+        let coin = randomRange(1, 2);
+        let dice = randomRange(1, 6);
+
+        setTimeout(function() {
+            
+            allow = true;
+            
+        }, 500);
+
+        if(dice == 6) {
+            if(images[num].name == "Moon") {
+
+                if(coin == 1) {
+                    eagle.play();
+                } else {
+                    jfk.play();
+                }
+
+            } else if(images[num].name == "Earth" || images[num].name == "Low Earth Orbit Night") {
+                earthFrom.play();
+            } else {
+                onWay.play();
+            }
+
+        } else {
+            raptor.play();
+            boost.style.visibility = "visible";
+            speed = true;
+
+            setTimeout(function() {
+                boost.style.visibility = "hidden";
+                speed = false;
+            }, 500);
+        }
+    }
+});
+
+
+//astronaut moves to location
 window.addEventListener("touchmove",function(event){
 
     if(present && allow) {
@@ -1157,7 +1164,7 @@ window.addEventListener("touchmove",function(event){
 
 window.addEventListener("click", function(event) {
 
-    //starts astronaut movement animation
+    //astronaut moves to location
     if(present && allow) {
         cowboy.flyTo = "flying";
         cowboy.fly(event);
@@ -1176,15 +1183,16 @@ window.addEventListener("click", function(event) {
 
 //reassigns value to screenWidth if screen size changes
 window.addEventListener("resize", function() {
+    
     screenWidth = document.documentElement.scrollWidth;
 });
 
 
 window.onload = function() {
 
-    animate(rocket); //animates starship
+    orbit(rocket); //animates starship
     
-    outerSpace();
+    outerSpace(); //sets background scene
 
-    setTimeout(function() { preloadImages() }, 1250); //waits for primary images to load first
+    setTimeout(function() { preloadImages() }, 2000); //waits for primary images to load first
 }
