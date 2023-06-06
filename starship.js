@@ -27,6 +27,7 @@ const hubbleLaunch = new Audio("assets/sounds/hubble-launch.mp3"); //launch
 const hubbleService = new Audio("assets/sounds/hubble-service.mp3"); //service
 const jfk = new Audio("assets/sounds/jfk.mp3"); //we choose..
 const onWay = new Audio("assets/sounds/on-way.mp3"); //ship's radio
+const majorTom = new Audio('assets/sounds/major-tom.mp3') //ground control to...
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
 
 let allow = true; //a check for astronaut movements
@@ -297,7 +298,7 @@ function outerSpace() {
         locationName.style.opacity = "0.0"; 
         locationName.innerHTML = images[num].name;
 
-        
+
         if(locationOff) {
             locationOff = false;
             //shows location name
@@ -448,6 +449,8 @@ function outerSpace() {
             iss.addEventListener("click", function() {
 
                 issName.style.visibility = "visible";
+
+                majorTom.play();
 
                 setTimeout(function() {
                     issName.style.visibility = "hidden";
