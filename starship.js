@@ -450,7 +450,7 @@ function outerSpace() {
 
                 issName.style.visibility = "visible";
 
-                majorTom.play();
+                majorTom.play(); //plays music
 
                 setTimeout(function() {
                     issName.style.visibility = "hidden";
@@ -535,7 +535,7 @@ function outerSpace() {
 
                     canvasAnimate();
                 }        
-            }, randomRange(10000, 15000)); //waits 5 to 15 seconds
+            }, randomRange(15000, 25000)); //waits 15 to 25 seconds
         break;
     }
 }
