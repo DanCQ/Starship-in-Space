@@ -101,23 +101,27 @@ footer a {
 }
 
 .info-aurora {
-    visibility:hidden;
+    visibility: hidden;
 }
 
 .info-earth {
-    visibility:hidden;
+    visibility: hidden;
+}
+
+.info-jupiter {
+    visibility: hidden;
 }
 
 .info-mars {
-    visibility:hidden;
+    visibility: hidden;
 }
 
 .info-mercury {
-    visibility:hidden;
+    visibility: hidden;
 }
 
 .info-moon {
-    visibility:hidden;
+    visibility: hidden;
 }
 
 .info-sun {
