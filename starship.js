@@ -139,7 +139,7 @@ c = canvas.getContext("2d");
 //turns on|off canvas animation
 function canvasAnimate() { 
 
-    if(present) {
+    if(present) { //present keeps animation running
 
         animationFrame = requestAnimationFrame(canvasAnimate);
 
@@ -147,7 +147,7 @@ function canvasAnimate() {
 
         cowboy.update();
 
-    } else {
+    } else { //else cancels animation
 
         animationFrame = cancelAnimationFrame(canvasAnimate);
 
