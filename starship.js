@@ -15,6 +15,7 @@ const starship = document.querySelector(".starship");
 
 const auroraInfo = document.querySelector(".info-aurora");
 const earthInfo = document.querySelector(".info-earth");
+const jupiterInfo = document.querySelector(".info-jupiter");
 const marsInfo = document.querySelector(".info-mars");
 const mercuryInfo = document.querySelector(".info-mercury");
 const moonInfo = document.querySelector(".info-moon");
@@ -135,7 +136,7 @@ canvas.width = screenWidth;
 c = canvas.getContext("2d");
 
 
-//on|off canvas animation
+//turns on|off canvas animation
 function canvasAnimate() { 
 
     if(present) {
@@ -602,6 +603,7 @@ function navigation() {
         hubbleName.style.visibility = "hidden";
         iss.style.visibility = "hidden";
         issName.style.visibility = "hidden";
+        jupiterInfo.style.visibility = "hidden";
         latin = false;
         locationName.innerHTML = "";
         locationName.style.opacity = "0.0"; 
@@ -760,6 +762,12 @@ function randomRange(min,max) {
 }
 
 
+function visible(item) {
+    //toggle visible or hidden.
+    item.style.visibility  == "visible" ? item.style.visibility = "hidden" : item.style.visibility = "visible";
+}
+
+
 //astronaut object
 class spaceCowboy {
     constructor() {
@@ -823,8 +831,11 @@ class spaceCowboy {
             }
 
         } else if(images[num].name == "Mars") {
+
             this.explore.play();
+
         } else {
+
             this.niceOrbit.play();
         }
     
@@ -1018,7 +1029,6 @@ class spaceCowboy {
                     break; //nothing happens
                 default:
                     noCowboys();
-                    break;
             }
         }
     };
@@ -1040,7 +1050,7 @@ leftNav.addEventListener("click", function() {
 
     navigation();
 
-    nav.style.visibility == "visible" ? nav.style.visibility = "hidden" : nav.style.visibility = "visible";
+    visible(nav);
 
     allow = false;
 
@@ -1073,38 +1083,40 @@ rightNav.addEventListener("click", function() {
     
     switch(images[num].name) {
         case "Aurora Borealis":
-            auroraInfo.style.visibility  == "visible" ? auroraInfo.style.visibility = "hidden" : auroraInfo.style.visibility = "visible";
+            visible(auroraInfo);
             break;
         case "Earth":
         case "Earth At Night":
         case "Low Earth Orbit Night":
-            earthInfo.style.visibility == "visible" ? earthInfo.style.visibility = "hidden" : earthInfo.style.visibility = "visible";
+            visible(earthInfo);
+            break;
+        case "Jupiter":
+            visible(jupiterInfo);
             break;
         case "Mars":
-            marsInfo.style.visibility == "visible" ? marsInfo.style.visibility = "hidden" : marsInfo.style.visibility = "visible";
+            visible(marsInfo);
             break;
         case "Mercury":
-            mercuryInfo.style.visibility == "visible" ? mercuryInfo.style.visibility = "hidden" : mercuryInfo.style.visibility = "visible";
+            visible(mercuryInfo);
             break;
         case "Moon":
-            moonInfo.style.visibility  == "visible" ? moonInfo.style.visibility = "hidden" : moonInfo.style.visibility = "visible";
+            visible(moonInfo);
             break;
         case "Sun":
         case "Sun's Atmosphere":
-            sunInfo.style.visibility == "visible" ? sunInfo.style.visibility = "hidden" : sunInfo.style.visibility = "visible";
+            visible(sunInfo);
             break;
         case "Venus":
-            venusInfo.style.visibility == "visible" ? venusInfo.style.visibility = "hidden" : venusInfo.style.visibility = "visible";
+            visible(venusInfo);
             break;
         default: 
             location.reload();
-            break;
     }
 
     setTimeout(function() {
 
-        footer.style.visibility == "visible" ? footer.style.visibility = "hidden" : footer.style.visibility = "visible";
-
+        visible(footer);
+        
         allow = true;        
 
     }, 500);
