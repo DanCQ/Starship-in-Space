@@ -6,6 +6,8 @@ Solar System information from <a href="https://solarsystem.nasa.gov/solar-system
 
 <a href="https://starship-in-space.pages.dev/">Starship in Space</a>
 
+I still need to add information for Uranus, Saturn, Neptune, and the Milky Way.
+
 I'm searching for detailed satellite photos, <br>
 and for historical space exporation sound clips.
 
