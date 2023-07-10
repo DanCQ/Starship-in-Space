@@ -1127,13 +1127,13 @@ rightNav.addEventListener("click", function() {
 //activates rocket boosters
 rocket.addEventListener("click", function() {
 
+    const boost = document.querySelector(".boost"); //engine fire
     allow = false;
 
     flip();
 
     function flip() {
 
-        const boost = document.querySelector(".boost"); //engine fire
         let coin = randomRange(1, 2);
         let dice = randomRange(1, 6);
 
@@ -1144,31 +1144,64 @@ rocket.addEventListener("click", function() {
         }, 500);
 
         if(dice == 6) {
+
             if(images[num].name == "Moon") {
 
-                if(coin == 1) {
-                    eagle.play();
-                } else {
-                    jfk.play();
+                if(eagle.paused && jfk.paused) {
+
+                    if(coin == 1) {
+                        eagle.play();
+                    } else {
+                        jfk.play();
+                    }
+
+                } else { //if playing, rocket boost
+                 
+                    raptorBoost();
                 }
 
             } else if(images[num].name == "Earth" || images[num].name == "Low Earth Orbit Night") {
-                earthFrom.play();
+
+                if(earthFrom.paused) {
+
+                    earthFrom.play();
+
+                } else {
+
+                    raptorBoost();
+                }
+
             } else {
-                onWay.play();
+
+                if(onWay.paused) {
+
+                    onWay.play();
+
+                } else {
+
+                    raptorBoost();
+                }
             }
 
         } else {
-            raptor.play();
-            boost.style.visibility = "visible";
-            speed = true;
 
-            setTimeout(function() {
-                boost.style.visibility = "hidden";
-                speed = false;
-            }, 500);
+            raptorBoost();
         }
     }
+
+    //rocket booster animation
+    function raptorBoost() {
+
+        raptor.play();
+        boost.style.visibility = "visible";
+        speed = true;
+
+        setTimeout(function() {
+            boost.style.visibility = "hidden";
+            speed = false;
+        }, 500);
+    }
+
 });
 
 
@@ -1215,4 +1248,5 @@ window.onload = function() {
     outerSpace(); //sets background scene
 
     setTimeout(function() { preloadImages() }, 2000); //waits for primary images to load first
+    
 }
