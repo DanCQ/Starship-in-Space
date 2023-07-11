@@ -168,7 +168,7 @@ function outerSpace() {
             starship.style.visibility = "hidden";
             break;
         default:
-            setTimeout(function() { 
+            setTimeout( () => { 
                 starship.style.visibility = "visible"; 
             }, 100); //fixes initial position appearance of image
     }
@@ -183,7 +183,7 @@ function outerSpace() {
 
 
     //repeats show of location name on click
-    body.addEventListener("click", function() {
+    body.addEventListener("click", () => {
         
         if(locationOff && allow) {
             locationDisplay();
@@ -196,7 +196,7 @@ function outerSpace() {
 
         if(images[num].name == "Aurora Borealis") {
 
-            movies = setInterval(function() {
+            movies = setInterval( () => {
                 aurora++;
                 if(aurora > 117) {
                     aurora = 1;
@@ -206,7 +206,7 @@ function outerSpace() {
                 body.style.transition = "ease-in-out 50ms";
             
                 //change only happens once next image is loaded
-                nextImg.onload = function() {
+                nextImg.onload = () => {
                     images[num].img = nextImg.src;
                     background();
                 } 
@@ -231,7 +231,7 @@ function outerSpace() {
 
         if(images[num].name == "Earth") {
 
-            movies = setInterval(function() {
+            movies = setInterval( () => {
                 earth++;
                 if(earth > 69) {
                     earth = 1;
@@ -241,7 +241,7 @@ function outerSpace() {
                 body.style.transition = "ease-in-out 50ms";
             
                 //change only happens once next image is loaded
-                nextImg.onload = function() {
+                nextImg.onload = () => {
                     images[num].img = nextImg.src;
                     background();
                 } 
@@ -258,28 +258,33 @@ function outerSpace() {
 
             hubble.style.visibility = "visible";
 
-            hubble.addEventListener("click", function() {
+            hubble.addEventListener("click", () => {
 
                 allow = false;
                 hubbleName.style.visibility = "visible";
                 flip();
 
                 function flip() {
+
                     let coin = randomRange(1, 2);
         
-                    if(coin == 1) {
-                        hubbleLaunch.play();
-                    } else {
-                        hubbleService.play();
+                    if(hubbleLaunch.paused && hubbleService.paused) {
+                        
+                        if(coin == 1) {
+                            hubbleLaunch.play();
+                        } else {
+                            hubbleService.play();
+                        }
                     }
                 } 
                 
-                setTimeout(function() {
+                setTimeout( () => { 
+                    
                     hubbleName.style.visibility = "hidden";
 
                 }, 4000);
 
-                setTimeout(function() {
+                setTimeout( () => {
                     
                     allow = true;
                     
@@ -303,7 +308,7 @@ function outerSpace() {
         if(locationOff) {
             locationOff = false;
             //shows location name
-            setTimeout(function() {
+            setTimeout( () => {
 
                 if(locationName.style.opacity <= 0.0) {
 
@@ -334,7 +339,7 @@ function outerSpace() {
 
                 clearInterval(fade);
     
-                setTimeout(function() {
+                setTimeout( () => {
     
                     if(locationName.style.opacity >= 1) {
                         
@@ -360,7 +365,7 @@ function outerSpace() {
 
                     locationOff = false;
 
-                    setTimeout(function() {
+                    setTimeout( () => {
                 
                         if(!locationOff) {
 
@@ -372,8 +377,8 @@ function outerSpace() {
                                 //if location changed 
                                 locationName.innerHTML = images[num].name;
                             }
-                            
                         }
+
                     }, 2500); //2.5 seconds
                 }
             }
@@ -381,14 +386,14 @@ function outerSpace() {
 
 
         //latin names switch
-        locationName.addEventListener("click", function() {
+        locationName.addEventListener("click", () => {
 
             //only if name is visible
             if(locationName.style.opacity > 0.0) {
 
                 allow = false;
 
-                setTimeout(function() {
+                setTimeout( () => {
                     
                     allow = true;
                     
@@ -433,7 +438,6 @@ function outerSpace() {
                         break;
                     default: 
                         latin = false;
-                        break;
                 };
             }
         });
@@ -447,18 +451,18 @@ function outerSpace() {
             
             iss.style.visibility = "visible";
 
-            iss.addEventListener("click", function() {
+            iss.addEventListener("click", () => {
 
                 issName.style.visibility = "visible";
 
                 majorTom.play(); //plays music
 
-                setTimeout(function() {
+                setTimeout( () => {
                     issName.style.visibility = "hidden";
                 }, 4000);
             });
 
-            movies = setInterval(function() {
+            movies = setInterval( () => {
                 earthNight++;
                 if(earthNight > 119) {
                     earthNight = 1;
@@ -468,7 +472,7 @@ function outerSpace() {
                 body.style.transition = "ease-in-out 50ms";
             
                 //change only happens once next image is loaded
-                nextImg.onload = function() {
+                nextImg.onload = () => {
                     images[num].img = nextImg.src;
                     background();
                 }
@@ -488,7 +492,7 @@ function outerSpace() {
             locationName.style.textShadow = "0px 0px 2px black";
             parker.style.visibility = "visible";
 
-            movies = setInterval(function() {
+            movies = setInterval( () => {
                 sunAtmosphere++;
 
                 if(sunAtmosphere > 170) {
@@ -498,19 +502,19 @@ function outerSpace() {
                 nextImg.src = `assets/sun-surface/${sunAtmosphere}.jpg`; //preloads next image
                 
                 //change only happens once next image is loaded
-                nextImg.onload = function() {
+                nextImg.onload = () => {
                     images[num].img = nextImg.src;
                     background();
                 }
 
             }, 1000);
 
-            parker.addEventListener("click", function() {
+            parker.addEventListener("click", () => {
 
                 parkerLaunch.play();
                 parkerName.style.visibility = "visible";
 
-                setTimeout(function() {
+                setTimeout( () => {
                     parkerName.style.visibility = "hidden";
                 }, 4000);
             });
@@ -525,7 +529,7 @@ function outerSpace() {
         case "Low Earth Orbit Night":
         case "Mars":
 
-            setTimeout(function() { 
+            setTimeout( () => { 
                 
                 cowboy = new spaceCowboy(); //calls astronaut 
 
@@ -536,7 +540,9 @@ function outerSpace() {
 
                     canvasAnimate();
                 }        
+
             }, randomRange(15000, 25000)); //waits 15 to 25 seconds
+
         break;
     }
 }
@@ -552,7 +558,7 @@ function navigation() {
     let i = j - 1;
     let k = j + 1;
 
-    navBottom.onclick = function() { 
+    navBottom.onclick = () => { 
         i--;
         j--;
         k--;
@@ -560,7 +566,7 @@ function navigation() {
         displayOn();
     };
 
-    navTop.onclick = function() {
+    navTop.onclick = () => {
         i++;
         j++;
         k++;
@@ -590,7 +596,7 @@ function navigation() {
         }
     }
 
-    function hide () {
+    function hide() {
 
         clearInterval(fade);
         clearInterval(movies); //clears animated background
@@ -628,7 +634,7 @@ function navigation() {
 
         top.innerHTML = images[i].name;
         top.style.background = `url(${images[i].img})`;
-        top.onclick = function() { 
+        top.onclick = () => { 
             
             hide();
             num = i;
@@ -637,7 +643,7 @@ function navigation() {
     
         middle.innerHTML = images[j].name;
         middle.style.background = `url(${images[j].img})`;
-        middle.onclick = function() { 
+        middle.onclick = () => { 
             
             hide();
             num = j;
@@ -646,7 +652,7 @@ function navigation() {
 
         bottom.innerHTML = images[k].name;
         bottom.style.background = `url(${images[k].img})`;
-        bottom.onclick = function() { 
+        bottom.onclick = () => { 
             
             hide();
             num = k;
@@ -681,43 +687,62 @@ function noCowboys() {
 
 //Animate item left to right
 function orbit(item) {
+
     let advance;
     let position = randomRange(0, screenWidth);
     let retreat;
+
+    flip();
     
     //random ship flight direction
     function flip() {
+
         let coin = randomRange(1, 2);
 
         if(coin == 1) {
+
             if(starship.style.visibility == "hidden") {
+
                 clearInterval(advance);
                 clearInterval(retreat);
+
             } else {
+
                 advance = setInterval(animateForward, 20);
             }
+
         } else {
+
             if(starship.style.visibility == "hidden") {
+
                 clearInterval(advance);
                 clearInterval(retreat);
+
             } else {
+
                 retreat = setInterval(animateBackward, 20);
             }
+
         }
     } 
-    flip();
     
         
     function animateForward() {
+
         if(speed) {
+
             position += 2.5;
+
         } else {
+
             position += 0.2;
         }
+
         item.style.left = position + "px";
         item.style.transform = "rotate(90deg)";
 
-        if (position > screenWidth + starship.offsetHeight) {
+        if(position > screenWidth + starship.offsetHeight) {
+
             clearInterval(advance);
             retreat = setInterval(animateBackward, 15);
             position -= 150;
@@ -725,15 +750,21 @@ function orbit(item) {
     }
 
     function animateBackward() {
+
         if(speed) {
+
             position -= 2.5;
+
         } else {
+
             position -= 0.2;
         }
+
         item.style.left = position + "px";
         item.style.transform = "rotate(-90deg)";
 
         if (position < 0 - starship.offsetHeight) {
+
             clearInterval(retreat);
             advance = setInterval(animateForward, 15);
             position += 150;
@@ -756,14 +787,16 @@ function preloadImages() {
 
 //Returns a random number within a chosen range
 function randomRange(min,max) {
+
     return Math.floor(Math.random() * (max - min + 1)) + min;
 //Math.floor() rounds down to the nearest whole number  e.i. 10 = 0 - 9  
 //Math.random() returns a random decimal between 0 - 0.99
 }
 
 
+//toggles visible or hidden.
 function visible(item) {
-    //toggle visible or hidden.
+    
     item.style.visibility  == "visible" ? item.style.visibility = "hidden" : item.style.visibility = "visible";
 }
 
@@ -824,10 +857,15 @@ class spaceCowboy {
 
             this.flip();
     
-            if(this.coin == 1) {
-                this.smallStep.play();
-            } else {
-                this.hereMan.play();
+            if(this.smallStep.paused && this.hereMan.paused) {
+
+                if(this.coin == 1) {
+
+                    this.smallStep.play();
+                } else {
+
+                    this.hereMan.play();
+                }
             }
 
         } else if(images[num].name == "Mars") {
@@ -863,8 +901,7 @@ class spaceCowboy {
 
 
     //creates randomness
-    flip() {
-
+    flip() { 
         this.coin = randomRange(1, 2);
     }
 
@@ -976,13 +1013,19 @@ class spaceCowboy {
 
     //spin animation
     ride() {
+
         if(this.rotation > 8) {
+
             this.rotation -= Math.round(0.25 * 100) / 100;
             astronaut.style.transform = `rotate(${this.rotation}deg)`;
+
         } else if(this.rotation < 8) {
+
             this.rotation += Math.round(0.25 * 100) / 100;
             astronaut.style.transform = `rotate(${this.rotation}deg)`;
+
         } if(this.rotation == 8) {
+
             this.spin = "nominal";
         }
     }
@@ -1037,7 +1080,7 @@ class spaceCowboy {
 
 
 //starts astronaut leaving animation
-astronaut.addEventListener("click", function() {
+astronaut.addEventListener("click", () => {
    
     if(cowboy.travel != "away") {
         cowboy.contact();
@@ -1046,7 +1089,7 @@ astronaut.addEventListener("click", function() {
 
 
 //refresh page to random location
-leftNav.addEventListener("click", function() {
+leftNav.addEventListener("click", () => {
 
     navigation();
 
@@ -1054,7 +1097,7 @@ leftNav.addEventListener("click", function() {
 
     allow = false;
 
-    setTimeout(function() {
+    setTimeout( () => {
         
         allow = true;
 
@@ -1063,11 +1106,11 @@ leftNav.addEventListener("click", function() {
 
 
 //prevents certain functions
-nav.addEventListener("click", function () {
+nav.addEventListener("click", () => {
 
     allow = false;
 
-    setTimeout(function() {
+    setTimeout( () => {
         
         allow = true;
 
@@ -1077,7 +1120,7 @@ nav.addEventListener("click", function () {
 
 
 //planetary analysis
-rightNav.addEventListener("click", function() {
+rightNav.addEventListener("click", () => {
 
     allow = false;
     
@@ -1113,7 +1156,7 @@ rightNav.addEventListener("click", function() {
             location.reload();
     }
 
-    setTimeout(function() {
+    setTimeout( () => {
 
         visible(footer);
         
@@ -1125,7 +1168,7 @@ rightNav.addEventListener("click", function() {
 
 
 //activates rocket boosters
-rocket.addEventListener("click", function() {
+rocket.addEventListener("click", () => {
 
     const boost = document.querySelector(".boost"); //engine fire
     allow = false;
@@ -1137,7 +1180,7 @@ rocket.addEventListener("click", function() {
         let coin = randomRange(1, 2);
         let dice = randomRange(1, 6);
 
-        setTimeout(function() {
+        setTimeout( () => {
             
             allow = true;
             
@@ -1156,7 +1199,6 @@ rocket.addEventListener("click", function() {
                     }
 
                 } else { //if playing, rocket boost
-                 
                     raptorBoost();
                 }
 
@@ -1167,7 +1209,6 @@ rocket.addEventListener("click", function() {
                     earthFrom.play();
 
                 } else {
-
                     raptorBoost();
                 }
 
@@ -1178,13 +1219,11 @@ rocket.addEventListener("click", function() {
                     onWay.play();
 
                 } else {
-
                     raptorBoost();
                 }
             }
 
         } else {
-
             raptorBoost();
         }
     }
@@ -1196,17 +1235,17 @@ rocket.addEventListener("click", function() {
         boost.style.visibility = "visible";
         speed = true;
 
-        setTimeout(function() {
+        setTimeout( () => {
+
             boost.style.visibility = "hidden";
             speed = false;
         }, 500);
     }
-
 });
 
 
 //astronaut moves to location
-window.addEventListener("touchmove",function(event){
+window.addEventListener("touchmove", (event) => {
 
     if(present && allow) {
         cowboy.flyTo = "flying";
@@ -1215,7 +1254,7 @@ window.addEventListener("touchmove",function(event){
 });
 
 
-window.addEventListener("click", function(event) {
+window.addEventListener("click", (event) => {
 
     //astronaut moves to location
     if(present && allow) {
@@ -1227,7 +1266,7 @@ window.addEventListener("click", function(event) {
     leftNav.style.opacity = "0.3";
     rightNav.style.opacity = "0.3";
     
-    setTimeout(function() {
+    setTimeout( () => {
         leftNav.style.opacity = "0.0";
         rightNav.style.opacity = "0.0";
     },550);
@@ -1235,10 +1274,7 @@ window.addEventListener("click", function(event) {
 
 
 //reassigns value to screenWidth if screen size changes
-window.addEventListener("resize", function() {
-    
-    screenWidth = document.documentElement.scrollWidth;
-});
+window.addEventListener("resize", () => screenWidth = document.documentElement.scrollWidth);
 
 
 window.onload = function() {
@@ -1247,6 +1283,6 @@ window.onload = function() {
     
     outerSpace(); //sets background scene
 
-    setTimeout(function() { preloadImages() }, 2000); //waits for primary images to load first
+    setTimeout( () => { preloadImages() }, 2000); //waits for primary images to load first
     
 }
