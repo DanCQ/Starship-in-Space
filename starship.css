@@ -124,6 +124,10 @@ footer a {
     visibility: hidden;
 }
 
+.info-saturn {
+    visibility:hidden;
+}
+
 .info-sun {
     visibility:hidden;
 }
