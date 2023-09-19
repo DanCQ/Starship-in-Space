@@ -624,7 +624,7 @@ function navigation() {
         parkerName.style.visibility = "hidden";
         saturnInfo.style.visibility = "hidden";
         sunInfo.style.visibility = "hidden";
-        uranusInfo.style.visibility = "hidden;
+        uranusInfo.style.visibility = "hidden";
         venusInfo.style.visibility = "hidden";
     }
     
