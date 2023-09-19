@@ -75,16 +75,16 @@ footer a {
 .info {
     background-color: black;
     border-radius: 10px;
-    color:white;
+    color: white;
     font-family: "jura", monospace;
     opacity: 0.75;
-    overflow-y:scroll;
+    overflow-y: scroll;
     max-width: 50vw;
     max-height: 80vh;
     padding: 1rem;
-    position:absolute;
-        right:5%;
-        top:1%;
+    position: absolute;
+        right: 5%;
+        top: 1%;
     text-shadow: 0px 0px 2px black;
     z-index:6;
 }    
@@ -96,7 +96,7 @@ footer a {
 
 .info h3 {
     font-family: "antonio";
-    margin-top:2rem;
+    margin-top: 2rem;
     text-indent: 5px;
 }
 
@@ -125,260 +125,264 @@ footer a {
 }
 
 .info-saturn {
-    visibility:hidden;
+    visibility: hidden;
 }
 
 .info-sun {
-    visibility:hidden;
+    visibility: hidden;
+}
+
+.info-uranus {
+    visibility: hidden;
 }
 
 .info-venus {
-    visibility:hidden;
+    visibility: hidden;
 }
 
 .iss {
-    cursor:pointer;
-    transform:rotate(-20deg);
+    cursor: pointer;
+    transform: rotate(-20deg);
     user-select: none;
-    -webkit-touch-callout:none;
-    -webkit-user-drag:none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
     -webkit-user-select: none;
-    width:400px;
-    visibility:hidden;
+    width: 400px;
+    visibility: hidden;
 }
 
 .left-nav {
-    background-color:white;
+    background-color: white;
     border-radius: 5px;
-    cursor:pointer;
+    cursor: pointer;
     font-family: "jura", monospace;
-    font-size:larger;
+    font-size: larger;
     height: 100vh;
-    display:flex;
+    display: flex;
         align-items: center;
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: center;
-    opacity:0.0;
-    position:absolute;
-        left:0;
-        top:0;
+    opacity: 0.0;
+    position: absolute;
+        left: 0;
+        top: 0;
     text-shadow: 0px 0px 2px black;
     user-select: none;
     -webkit-user-select: none;
-    width:5%;
-    z-index:0;
+    width: 5%;
+    z-index: 0;
 }
 
 .location {
-    color:ghostwhite;
+    color: ghostwhite;
     font-family: "audiowide", "antonio", "jura", monospace;
-    font-size:26px;
-    position:absolute;
-        bottom:1em;
-        right:1.5em;
+    font-size: 26px;
+    position: absolute;
+        bottom: 1em;
+        right: 1.5em;
     user-select: none;
     -webkit-user-select: none;
-    z-index:5;
+    z-index: 5;
 }
 
 .nav {
     border-radius: 10px;
-    cursor:pointer;
-    display:flex;
+    cursor: pointer;
+    display: flex;
         align-items: center;
-        justify-content:space-evenly;
-    height:98vh;
-    position:absolute;
-        left:5%;
-    width:33vw;
+        justify-content: space-evenly;
+    height: 98vh;
+    position: absolute;
+        left: 5%;
+    width: 33vw;
     visibility: hidden;
-    z-index:5;
+    z-index: 5;
 }
 
 .nav-bottom {
     background-color: white;
-    border-radius:10px;
-    min-height:10%;
-    opacity:0.3;
-    position:absolute;
-        bottom:0;
-    width:100%;
+    border-radius: 10px;
+    min-height: 10%;
+    opacity: 0.3;
+    position: absolute;
+        bottom: 0;
+    width: 100%;
 }
 
 .nav #bottom {
-    bottom:10.3%;
-    left:0;
+    bottom: 10.3%;
+    left: 0;
 }
 
 .nav #middle {
-    top:36.9%;
-    left:0;
+    top: 36.9%;
+    left: 0;
 }
 
 .nav-top {
     background-color: white;
-    border-radius:10px;
-    min-height:10%;
-    opacity:0.3;
-    position:absolute;
-        top:0;
-    width:100%;
+    border-radius: 10px;
+    min-height: 10%;
+    opacity: 0.3;
+    position: absolute;
+        top: 0;
+    width: 100%;
 }
 
 .nav #top {
-    top:10.3%;
-    left:0;
+    top: 10.3%;
+    left: 0;
 }
 
 .parker {
     animation-duration: 40s;
-    animation-iteration-count:infinite;
-    animation-name:scan;
+    animation-iteration-count: infinite;
+    animation-name: scan;
     animation-timing-function: ease-in-out;
-    cursor:pointer;
+    cursor: pointer;
     height: 200px;
-    transform:rotate(-5deg);
+    transform: rotate(-5deg);
     user-select: none;
-    -webkit-touch-callout:none;
-    -webkit-user-drag:none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
     -webkit-user-select: none;
-    visibility:hidden;
+    visibility: hidden;
 }
 
 .picture {
-    border-radius:10px;
-    color:white;
+    border-radius: 10px;
+    color: white;
     display: flex;
         align-items: center;
         justify-content: center;
     font-family: "audiowide", "antonio", monospace;
     font-size: 1.4rem;
-    height:26.2%;
-    position:absolute;
+    height: 26.2%;
+    position: absolute;
     text-align: center;
     user-select: none;
-    -webkit-touch-callout:none;
-    -webkit-user-drag:none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
     -webkit-user-select: none;
-    width:100%;
+    width: 100%;
 }
 
 .probe { 
-    display:flex;
+    display: flex;
         align-items: center;
         justify-content: center;
     font-size: 20px;
-    position:absolute;
+    position: absolute;
         left: 0;
         top: 0;
     text-align: center;
     user-select: none;
-    -webkit-touch-callout:none;
-    -webkit-user-drag:none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
     -webkit-user-select: none;
 }
 
 .probe figcaption {
-    color:whitesmoke;
+    color: whitesmoke;
     font-family: "antonio", monospace;
-    position:absolute;
-        top:50%;
+    position: absolute;
+        top: 50%;
     visibility: hidden;
-    z-index:4;
+    z-index: 4;
 }
 
 .right-nav {
-    background-color:white;
+    background-color: white;
     border-radius: 5px;
-    cursor:pointer;
+    cursor: pointer;
     font-family: "jura", monospace;
-    font-size:larger;
-    height:100vh;
-    display:flex;
+    font-size: larger;
+    height: 100vh;
+    display: flex;
         align-items: center;
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: center;
-    opacity:0.0;
-    position:absolute;
-        right:0;
-        top:0;
+    opacity: 0.0;
+    position: absolute;
+        right: 0;
+        top: 0;
     text-shadow: 0px 0px 2px black;
     user-select: none;
     -webkit-user-select: none;
-    width:5%;
-    z-index:0;
+    width: 5%;
+    z-index: 0;
 }
 
 .rocket {
-    cursor:pointer;
+    cursor: pointer;
     position: absolute;
         top: 45%;
     transform: rotate(90deg);
     user-select: none;
-    -webkit-touch-callout:none;
-    -webkit-user-drag:none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
     -webkit-user-select: none;
-    z-index:1;
+    z-index: 1;
 }
 
 .space-station {
-    display:flex;
+    display: flex;
         align-items: center;
         justify-content: center;
     font-size: 20px;
-    position:absolute;
+    position: absolute;
         left: 0;
         top: 0;
     text-align: center;
     user-select: none;
-    -webkit-touch-callout:none;
-    -webkit-user-drag:none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
     -webkit-user-select: none;
 }
 
 .space-station figcaption {
-    color:whitesmoke;
+    color: whitesmoke;
     font-family: "antonio", monospace;
-    position:absolute;
-        bottom:0;
+    position: absolute;
+        bottom: 0;
     visibility: hidden;
-    z-index:4;
+    z-index: 4;
 }
 
 .starship {
     height: 225px;
-    position:absolute;
-    visibility:hidden;
+    position: absolute;
+    visibility: hidden;
     user-select: none;
-    -webkit-touch-callout:none;
-    -webkit-user-drag:none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
     -webkit-user-select: none;
-    z-index:1;
+    z-index: 1;
 }
 
 .telescope {
-    display:flex;
+    display: flex;
         justify-content: center;
     font-family: "antonio", monospace;
     font-size: 20px;
-    position:absolute;
+    position: absolute;
         left: 9em;
         top: 3em;
     text-align: center;
     user-select: none;
-    -webkit-touch-callout:none;
-    -webkit-user-drag:none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
     -webkit-user-select: none;
 }
 
 .telescope figcaption {
-    color:whitesmoke;
-    position:absolute;
-        bottom:20%;
+    color: whitesmoke;
+    position: absolute;
+        bottom: 20%;
     visibility: hidden;
-    z-index:4;
+    z-index: 4;
 }
 
 
@@ -404,7 +408,7 @@ footer a {
 @media (max-width: 1000px) {
 
     .boost {
-        top:187px;
+        top: 187px;
         left: 42px;
         width: 22px;
     }
@@ -414,11 +418,11 @@ footer a {
     }
 
     .iss {
-        width:375px;
+        width: 375px;
     }
 
     .location {
-        font-size:25px;
+        font-size: 25px;
     }
 
     .parker {
@@ -439,8 +443,8 @@ footer a {
 
     .telescope {
         font-size: 19px;
-        left:8em;
-        top:4em;
+        left: 8em;
+        top: 4em;
     }
 
 }
@@ -448,7 +452,7 @@ footer a {
 @media (max-width: 800px) {
 
     .boost {
-        top:164px;
+        top: 164px;
         left: 37px;
         width: 19px;
     }
@@ -458,11 +462,11 @@ footer a {
     }
 
     .iss {
-        width:350px;
+        width: 350px;
     }
 
     .location {
-        font-size:24px;
+        font-size: 24px;
     }
 
     .parker {
@@ -483,8 +487,8 @@ footer a {
 
     .telescope {
         font-size: 18px;
-        left:6em;
-        top:6em;
+        left: 6em;
+        top: 6em;
     }
 
 }
@@ -492,7 +496,7 @@ footer a {
 @media (max-width: 600px) {
 
     .boost {
-        top:140px;
+        top: 140px;
         left: 32px;
         width: 16px;
     }
@@ -502,11 +506,11 @@ footer a {
     }
 
     .iss {
-        width:350px;
+        width: 350px;
     }
 
     .location {
-        font-size:23px;
+        font-size: 23px;
     }
 
     .parker {
@@ -531,7 +535,7 @@ footer a {
 
     .telescope {
         font-size: 16px;
-        left:3em;
+        left: 3em;
     }
 
 }
