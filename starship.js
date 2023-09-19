@@ -21,6 +21,7 @@ const mercuryInfo = document.querySelector(".info-mercury");
 const moonInfo = document.querySelector(".info-moon");
 const saturnInfo = document.querySelector(".info-saturn");
 const sunInfo = document.querySelector(".info-sun");
+const uranusInfo = document.querySelector(".info-uranus");
 const venusInfo = document.querySelector(".info-venus");
 
 const eagle = new Audio("assets/sounds/eagle.mp3"); //the eagle has landed
@@ -623,6 +624,7 @@ function navigation() {
         parkerName.style.visibility = "hidden";
         saturnInfo.style.visibility = "hidden";
         sunInfo.style.visibility = "hidden";
+        uranusInfo.style.visibility = "hidden;
         venusInfo.style.visibility = "hidden";
     }
     
@@ -1153,6 +1155,9 @@ rightNav.addEventListener("click", () => {
         case "Sun":
         case "Sun's Atmosphere":
             visible(sunInfo);
+            break;
+        case "Uranus":
+            visible(uranusInfo);
             break;
         case "Venus":
             visible(venusInfo);
