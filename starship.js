@@ -1154,6 +1154,7 @@ rightNav.addEventListener("click", () => {
             break;
         case "Sun":
         case "Sun's Atmosphere":
+        case "Distant Sun":
             visible(sunInfo);
             break;
         case "Uranus":
