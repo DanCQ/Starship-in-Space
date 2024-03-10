@@ -113,7 +113,7 @@ let images = [
     },
     {
         name: "Pluto",
-        img: "assets/pluto.jpeg"
+        img: "assets/pluto.png"
     },
     {
         name: "Distant Sun",
