@@ -1,5 +1,4 @@
 # Starship-in-Space
---UnDEr ConStrUCTion--
 
 An educational site on the planetary bodies of our solar system. <br>
 Solar System information from <a href="https://solarsystem.nasa.gov/solar-system/sun/overview/">NASA</a>.
@@ -8,8 +7,7 @@ Solar System information from <a href="https://solarsystem.nasa.gov/solar-system
 
 I still need to add information for Pluto, Neptune, and the Milky Way.
 
-I'm searching for detailed satellite photos, <br>
-and for historical space exporation sound clips.
+I'm creating some images with AI.
 
 A recreation of the space game from OpenAI: <br>
 https://youtu.be/Zm9B-DvwOgw
