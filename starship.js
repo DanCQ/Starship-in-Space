@@ -109,7 +109,7 @@ let images = [
     },
     {
         name: "Neptune",
-        img: "assets/neptune.jpeg"
+        img: "assets/neptune.png"
     },
     {
         name: "Pluto",
