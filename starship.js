@@ -97,7 +97,7 @@ let images = [
     },
     {
         name: "Jupiter",
-        img: "assets/jupiter.jpeg"
+        img: "assets/jupiter.png"
     },
     {
         name: "Saturn",
