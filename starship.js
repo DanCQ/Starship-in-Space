@@ -1151,7 +1151,7 @@ rightNav.addEventListener("click", () => {
         case "Moon":
             visible(moonInfo);
             break;
-        case "Neoptune":
+        case "Neptune":
             visible(neptuneInfo);
             break;
         case "Saturn":
