@@ -19,6 +19,7 @@ const jupiterInfo = document.querySelector(".info-jupiter");
 const marsInfo = document.querySelector(".info-mars");
 const mercuryInfo = document.querySelector(".info-mercury");
 const moonInfo = document.querySelector(".info-moon");
+const neptuneInfo = document.querySelector(".info-neptune");
 const saturnInfo = document.querySelector(".info-saturn");
 const sunInfo = document.querySelector(".info-sun");
 const uranusInfo = document.querySelector(".info-uranus");
@@ -620,6 +621,7 @@ function navigation() {
         mercuryInfo.style.visibility = "hidden";
         moonInfo.style.visibility = "hidden";
         nav.style.visibility = "hidden";
+        neptuneInfo.style.visibility = "hidden";
         parker.style.visibility = "hidden";
         parkerName.style.visibility = "hidden";
         saturnInfo.style.visibility = "hidden";
@@ -1148,6 +1150,9 @@ rightNav.addEventListener("click", () => {
             break;
         case "Moon":
             visible(moonInfo);
+            break;
+        case "Neoptune":
+            visible(neptuneInfo);
             break;
         case "Saturn":
             visible(saturnInfo);
