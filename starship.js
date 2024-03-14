@@ -58,8 +58,7 @@ let images = [
     },
     {
         name: "Sun",
-        img: "assets/sun1.jpg"
-        //img: "assets/sun.jpeg"
+        img: "assets/sun.jpeg"
     },
     {
         name: "Mercury",
