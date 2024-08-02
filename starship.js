@@ -537,7 +537,7 @@ function outerSpace() {
         case "Low Earth Orbit Night":
         case "Mars":
 
-            if(!present) {
+            if(!present) { //prevents duplicates
                 
                 setTimeout( () => { 
                     cowboy = new spaceCowboy(); //calls astronaut 
