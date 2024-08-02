@@ -26,7 +26,7 @@ const sunInfo = document.querySelector(".info-sun");
 const uranusInfo = document.querySelector(".info-uranus");
 const venusInfo = document.querySelector(".info-venus");
 
-const hiddenArray = [ //meant to remain hidden until needed
+const hiddenArray = [ //remains hidden until needed
     auroraInfo, earthInfo, footer, hubble, hubbleName, iss, issName, jupiterInfo, marsInfo, mercuryInfo, moonInfo, nav, neptuneInfo, parker, parkerName, plutoInfo, saturnInfo, sunInfo, uranusInfo, venusInfo
 ];
 
@@ -618,28 +618,8 @@ function navigation() {
         for(let i = 0; i < hiddenArray.length; i++) {
             hiddenArray[i].style.visibility = "hidden";
         }
-
-        // auroraInfo.style.visibility = "hidden";
-        // earthInfo.style.visibility = "hidden";
-        // footer.style.visibility = "hidden";
-        // hubble.style.visibility = "hidden";
-        // hubbleName.style.visibility = "hidden";
-        // iss.style.visibility = "hidden";
-        // issName.style.visibility = "hidden";
-        // jupiterInfo.style.visibility = "hidden";
-        // marsInfo.style.visibility = "hidden";
-        // mercuryInfo.style.visibility = "hidden";
-        // moonInfo.style.visibility = "hidden";
-        // nav.style.visibility = "hidden";
-        // neptuneInfo.style.visibility = "hidden";
-        // parker.style.visibility = "hidden";
-        // parkerName.style.visibility = "hidden";
-        // plutoInfo.style.visibility = "hidden";
-        // saturnInfo.style.visibility = "hidden";
-        // sunInfo.style.visibility = "hidden";
-        // uranusInfo.style.visibility = "hidden";
-        // venusInfo.style.visibility = "hidden";
     }
+    
     
     function displayOn() {
 
@@ -1164,6 +1144,9 @@ rightNav.addEventListener("click", () => {
             break;
         case "Neptune":
             visible(neptuneInfo);
+            break;
+        case "Pluto":
+            visible(plutoInfo);
             break;
         case "Saturn":
             visible(saturnInfo);
