@@ -20,6 +20,7 @@ const marsInfo = document.querySelector(".info-mars");
 const mercuryInfo = document.querySelector(".info-mercury");
 const moonInfo = document.querySelector(".info-moon");
 const neptuneInfo = document.querySelector(".info-neptune");
+const plutoInfo = document.querySelector(".info-pluto");
 const saturnInfo = document.querySelector(".info-saturn");
 const sunInfo = document.querySelector(".info-sun");
 const uranusInfo = document.querySelector(".info-uranus");
@@ -605,6 +606,11 @@ function navigation() {
         clearInterval(movies); //clears animated background
         noCowboys(); //hides astronaut
 
+        latin = false;
+        locationName.innerHTML = "";
+        locationName.style.opacity = "0.0"; 
+        locationOff = true;
+
         auroraInfo.style.visibility = "hidden";
         earthInfo.style.visibility = "hidden";
         footer.style.visibility = "hidden";
@@ -613,10 +619,6 @@ function navigation() {
         iss.style.visibility = "hidden";
         issName.style.visibility = "hidden";
         jupiterInfo.style.visibility = "hidden";
-        latin = false;
-        locationName.innerHTML = "";
-        locationName.style.opacity = "0.0"; 
-        locationOff = true;
         marsInfo.style.visibility = "hidden";
         mercuryInfo.style.visibility = "hidden";
         moonInfo.style.visibility = "hidden";
@@ -624,6 +626,7 @@ function navigation() {
         neptuneInfo.style.visibility = "hidden";
         parker.style.visibility = "hidden";
         parkerName.style.visibility = "hidden";
+        plutoInfo.style.visibility = "hidden";
         saturnInfo.style.visibility = "hidden";
         sunInfo.style.visibility = "hidden";
         uranusInfo.style.visibility = "hidden";
