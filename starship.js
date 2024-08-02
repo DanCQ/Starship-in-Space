@@ -537,19 +537,19 @@ function outerSpace() {
         case "Low Earth Orbit Night":
         case "Mars":
 
-            setTimeout( () => { 
+            if(!present) {
                 
-                cowboy = new spaceCowboy(); //calls astronaut 
-
-                //prevent duplicates 
-                if(canvasOff) {
-
-                    canvasOff = false;
-
-                    canvasAnimate();
-                }        
-
-            }, randomRange(15000, 25000)); //waits 15 to 25 seconds
+                setTimeout( () => { 
+                    cowboy = new spaceCowboy(); //calls astronaut 
+    
+                    //prevent duplicates 
+                    if(canvasOff) {
+                        canvasOff = false;
+                        canvasAnimate();
+                    }        
+        
+                }, randomRange(15000, 25000)); //waits 15 to 25 seconds
+            }
 
         break;
     }
