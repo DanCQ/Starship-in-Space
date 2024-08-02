@@ -40,6 +40,7 @@ const majorTom = new Audio('assets/sounds/major-tom.mp3') //ground control to...
 const raptor = new Audio("assets/sounds/raptor.mp3"); //raptor engine  
 
 let allow = true; //a check for astronaut movements
+let allowMovies = false; //used to prevent preload image bug
 let cowboy; //used for astronaut object
 let fade; //used for location name intervals
 let movies; //used for animation of backgrounds
@@ -203,6 +204,8 @@ function outerSpace() {
     function auroraSpin() {
 
         if(images[num].name == "Aurora Borealis") {
+            
+            allowMovies = true;
 
             movies = setInterval( () => {
                 aurora++;
@@ -215,8 +218,10 @@ function outerSpace() {
             
                 //change only happens once next image is loaded
                 nextImg.onload = () => {
-                    images[num].img = nextImg.src;
-                    background();
+                    if(allowMovies) {
+                        images[num].img = nextImg.src;
+                        background();
+                    }
                 } 
 
             }, 1000);
@@ -238,6 +243,8 @@ function outerSpace() {
     function earthSpin() {
 
         if(images[num].name == "Earth") {
+            
+            allowMovies = true;
 
             movies = setInterval( () => {
                 earth++;
@@ -250,8 +257,10 @@ function outerSpace() {
             
                 //change only happens once next image is loaded
                 nextImg.onload = () => {
-                    images[num].img = nextImg.src;
-                    background();
+                    if(allowMovies) {
+                        images[num].img = nextImg.src;
+                        background();
+                    }
                 } 
 
             }, 3500); 
@@ -457,6 +466,8 @@ function outerSpace() {
         
         if(images[num].name == "Earth At Night") {
             
+            allowMovies = true;
+            
             iss.style.visibility = "visible";
 
             iss.addEventListener("click", () => {
@@ -481,8 +492,10 @@ function outerSpace() {
             
                 //change only happens once next image is loaded
                 nextImg.onload = () => {
-                    images[num].img = nextImg.src;
-                    background();
+                    if(allowMovies) {
+                        images[num].img = nextImg.src;
+                        background();
+                    }
                 }
 
             }, 1500);
@@ -496,6 +509,8 @@ function outerSpace() {
         const parkerLaunch = new Audio("assets/sounds/parker-liftoff.mp3"); //parker launch
 
         if(images[num].name == "Sun's Atmosphere") {
+
+            allowMovies = true;
 
             locationName.style.textShadow = "0px 0px 2px black";
             parker.style.visibility = "visible";
@@ -511,8 +526,10 @@ function outerSpace() {
                 
                 //change only happens once next image is loaded
                 nextImg.onload = () => {
-                    images[num].img = nextImg.src;
-                    background();
+                    if(allowMovies) {
+                        images[num].img = nextImg.src;
+                        background();
+                    }
                 }
 
             }, 1000);
@@ -605,15 +622,16 @@ function navigation() {
     }
 
     function hide() {
-
-        clearInterval(fade);
-        clearInterval(movies); //clears animated background
-        noCowboys(); //hides astronaut
-
+        
+        allowMovies = false;
         latin = false;
         locationName.innerHTML = "";
         locationName.style.opacity = "0.0"; 
         locationOff = true;
+
+        clearInterval(fade);
+        clearInterval(movies); //clears animated background
+        noCowboys(); //hides astronaut
 
         for(let i = 0; i < hiddenArray.length; i++) {
             hiddenArray[i].style.visibility = "hidden";
