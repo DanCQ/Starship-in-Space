@@ -104,46 +104,17 @@ footer a {
     text-indent: 5px;
 }
 
-.info-aurora {
-    visibility: hidden;
-}
-
-.info-earth {
-    visibility: hidden;
-}
-
-.info-jupiter {
-    visibility: hidden;
-}
-
-.info-mars {
-    visibility: hidden;
-}
-
-.info-mercury {
-    visibility: hidden;
-}
-
-.info-moon {
-    visibility: hidden;
-}
-
-.info-neptune {
-    visibility: hidden;
-}
-
-.info-saturn {
-    visibility: hidden;
-}
-
-.info-sun {
-    visibility: hidden;
-}
-
-.info-uranus {
-    visibility: hidden;
-}
-
+.info-aurora, 
+.info-earth, 
+.info-jupiter, 
+.info-mars, 
+.info-mercury,
+.info-moon,
+.info-neptune,
+.info-pluto,
+.info-saturn,
+.info-sun,
+.info-uranus,
 .info-venus {
     visibility: hidden;
 }
