@@ -26,6 +26,10 @@ const sunInfo = document.querySelector(".info-sun");
 const uranusInfo = document.querySelector(".info-uranus");
 const venusInfo = document.querySelector(".info-venus");
 
+const hiddenArray = [ //meant to remain hidden until needed
+    auroraInfo, earthInfo, footer, hubble, hubbleName, iss, issName, jupiterInfo, marsInfo, mercuryInfo, moonInfo, nav, neptuneInfo, parker, parkerName, plutoInfo, saturnInfo, sunInfo, uranusInfo, venusInfo
+];
+
 const eagle = new Audio("assets/sounds/eagle.mp3"); //the eagle has landed
 const earthFrom = new Audio("assets/sounds/earth-from-here.mp3"); //..from here..
 const hubbleLaunch = new Audio("assets/sounds/hubble-launch.mp3"); //launch
@@ -611,26 +615,30 @@ function navigation() {
         locationName.style.opacity = "0.0"; 
         locationOff = true;
 
-        auroraInfo.style.visibility = "hidden";
-        earthInfo.style.visibility = "hidden";
-        footer.style.visibility = "hidden";
-        hubble.style.visibility = "hidden";
-        hubbleName.style.visibility = "hidden";
-        iss.style.visibility = "hidden";
-        issName.style.visibility = "hidden";
-        jupiterInfo.style.visibility = "hidden";
-        marsInfo.style.visibility = "hidden";
-        mercuryInfo.style.visibility = "hidden";
-        moonInfo.style.visibility = "hidden";
-        nav.style.visibility = "hidden";
-        neptuneInfo.style.visibility = "hidden";
-        parker.style.visibility = "hidden";
-        parkerName.style.visibility = "hidden";
-        plutoInfo.style.visibility = "hidden";
-        saturnInfo.style.visibility = "hidden";
-        sunInfo.style.visibility = "hidden";
-        uranusInfo.style.visibility = "hidden";
-        venusInfo.style.visibility = "hidden";
+        for(let i = 0; i < hiddenArray.length; i++) {
+            hiddenArray[i].style.visibility = "hidden";
+        }
+
+        // auroraInfo.style.visibility = "hidden";
+        // earthInfo.style.visibility = "hidden";
+        // footer.style.visibility = "hidden";
+        // hubble.style.visibility = "hidden";
+        // hubbleName.style.visibility = "hidden";
+        // iss.style.visibility = "hidden";
+        // issName.style.visibility = "hidden";
+        // jupiterInfo.style.visibility = "hidden";
+        // marsInfo.style.visibility = "hidden";
+        // mercuryInfo.style.visibility = "hidden";
+        // moonInfo.style.visibility = "hidden";
+        // nav.style.visibility = "hidden";
+        // neptuneInfo.style.visibility = "hidden";
+        // parker.style.visibility = "hidden";
+        // parkerName.style.visibility = "hidden";
+        // plutoInfo.style.visibility = "hidden";
+        // saturnInfo.style.visibility = "hidden";
+        // sunInfo.style.visibility = "hidden";
+        // uranusInfo.style.visibility = "hidden";
+        // venusInfo.style.visibility = "hidden";
     }
     
     function displayOn() {
