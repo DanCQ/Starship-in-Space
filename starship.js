@@ -557,18 +557,24 @@ function outerSpace() {
             if(!present) { //prevents duplicates
                 
                 setTimeout( () => { 
-                    cowboy = new spaceCowboy(); //calls astronaut 
-    
-                    //prevent duplicates 
-                    if(canvasOff) {
-                        canvasOff = false;
-                        canvasAnimate();
-                    }        
+
+                    if(!present) { //prevents duplicates redundacy
+
+                        cowboy = new spaceCowboy(); //calls astronaut 
         
+                        //prevent duplicates 
+                        if(canvasOff) {
+                            canvasOff = false;
+                            canvasAnimate();
+                        }
+                    }
+
                 }, randomRange(15000, 25000)); //waits 15 to 25 seconds
             }
+            break; //exit switch
 
-        break;
+        default:
+            noCowboys();
     }
 }
 
@@ -1046,7 +1052,7 @@ class spaceCowboy {
     }
     
     //runs animations
-    update() {
+    update() { 
 
         if(this.travel != "away") {
 
